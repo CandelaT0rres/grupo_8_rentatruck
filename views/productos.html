@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
-<<<<<<< HEAD
+   <!----- HEAD------>
     <head>
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,14 +12,15 @@
         
     </head>
 
-    <body>
+    <body class="body-productos">
 
         <header>
-            <nav class="navbar bg-dark">
+            <nav class="navbar bg-dark fixed-top">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="#">
-                        <img src="img/logo.jpg" id="logo" width="40" height="40">
+                    <a class="navbar-brand" href="./home.html">
+                         <img src="img/logo.jpg" id="logo" width="40" height="40">
                     </a>
+                    <p class="text-center">Una empresa que se proyecta a futuro.</p>
                     <form class="d-flex" role="Buscar">
                         <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
                         <button class="btn btn-outline-danger" type="submit">Buscar</button>
@@ -27,20 +28,21 @@
                 </div>
             </nav>
                 
-            <h1 class="text-center width-">Una empresa que se proyecta a futuro.</h1>
 
         </header>
 
         <main id="main"> 
+
+
 
             <div class="container my-3">
                 <div class="row my-custom-row justify-content-center">
 
                     <!----------------------------TARJETA UNO------------------------->  
               
-                    <div class="col">
+                    <div class="col-sm-12">
 
-                       <div class="card" style="width: 20rem;">
+                       <div class="card border border-danger mb-3 m-3" style="width: 20rem;">
                          <img src="img/camion1.jpg" class="camiones">
                           <div class="card-body">
                              <h1>Camión de automóviles</h1>
@@ -53,7 +55,7 @@
                                      <li>Precio por Km: $7.000</li>
                                  </ul>
                               </p>
-                              <a href="#" class="btn btn-outline-danger">Contratar</a>                         
+                              <a href="./carrito.html" class="btn btn-outline-danger">Contratar</a>                         
                            </div>
 
                         </div>
@@ -64,9 +66,9 @@
 
                   <!----------------------------TARJETA DOS------------------------->  
               
-                    <div class="col">
+                    <div class="col-sm-12">
 
-                       <div class="card" style="width: 20rem;">
+                       <div class="card border border-danger mb-3 m-3" style="width: 20rem;">
                            <img src="img/camion2.jpg" class="camiones">
                           <div class="card-body">
                               <h1>Camión Térmico</h1>
@@ -79,7 +81,7 @@
                                      <li>Precio por Km: $4.000</li>
                                    </ul>
                                </p>
-                               <a href="#" class="btn btn-outline-danger">Contratar</a>  
+                               <a href="./carrito.html" class="btn btn-outline-danger">Contratar</a>  
                             </div>   
 
                         </div>
@@ -89,27 +91,102 @@
 
                  <!----------------------------TARJETA TRES------------------------->  
               
-                    <div class="col">
+                    <div class="col-sm-12">
 
-                      <div class="card" style="width: 20rem;">
-                          <img src="img/camion3.jpg" class="camiones">
+                      <div class="card border border-danger mb-3 m-3" style="width: 20rem;">
+                          <img src="img/camion-fletero.jpg" class="camiones">
                           <div class="card-body">
-                              <h1>Camión Fletero</h1>
+                              <h1>Camión de envasados</h1>
 
                               <p> 
                                   <ul>
                                      <li>Marca: Volvo</li>
                                      <li>Modelo: Dayli</li>
-                                     <li>Tipo de carga: Productos hogareños</li>
+                                     <li>Tipo de carga: Productos envasados</li>
                                     <li>Precio por Km: $2.000</li>
                                  </ul>
                               </p>
-                              <a href="#" class="btn btn-outline-danger">Contratar</a>
+                              <a href="./carrito.html" class="btn btn-outline-danger">Contratar</a>
                               
                             </div>  
 
                         </div>
 
+                    </div>
+
+                    <!----------------------------TARJETA CUATRO------------------------->  
+
+                    <div class="col-sm-12">
+
+                        <div class="card border border-danger mb-3 m-3" style="width: 20rem;">
+                            <img src="img/camiones-con-barro.jpg" class="camiones">
+                            <div class="card-body">
+                                <h1>Camión de madera</h1>
+  
+                                <p> 
+                                    <ul>
+                                       <li>Marca: Volvo</li>
+                                       <li>Modelo: Dayli</li>
+                                       <li>Tipo de carga: Productos de madera</li>
+                                      <li>Precio por Km: $2.000</li>
+                                   </ul>
+                                </p>
+                                <a href="./carrito.html" class="btn btn-outline-danger">Contratar</a>
+                                
+                            </div>  
+  
+                        </div>
+  
+                    </div>
+
+                    <!----------------------------TARJETA CINCO-------------------------> 
+
+                    <div class="col-sm-12">
+
+                        <div class="card border border-danger mb-3 m-3" style="width: 20rem;">
+                            <img src="img/camion-de-carga.jpg" class="camiones">
+                            <div class="card-body">
+                                <h1>Camión de carga</h1>
+  
+                                <p> 
+                                    <ul>
+                                       <li>Marca: Volvo</li>
+                                       <li>Modelo: Dayli</li>
+                                       <li>Tipo de carga: Productos hogareños</li>
+                                      <li>Precio por Km: $2.000</li>
+                                   </ul>
+                                </p>
+                                <a href="./carrito.html" class="btn btn-outline-danger">Contratar</a>
+                                
+                            </div>  
+  
+                        </div>
+  
+                    </div>
+
+                    <!----------------------------TARJETA SEIS-------------------------> 
+
+                    <div class="col-sm-12">
+
+                        <div class="card border border-danger mb-3 m-3" style="width: 20rem;">
+                            <img src="img/camion6.jpg" class="camiones">
+                            <div class="card-body">
+                                <h1>Camión Frigorífico</h1>
+  
+                                <p> 
+                                    <ul>
+                                       <li>Marca: Volvo</li>
+                                       <li>Modelo: Dayli</li>
+                                       <li>Tipo de carga: Productos hogareños</li>
+                                      <li>Precio por Km: $2.000</li>
+                                   </ul>
+                                </p>
+                                <a href="./carrito.html" class="btn btn-outline-danger">Contratar</a>
+                                
+                            </div>  
+  
+                        </div>
+  
                     </div>
                     
                 </div>
@@ -118,14 +195,14 @@
 
             <form> 
 
-             <div class="mb-3">
+             <div class="mb-3 m-3">
                  <label for="exampleFormControlInput1" class="form-label">Dirección de correo electrónico</label>
-                 <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com">
+                 <input type="email" class="form-control border border-danger" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com">
                </div>
-               <div class="mb-3">
+               <div class="mb-3 m-3">
                  <label for="exampleFormControlTextarea1" class="form-label">Opiniones:</label>
-                 <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                 <a href="#" class="btn btn-outline-success">Enviar</a>
+                 <textarea class="form-control border border-danger" id="exampleFormControlTextarea1" rows="3"></textarea>
+                 <a href="#" class="btn btn-outline-success m-2">Enviar</a>
                  <a href="#" class="btn btn-outline-danger">Borrar</a>
               </div>
 
@@ -136,15 +213,4 @@
         
     </body>
 
-=======
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>productos</title>
-</head>
-<body>
-    <h1>productos</h1>
-</body>
->>>>>>> 14e5300586e46e30d18343df759130ec393cca36
 </html>
