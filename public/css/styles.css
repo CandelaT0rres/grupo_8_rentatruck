@@ -29,8 +29,9 @@
     justify-content: space-around;
 }
 
-.logo{
-    max-width: 100px;
+.logo-carrito{
+    max-width: 25%;
+    max-height: 15%;
 }
 
 .body-carrito{
@@ -39,4 +40,68 @@
     background-repeat: no repeat;
     background-size: cover;
     background-position: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+
+.table-carrito-camiones > img{
+    width: 9rem;
+    object-fit: contain;
+    border-radius: 6px;
+    margin-right: 20px;
+}
+
+.input-carrito-cantidad{
+    width: 40px;
+}
+
+.table-carrito-precio, .table-carrito-recorrido{
+    font-weight: 500;
+    color: white
+}
+
+
+.table-carrito-background{
+    background-color: rgba(9, 8, 9, 0.61)
+    
+}
+.centrado-carrito{
+    text-align: center;
+    vertical-align: middle;
+}
+.total-carrito-items{
+    font-size: 3rem;
+    font-weight: 700;
+    
+}
+@media only screen and (max-width:30rem) {
+    
+    table{
+        width: 100%;
+    }
+    table thead tr, tbody tr{
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        border: solid 1px white;
+    }
+    table thead{
+        display: none;
+    }
+
+    table td[data-title]{
+        display: flex;
+    }
+    table td[data-title]::before{
+        content: attr( data-title);
+        width: 120px;
+        font-weight: bold;
+        color: white;
+    }
+    #button-carrito-buy{
+        border: dashed 3 red;
+    }
+        
+    
 }
