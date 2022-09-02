@@ -43,6 +43,20 @@
 }
 
 
+.body-productos{
+    background-image: url("../img/camionesbyn.jpg");
+    background-attachment: fixed;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.form-label{
+    color:white
+}
+
+
 
 .table-carrito-camiones > img{
     width: 9rem;
@@ -105,6 +119,7 @@
         
     
 }
+
 .text-center-productos{
  color: white;
  font-size:25px;
@@ -123,4 +138,3 @@
 .form-label{
     color:white
 }
-
