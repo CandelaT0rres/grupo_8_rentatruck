@@ -391,10 +391,6 @@ display: flex;
 
 /* REGISTRO */
 
-.fondo {
-    z-index: 0;
-}
-
 .registro {
     width: 100vw;
     height: 100vh;

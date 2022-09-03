@@ -12,35 +12,57 @@
     <link rel="stylesheet" href="/css/styles.css">
     <title>Registro</title>
 </head>
-<body class="body-home">
-    <div class="registro d-flex justify-content-center">
+<body class="body-home registro">
+    <div class="d-flex justify-content-center">
         <div class="row section-1-home container">
             <div class="row justify-content-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     <h1>Rent-A-Truck</h1>
-                    <img class ="logo-registro" src="/img/logo.jpg" alt="logo">
+                    <img class ="logo rounded-pill" src="/img/logo.jpg" alt="logo">
                     <h3 id="crea-tu-cuenta">¡Creá tu cuenta!</h3>
                 </div>
             </div>
-            <form action="">
-                <div class="row">
-                    <input type="text" placeholder="Nombre o razón social" id="nombre" class="col">
-                    <input type="text" placeholder="Calle 1" id="calle1" class="col-8">
+            <form class="row g-3">
+                <div class="col-md-4">
+                  <label for="inputNombre4" class="form-label">Nombre/Razón social</label>
+                  <input type="email" class="form-control" id="inputNombre4">
                 </div>
-                <div class="row">
-                    <input type="text" placeholder="Apellido" id="apellido" class="col">
-                    <input type="text" placeholder="Calle 2" id="calle2" class="col-8">
+                <div class="col-8">
+                    <label for="inputAddress" class="form-label">Dirección</label>
+                    <input type="text" class="form-control" id="inputAddress" placeholder="Av. San Martín 144">
                 </div>
-                <div class="row">
-                    <input type="number" placeholder="DNI o CUIT" id="dni" class="col">
-                    <input type="text" placeholder="Ciudad" id="ciudad" class="col-4">
-                    <input type="text" placeholder="Estado/Provincia" id="estado" class="col-4">
+                <div class="col-md-4">
+                    <label for="inputApellido4" class="form-label">Apellido</label>
+                    <input type="email" class="form-control" id="inputApellido4">
                 </div>
-                <div class="row">
-                    <input type="email" placeholder="E-Mail" id="email" class="col">
-                    <input type="text" placeholder="Código Postal" id="cp" class="col-4">
-                    <select name="pais" id="pais" class="col-4">
-                        <option value="arg">Argentina</option>
+                <div class="col-8">
+                      <label for="inputAddress2" class="form-label">Dirección 2</label>
+                      <input type="text" class="form-control" id="inputAddress2" placeholder="Casa, departamento, etc.">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputDNI4" class="form-label">DNI o CUIT</label>
+                    <input type="number" class="form-control" id="inputDNI4">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputCity" class="form-label">Ciudad</label>
+                    <input type="text" class="form-control" id="inputCity">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputProvincia" class="form-label">Estado/Provincia</label>
+                    <input type="text" class="form-control" id="inputProvincia">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputEmail4" class="form-label">E-Mail</label>
+                    <input type="email" class="form-control" id="inputEmail4">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputCodigo" class="form-label">Código Postal</label>
+                    <input type="number" class="form-control" id="inputCodigo">
+                </div>
+                <div class="col-md-4">
+                    <label for="inputPais" class="form-label">País</label>
+                    <select id="inputPais" class="form-select">
+                        <option value="arg" selected>Argentina</option>
                         <option value="brs">Brasil</option>
                         <option value="uru">Uruguay</option>
                         <option value="chl">Chile</option>
@@ -49,19 +71,24 @@
                         <option value="vzla">Venezuela</option>
                     </select>
                 </div>
-                <div class="row">
-                    <div class="col-4">
-                        <label for="pas">Contraseña</label><br>
-                        <input type="password" id="pas" class="col-12">
-                    </div>
-                    <div class="col-8">
-                        <label for="pas2">Repita su contraseña</label><br>
-                        <input type="password" id="pas2" class="col-12">
-                    </div>
+                <div class="col-md-6">
+                  <label for="inputPassword4" class="form-label">Contraseña</label>
+                  <input type="password" class="form-control" id="inputPassword4">
                 </div>
-                <div class="row">
-                    <img src="/img/captcha.png" alt="captcha" width="25px" height="100px" class="col-2">
-                    <button type="submit" class="btn btn-primary col-10">Registrarme</button>
+                <div class="col-md-6">
+                    <label for="inputPassword2" class="form-label">Repita su contraseña</label>
+                    <input type="password" class="form-control" id="inputPassword2">
+                  </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="gridCheck">
+                    <label class="form-check-label" for="gridCheck">
+                      Recúerdame en este dispositivo
+                    </label>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary">Registrarme</button>
                 </div>
             </form>
         </div>
