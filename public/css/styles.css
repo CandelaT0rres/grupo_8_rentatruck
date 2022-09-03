@@ -50,6 +50,17 @@
     padding-bottom: 10px;
     
 }
+.iniciar-sesion{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: center;
+}
+.no-tienes-cuenta{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 .main-login{
 width: 100vw;
 display: flex;
