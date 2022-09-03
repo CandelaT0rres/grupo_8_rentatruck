@@ -389,7 +389,31 @@ display: flex;
     background-position: center;
 }
 
+/* REGISTRO */
 
+.fondo {
+    z-index: 0;
+}
+
+.registro {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../img/servicios.jpg");
+    background-attachment:scroll;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.logo-registro {
+    width: 20%;
+    height: 100px;
+}
+
+#crea-tu-cuenta {
+    width: 200px;
+    height: auto;
+}
 
 /* From uiverse.io by @CristianMontoya98 */
 .btn-home-inicio-sesion {
