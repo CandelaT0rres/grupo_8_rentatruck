@@ -336,6 +336,8 @@ display: flex;
 }
 
 .inicio-home-background{
+    width: 100%;
+    height: 100%;
     background-image: url("../img/carousel2.jpg");
     background-attachment: fixed;
     background-repeat: no repeat;
@@ -354,7 +356,7 @@ display: flex;
     background-repeat: no repeat;
     background-size: cover;
     background-position: center;
-    font-family: 'Raleway', sans-serif;
+
 }
 .section-2-art-1-home{
     width: 100%;
@@ -370,18 +372,25 @@ display: flex;
 }
 .section-3-art-1-home{
     width: 100%;
-    height: 20vh
+    height: 20%
 }
 
 .section-3-home{
     width: 100%;
-    height: 80vh;
+    height: 100%;
 }
-.video-section-3{
-    width: 50%;
-    height: 50%;
+.section-3-background-img{
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/servicios.jpg");
+    background-attachment:scroll;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+}
 
-}
+
+
 /* From uiverse.io by @CristianMontoya98 */
 .btn-home-inicio-sesion {
     width: 6.5em;
@@ -421,3 +430,5 @@ display: flex;
     -webkit-transition: all 0.5s;
     transition: all 0.5s;
    }
+
+   
