@@ -4,7 +4,8 @@
   "description": "TEMATICA Y DESCRIPCION:\r  Nuestro ecommerce va a tratar sobre el alquiler de vehículos de carga con el fin de transportar un alto volumen de mercadería.\r  Nuestro sitio web va a contar con distintas páginas que tendrán distintas funcionalidades.\r  Por su parte desde el home se va a poder visualizar información general de la empresa, imagenes de los distintos vehículos con su descripción y capacidad de cargamento. También el incio o registro de una cuenta.\r  Nuestro sitio web apunta a clientes que requieran el transporte de mercadería y no cuenten con las capacidades logísticas para realizarlo por cuenta propia.",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./app.js"
   },
   "repository": {
     "type": "git",
