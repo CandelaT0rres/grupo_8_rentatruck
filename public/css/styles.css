@@ -1,37 +1,227 @@
-.contenedor-login {
-    width: 25%;
-    height: 500px;
+
+/* LOGIN*/
+.section-login{
+    width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    border: dashed 2px blue;
+    justify-content: center;
+    align-self: start;
 }
 
-.sesion-ini {
-    border: dashed 2px red;
-    align-self: stretch;
+#hero{
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+.video-login{
+    position: fixed;
+    z-index: -1;
+    background-size: cover;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+
+.container-login{
+    width: 30%;
+    position: absolute;
+    top: 120px;
+    color: white;
+    font-size: 17px;
+    box-shadow: 0 5px 20px rgba(0,0,0, 2);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    
+
+}
+.logo-login{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+}
+.text-end-login{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+    
+}
+.iniciar-sesion{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: center;
+}
+.no-tienes-cuenta{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.main-login{
+width: 100vw;
+display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+@media screen and (max-width: 1297px){
+    .container-login{
+        width: 40%;
+        position: absolute;
+        top: 120px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+}
+@media screen and (max-width: 1024px) and (min-height: 600px){
+    .container-login{
+        width: 50%;
+        position: absolute;
+        top: 20px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+     }
+
+@media screen and (max-width: 1000px){
+    .container-login{
+        width: 50%;
+        position: absolute;
+        top: 120px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+     }
+
+    @media screen and (max-width: 820px){
+        .container-login{
+            width: 59%;
+            position: absolute;
+            top: 120px;
+            color: white;
+            font-size: 17px;
+            box-shadow: 0 5px 20px rgb(0 0 0);
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+    
+}
+
+@media screen and (max-width: 700px){
+    .container-login{
+        width: 70%;
+        position: absolute;
+        top: 120px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+}
+@media screen and (max-width: 540px){
+    .container-login{
+        width: 70%;
+        position: absolute;
+        top: 75px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+}
+
+@media screen and (max-width: 450px){
+    .container-login{
+        width: 85%;
+        position: absolute;
+        top: 120px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+}
+
+
+@media screen and (max-width: 375px){
+    .container-login{
+        width: 85%;
+        position: absolute;
+        top: 50px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+}
+
+@media screen and (max-width: 373px){
+    .container-login{
+        width: 85%;
+        position: absolute;
+        top: 120px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+}
+
+@media screen and (max-width: 355px){
+    .container-login{
+        width: 95%;
+        position: absolute;
+        top: 120px;
+        color: white;
+        font-size: 17px;
+        box-shadow: 0 5px 20px rgb(0 0 0);
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
+    
+}
+
+
+
+
+/* CARRITO*/
+
+.logo{
     width: 200px;
-    display: flex;
-    flex-direction: column;
-}
-
-#rec {
-    margin-right: 25px;
-    text-align: right;
-}
-
-.entrar {
-    text-align: center;
-}
-
-.copy {
-    display: flex;
-    justify-content: space-around;
-}
-
-.logo-carrito{
-    max-width: 25%;
-    max-height: 15%;
 }
 .body-carrito{
     background-image: url("../img/camion-de-carga.jpg");
@@ -41,22 +231,6 @@
     background-position: center;
     font-family: 'Raleway', sans-serif;
 }
-
-
-.body-productos{
-    background-image: url("../img/camionesbyn.jpg");
-    background-attachment: fixed;
-    background-repeat: no repeat;
-    background-size: cover;
-    background-position: center;
-
-}
-
-.form-label{
-    color:white
-}
-
-
 
 .table-carrito-camiones > img{
     width: 9rem;
@@ -86,10 +260,9 @@
 .total-carrito-items{
     font-size: 3rem;
     font-weight: 700;
-    
 }
+
 @media only screen and (max-width:30rem) {
-    
     table{
         width: 100%;
     }
@@ -113,12 +286,25 @@
         font-weight: bold;
         color: white;
     }
-    #button-carrito-buy{
-        border: dashed 3 red;
-    }
-        
-    
 }
+
+
+
+
+/* PRODUCTOS */
+.body-productos{
+    background-image: url("../img/camionesbyn.jpg");
+    background-attachment: fixed;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+
+.form-label{
+    color:white
+}
+
 
 .text-center-productos{
  color: white;
@@ -138,3 +324,221 @@
 .form-label{
     color:white
 }
+
+
+
+
+
+/* HOME */
+
+.body-home{
+    font-family:'Raleway', sans-serif;
+    width: 100%;
+}
+
+.inicio-home-background{
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/carousel2.jpg");
+    background-attachment: fixed;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+}
+.section-1-home{
+    width: 100%;
+    height: 60vh;
+}
+.section-2-home{
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/section2.jpg");
+    background-attachment:scroll;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+
+}
+.section-2-art-1-home{
+    width: 100%;
+    height: 15vh;
+    margin: 20px;
+}
+
+.section-2-border{
+    filter: drop-shadow(.75em .75em 2em);
+}
+
+.section-3-background{
+    background-color: rgba(84, 67, 56, 0.24);
+}
+.section-3-art-1-home{
+    width: 100%;
+    height: 20%
+}
+
+.section-3-home{
+    width: 100%;
+    height: 100%;
+}
+.section-3-background-img{
+    width: 100%;
+    height: 100%;
+    background-image: url("../img/servicios.jpg");
+    background-attachment:scroll;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+}
+/*section4 */
+.section-4{
+    width: 100%;
+    
+}
+.section-4-background-img{
+    width: 100%;
+    height: 100%;
+    background-image: url("/img/pexels-matt-hardy-2624031.jpg");
+    background-attachment:scroll;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+    
+   
+}
+
+
+.camion{
+    width: 100%;
+    height: 35vh;
+    box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
+    border-radius: 3em;
+    
+}
+.camion1{
+    width: 100%;
+    height: 35vh;
+    box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
+    border-radius: 3em;
+}
+
+.camion3{
+    width: 100%;
+    height: 35vh;
+    box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
+    border-radius: 3em;
+}
+/* section 5 */
+
+.titulo-section5{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0, 0.8);
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+}
+
+.conteiner-section5{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    height: 200px;
+    
+   
+   
+}
+.articulo-5{
+    width: 30%;
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    box-shadow: 0 5px 20px rgba(8,75,62, 1);
+    padding: 15px;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+    
+}
+
+/* SECTION 6 */
+
+.section-6-home{
+    width: 100%;
+    height: 100%;
+}
+
+/* REGISTRO */
+.registro {
+    width: 100vw;
+    height: 100vh;
+    background-image: url("../img/servicios.jpg");
+    background-attachment:scroll;
+    background-repeat: no repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.logo-registro {
+    width: 20%;
+    height: 100px;
+}
+
+#crea-tu-cuenta {
+    width: 200px;
+    height: auto;
+}
+
+.fondo-registro{
+    background: #000000;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
+}
+
+/* From uiverse.io by @CristianMontoya98 */
+.btn-home-inicio-sesion {
+    width: 6.5em;
+    height: 2.3em;
+    margin: 0.5em;
+    background: black;
+    color: white;
+    border: none;
+    border-radius: 0.625em;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+   }
+   
+   .button-h:hover {
+    color: black;
+   }
+   
+   .button-h:after {
+    content: "";
+    background: white;
+    position: absolute;
+    z-index: -1;
+    left: -20%;
+    right: -20%;
+    top: 0;
+    bottom: 0;
+    transform: skewX(-45deg) scale(0, 1);
+    transition: all 0.5s;
+   }
+   
+   .button-h:hover:after {
+    transform: skewX(-45deg) scale(1, 1);
+    -webkit-transition: all 0.5s;
+    transition: all 0.5s;
+   }
+
+   
