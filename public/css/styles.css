@@ -403,16 +403,11 @@ display: flex;
     background-repeat: no repeat;
     background-size: cover;
     background-position: center;
-    display: flex;
-    justify-content: center;
+    
    
 }
-.foto-padre-de-camiones{
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-}
+
+
 .camion{
     width: 100%;
     height: 35vh;
@@ -470,6 +465,13 @@ display: flex;
     
 }
 
+/* SECTION 6 */
+
+.section-6-home{
+    width: 100%;
+    height: 100%;
+}
+
 /* REGISTRO */
 .registro {
     width: 100vw;
@@ -489,6 +491,14 @@ display: flex;
 #crea-tu-cuenta {
     width: 200px;
     height: auto;
+}
+
+.fondo-registro{
+    background: #000000;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #434343, #000000);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #434343, #000000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+
 }
 
 /* From uiverse.io by @CristianMontoya98 */
