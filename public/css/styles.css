@@ -333,6 +333,7 @@ display: flex;
 
 .body-home{
     font-family:'Raleway', sans-serif;
+    width: 100%;
 }
 
 .inicio-home-background{
@@ -432,6 +433,43 @@ display: flex;
     box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
     border-radius: 3em;
 }
+/* section 5 */
+
+.titulo-section5{
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 20px rgba(0,0,0, 0.8);
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+}
+
+.conteiner-section5{
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    align-content: center;
+    align-items: center;
+    height: 200px;
+    
+   
+   
+}
+.articulo-5{
+    width: 30%;
+    display: flex;
+    margin: 5px;
+    padding: 5px;
+    flex-wrap: wrap;
+    flex-direction: row;
+    box-shadow: 0 5px 20px rgba(8,75,62, 1);
+    padding: 15px;
+    --bs-bg-opacity: 1;
+    background-color: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))!important;
+    
+}
+
 /* REGISTRO */
 .registro {
     width: 100vw;
