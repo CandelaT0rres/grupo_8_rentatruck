@@ -1,10 +1,12 @@
+const productosData = require('../data/products');
+
 const productsController = {
     productos: (req , res) => {
-       res.render ('productos')
+       res.render ('productos', {productos: productosData});
     },
 
     carrito: (req , res) => {
-        res.render ('carrito')
+        res.render ('carrito', {productos: productosData})
      },
 };
 
