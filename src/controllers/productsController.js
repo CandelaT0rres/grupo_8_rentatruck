@@ -6,7 +6,11 @@ const productsController = {
     },
 
     carrito: (req , res) => {
-        res.render ('./products/carrito', {productos: productosData})
+      var totalProductos = 0;
+      for (d of productosData) {
+         totalProductos = totalProductos + d.precioKm;
+      };
+        res.render ('./products/carrito', {productos: productosData, total: totalProductos})
      },
      cargar: (req, res) => {
       res.render('./products/cargar')
