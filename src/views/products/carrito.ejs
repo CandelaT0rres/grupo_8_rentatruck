@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <%- include('./partials/head') %>
+    <%- include('../partials/head') %>
     <title>Carrito</title>
 </head>
     <body class="body-carrito">
@@ -51,17 +51,17 @@
                                     </thead>
                                    
                                     <tbody>
-                                        <% for (let i=0; i < 3; i++) { %>
+                                        <% for (let i of productos) { %>
                                             <tr>
                                                 <th scope="row" class="centrado-carrito">1</th>
                                                 <td class="table-carrito-camiones centrado-carrito" data-title="Camión">
-                                                    <img src="/img/<%= productos[i].rutaImg %>" alt="camión-carga-blanco" >
+                                                    <img src="/img/<%= i.rutaImg %>" alt="camión-carga-blanco" >
                                                 </td>
                                                 <td class="table-carrito-recorrido centrado-carrito "  data-title="Recorrido">
-                                                    <p class="lead"> Origen: <%= productos[i].origen %> Destino: <%= productos[i].recorrido %></p>
+                                                    <p class="lead"> Origen: <%= i.origen %> Destino: <%= i.recorrido %></p>
                                                 </td>
                                                 <td class="table-carrito-precio centrado-carrito" data-title="Precio">
-                                                    <p class="lead">u$s<%= productos[i].precioKm %>/km</p>
+                                                    <p class="lead">u$s<%= i.precioKm %>/km</p>
                                                 </td>
                                                 <td class="table-carrito-cantidad centrado-carrito" data-title="Cantidad">
                                                     <input type="number" min="1" value="1" class="input-carrito-cantidad">
@@ -69,56 +69,6 @@
                                                 </td>
                                               </tr>
                                         <% } %>
-                                      <!--<tr>
-                                        <th scope="row" class="centrado-carrito">1</th>
-                                        <td class="table-carrito-camiones centrado-carrito" data-title="Camión">
-                                            <img src="/img/pexels-screeny-11053640.jpg" alt="camión-carga-blanco" >
-                                        </td>
-                                        <td class="table-carrito-recorrido centrado-carrito "  data-title="Recorrido">
-                                            <p class="lead"> Origen: C.A.B.A. Destino: Córdoba Capital</p>
-                                        </td>
-                                        <td class="table-carrito-precio centrado-carrito" data-title="Precio">
-                                            <p class="lead">u$s100/km</p>
-                                        </td>
-                                        <td class="table-carrito-cantidad centrado-carrito" data-title="Cantidad">
-                                            <input type="number" min="1" value="1" class="input-carrito-cantidad">
-                                            <button class="btn-home-inicio-sesion button-h "> Eliminar </a></button>
-                                        </td>
-                                      </tr>
-                                    
-                                      <tr>
-                                        <th scope="row" class="centrado-carrito">2</th>
-                                        <td class="table-carrito-camiones centrado-carrito" data-title="Camión">
-                                            <img src="/img/pexels-jonathan-cooper-9754798.jpg" alt="camión-carga-rojo">
-                                        </td>
-                                        <td class="table-carrito-recorrido centrado-carrito"  data-title="Recorrido">
-                                            <p class="lead"> Origen: C.A.B.A. Destino: San Juan</p>
-                                        </td>
-                                        <td class="table-carrito-precio centrado-carrito" data-title="Precio">
-                                            <p class="lead">u$s300/km</p>
-                                        </td>
-                                        <td class="table-carrito-cantidad centrado-carrito"  data-title="Cantidad">
-                                            <input type="number" min="1" value="1" class="input-carrito-cantidad">
-                                            <button class="btn-home-inicio-sesion button-h "> Eliminar </a></button>
-                                        </td>
-                                      </tr>
-                                      
-                                      <tr>
-                                        <th scope="row" class="centrado-carrito">3</th>
-                                        <td class="table-carrito-camiones centrado-carrito" data-title="Camión">
-                                            <img src="/img/camion1.jpg" alt="camión-carga-blanco">
-                                        </td>
-                                        <td class="table-carrito-recorrido centrado-carrito" data-title="Recorrido">
-                                            <p class="lead"> Origen: C.A.B.A. Destino: Montevideo - Uruguay</p>
-                                        </td>
-                                        <td class="table-carrito-precio centrado-carrito" data-title="Precio" >
-                                            <p class="lead">u$s500/km</p>
-                                        </td>
-                                        <td class="table-carrito-cantidad centrado-carrito" data-title="Cantidad">
-                                            <input type="number" min="1" value="1"class= "input-carrito-cantidad">
-                                            <button class="btn-home-inicio-sesion button-h "> Eliminar </a></button>
-                                        </td>
-                                      </tr>-->
                                     </tbody>
 
                                     <tfoot>
