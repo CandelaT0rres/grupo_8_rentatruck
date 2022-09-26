@@ -14,10 +14,6 @@ app.use('/products', productsRouter);
 app.use('/user', userRouter);
 
 
-/*app.listen(3005, ()=>{
-   console.log("servidor corriendo puerto 3005")});
-*/
-
 app.listen(process.env.PORT || 3005, function() {
     console.log("Servidor corriendo en el puerto 3005");
 });
