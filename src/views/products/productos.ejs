@@ -10,10 +10,10 @@
     <body class="body-productos">
 
         <header>
-            <nav class="navbar bg-dark fixed-top">
+            <nav class="navbar fondo-registro">
                 <div class="container-fluid">
-                    <a class="navbar-brand" href="/">
-                         <img src="/img/logo.jpg" id="logo" width="40" height="40" class="rounded-pill">
+                    <a class="navbar-brand" href="/" id="principio">
+                         <img src="/img/logo.jpg" id="logo" class="logo rounded-pill">
                     </a>
                     <p class="text-center-productos">Una empresa que se proyecta a futuro.</p>
                     <form class="d-flex" role="Buscar">
@@ -21,63 +21,63 @@
                         <button class="btn-home-inicio-sesion button-h" type="submit">Buscar</button>
                     </form>
                 </div>
-            </nav>
-                
-
+            </nav>               
         </header>
 
         <main id="margen-productos-sm"> 
 
             <br><br><br>
-
+            <a href="/products/cargar"class=""><button class="icon-btn add-btn">
+                <div class="add-icon"></div>
+                <div class="btn-txt">Nuevo Camión</div>
+            </button>
+            </a>
             <div class="container my-3 ">
-                <div class="row my-custom-row justify-content-center ">
-                    <% for (let d of productos) { %>
-                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-
-                            <div class="card border border-danger mb-3 m-3" style="width: 20rem;">
-                              <img src="/img/<%= d.rutaImg %>" class="camiones">
-                               <div class="card-body">
-                                  <h1><%= d.nombre %></h1>
-     
-                                   <p> 
-                                       <ul>
-                                          <li>Marca: <%= d.marca %></li>
-                                          <li> Modelo: <%= d.modelo %></li>
-                                          <li> Tipo de carga: <br> <%= d.tipoC %></li>
-                                          <li>Precio por Km: $<%= d.precioKm %></li>
-                                      </ul>
-                                   </p>
-                                   <button class="btn-home-inicio-sesion button-h"> <a href="/products/carrito" class="text-reset text-decoration-none">Contratar</a> </button>
-                                                           
-                                </div>
-     
-                             </div>
-     
-                         </div>
-                    <% } %>
+                <div class="row my-custom-row justify-content-center">
+                  <% for (let d of productos) { %>
                     
+                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">   
+                        <div class="card border-light mb-3 m-3" style="width: 20rem;">
+                             <img src="/img/<%= d.rutaImg %>" class="camiones card-img-top">
+                            <div class="card-body">
+                                <h1 class="fs-2 fw-bold"><%= d.nombre %></h1>
+                                <p> 
+                                    <ul class="list-group list-group-flush fw-bold">
+                                        <li  class="list-group-item ">Marca: <%= d.marca %></li>
+                                        <li  class="list-group-item">Modelo: <%= d.modelo %></li>
+                                        <li  class="list-group-item"> Tipo de carga: <br> <%= d.tipoC %></li>
+                                        <li  class="list-group-item">Precio por Km: $<%= d.precioKm %></li>
+                                    </ul>
+                                    </p>
+                                <div class="row">
+                                    <div class="col-12 row justify-content-around">
+                                        <button class="btn-home-inicio-sesion button-h"> <a href="/products/carrito" class="text-reset text-decoration-none">Contratar</a> </button>
+                                        <button class="btn-home-inicio-sesion button-h"> <a href="/products/editar/<%= d.id %> " class="text-reset text-decoration-none">Editar</a> </button>
+                                    </div>   
+                                </div>                                  
+                            </div>
+                        </div>
+                    </div>               
+                <% } %> 
                 </div>
-
             </div>
-
             <form> 
-
-             <div class="mb-3 m-3">
-                 <label for="exampleFormControlInput1" class="form-label">Dirección de correo electrónico</label>
-                 <input type="email" class="form-control border border-danger" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com">
+                <div class="mb-3 m-3">
+                <label for="exampleFormControlInput1" class="form-label">Dirección de correo electrónico</label>
+                <input type="email" class="form-control border border-light" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com">
                </div>
                <div class="mb-3 m-3">
                  <label for="exampleFormControlTextarea1" class="form-label">Opiniones:</label>
-                 <textarea class="form-control border border-danger" id="exampleFormControlTextarea1" rows="3"></textarea>
+                 <textarea class="form-control border border-light" id="exampleFormControlTextarea1" rows="3"></textarea>
                  <button class="btn-home-inicio-sesion button-h"> <a href="./carrito" class="text-reset text-decoration-none">Enviar</a> </button>
                  <button class="btn-home-inicio-sesion button-h"> <a href="./carrito" class="text-reset text-decoration-none">Borrar</a> </button>
               </div>
-
             </form>
-
-
         </main>
-        
+
+        <footer class="text-light fondo-registro mt-3">
+            <a href="#principio" class="text-reset text-decoration-none"><i class="bi bi-arrow-up-circle-fill fs-1" id="top"></i></a> 
+            <%- include('../partials/footer') %>
+        </footer>
     </body>
 </html>

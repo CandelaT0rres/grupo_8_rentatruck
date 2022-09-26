@@ -38,7 +38,7 @@ let productosData = [
         marca: 'Volvo',
         modelo: 'Dayli',
         tipoC: 'Productos de madera',
-        precioKm: 2000,
+        precioKm: 2999,
         rutaImg: 'camiones-con-barro.jpg',
         origen: 'Rosario',
         recorrido: 'Montevideo'
@@ -49,7 +49,7 @@ let productosData = [
         marca: 'Volvo',
         modelo: 'Dayli',
         tipoC: 'Productos hogareños',
-        precioKm: 2000,
+        precioKm: 3500,
         rutaImg: 'camion-de-carga.jpg',
         origen: 'San Pablo',
         recorrido: 'Paraguay'
@@ -60,7 +60,7 @@ let productosData = [
         marca: 'Volvo',
         modelo: 'Dayli',
         tipoC: 'Productos frigoríficos',
-        precioKm: 2000,
+        precioKm: 3000,
         rutaImg: 'camion6.jpg',
         origen: 'Asunción',
         recorrido: 'San Pablo'

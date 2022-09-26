@@ -2,14 +2,67 @@
 <html lang="en">
 <head>
     <%- include('../partials/head') %>
-    <title>Editar</title>
+    <title>Cargar</title>
 </head>
-<body>
-    <header>
-        <%- include('../partials/header') %>
-    </header>
-    <footer>
+<body class="registro">
+    <div class="container">
+        <header class="container-fluid" id="principio">
+            <div class="row justify-content-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="fw-normal text-dark fw-bold">Rent-A-Truck</h1>
+                    <a href="/"><img class ="logo rounded-pill" src="/img/logo.jpg" alt="logo"></a>
+                    <h3 class="fw-bold text-dark">Editar producto : <%= producto.nombre %> </h2>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                
+                    <form class="row col-8 g-3 fondo-registro m-4" action="/products/cargar?_method=PUT" method="post" enctype="multipart/form-data"> 
+                        <div class="col-md-6">
+                        <label for="inputNoombre" class="form-label">Nombre/Descripción</label>
+                        <input type="text" class="form-control" id="inputNoombre" name="nombre" value="<%= producto.nombre %> ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputMarca" class="form-label">Marca</label>
+                            <input type="text" class="form-control" id="inputMarca" name="marca" value="<%= producto.marca %> ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputModelo" class="form-label">Modelo</label>
+                            <input type="text" class="form-control" id="inputModelo" name="modelo" value="<%= producto.modelo %> ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputCarga" class="form-label">Tipo de Carga</label>
+                            <input type="text" class="form-control" id="inputCarga" name="tipoC" value="<%= producto.tipoC %> ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputOrigen" class="form-label">Origen</label>
+                            <input type="text" class="form-control" id="inputOrigen" name="origen" value="<%= producto.origen %> ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputDestino" class="form-label">Destino</label>
+                            <input type="text" class="form-control" id="inputDestino" name="recorrido" value="<%= producto.recorrido%> ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputPrecio" class="form-label">Precio</label>
+                            <input type="text" class="form-control" id="inputPrecio" name="precioKm" value="<%= producto.precioKm %> ">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="inputFile" class="form-label">Imagen</label>
+                            <input type="file" enctype="" class="form-control" id="inputFile" name="rutaImg" value="<%= producto.rutaImg %> ">
+                        </div>
+                        <div class="col-12">
+                            <button type="submit" class="btn-home-inicio-sesion button-h">Guardar</button>
+                          </div>
+                    </form>
+                </div>
+            </div> 
+        </main>
+    </div>
+
+        <footer class="text-dark bg-light mt-3">
         <%- include('../partials/footer') %>
-    </footer>
+        </footer>
 </body>
 </html>
