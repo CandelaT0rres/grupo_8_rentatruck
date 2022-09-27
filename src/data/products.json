@@ -64,16 +64,5 @@
         "rutaImg": "camion6.jpg",
         "origen": "Asunción",
         "recorrido": "San Pablo"
-    },
-    {
-        "id": 7,
-        "nombre": "Camino de carga vehicular",
-        "marca": "Mercedes-Benz",
-        "modelo": "RX 4500",
-        "tipoC": "vehicular",
-        "precioKm": 5000,
-        "rutaImg": "camion1.jpg",
-        "origen": "Montevideo",
-        "recorrido": "Rosario"
     }
 ]
