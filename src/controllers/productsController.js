@@ -1,4 +1,8 @@
-const productosData = require('../data/products');
+const fs = require('fs');
+const path = require('path');
+
+const productFilePath = path.join(__dirname, '../data/products.json');
+const productosData = JSON.parse(fs.readFileSync(productFilePath, 'utf-8'));
 
 const productsController = {
     productos: (req , res) => {
@@ -22,17 +26,20 @@ const productsController = {
       let idNuevo = (productosData[productosData.length - 1].id) + 1;
 
       let camionNuevo = {
-         id: idNuevo,
-         nombre: req.body.nombre,
-         marca: req.body.marca,
-         modelo: req.body.modelo,
-         tipoC: req.body.tipoC,
-         precioKm: parseInt(req.body.precioKm),
-         rutaImg: 'camion1.jpg',
-         origen: req.body.origen,
-         recorrido: req.body.recorrido
+         "id": idNuevo,
+         "nombre": req.body.nombre,
+         "marca": req.body.marca,
+         "modelo": req.body.modelo,
+         "tipoC": req.body.tipoC,
+         "precioKm": parseInt(req.body.precioKm),
+         "rutaImg": 'camion1.jpg',
+         "origen": req.body.origen,
+         "recorrido": req.body.recorrido
          }
       productosData.push(camionNuevo);
+
+      fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
+
       res.redirect('/');
      },
 
@@ -51,7 +58,23 @@ const productsController = {
      },
 
      actualizar: (req, res) => {
+      for (let o of productosData) {
+         if (o.id == req.params.id) {
+            o.nombre = req.body.nombre;
+            o.marca = req.body.marca;
+            o.modelo = req.body.modelo;
+            o.tipoC = req.body.tipoC;
+            o.precioKm = parseInt(req.body.precioKm);
+            o.rutaImg = req.body.rutaImg;
+            o.origen = req.body.origen;
+            o.recorrido = req.body.recorrido;
+            break;
+         }
+      };
 
+      fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
+
+      res.redirect('/');
      }
 };
 
