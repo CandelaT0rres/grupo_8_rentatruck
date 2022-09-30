@@ -12,14 +12,14 @@
     },
     {
         "id": 2,
-        "nombre": "Camión Térmico",
-        "marca": "Mercedes Benz",
-        "modelo": "Dayli",
-        "tipoC": "Productos congelados",
+        "nombre": "Camión Térmico  ",
+        "marca": "Mercedes Benz  ",
+        "modelo": "Dayli  ",
+        "tipoC": "Productos congelados  ",
         "precioKm": 4000,
-        "rutaImg": "camion2.jpg",
-        "origen": "La Plata",
-        "recorrido": "Rosario"
+        "rutaImg": "camiones-1664507728731.jpg",
+        "origen": "La Plata  ",
+        "recorrido": "Rosario  "
     },
     {
         "id": 3,

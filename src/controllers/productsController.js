@@ -1,6 +1,7 @@
 //Importación FileSystem + Path
 const fs = require('fs');
 const path = require('path');
+const { send } = require('process');
 
 const productFilePath = path.join(__dirname, '../data/products.json');
 const productosData = JSON.parse(fs.readFileSync(productFilePath, 'utf-8'));
@@ -49,7 +50,7 @@ const productsController = {
       //Guardado físico
       fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
          
-      res.redirect('/');
+      res.redirect('/products/productos');
    
      },
      
@@ -72,8 +73,10 @@ const productsController = {
      actualizar: (req, res) => {
 
       //Cuando encuentro el producto voy actualizando
+      let imgAntigua; 
       for (let o of productosData) {
          if (o.id == req.params.id) {
+            imgAntigua = o.rutaImg;
             o.nombre = req.body.nombre;
             o.marca = req.body.marca;
             o.modelo = req.body.modelo;
@@ -85,26 +88,47 @@ const productsController = {
             break;
          }
       };
+      fs.unlinkSync(path.join(__dirname, "../../public/img/")+imgAntigua)
 
       //Guardado físico
       fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
 
       res.redirect('/');
      },
-     
+     //Vista individual
+     detalle: (req, res) => {
+      let elementoCamion = null;
+      let detalleId = req.params.id 
+      for(cadaElemento of productosData){
+         if (cadaElemento.id == detalleId){
+            elementoCamion = cadaElemento
+            break
+         }
+       }
+       if(elementoCamion != null){
+         res.render("products/detalle", {camion: elementoCamion})
+       } else{
+         res.send("flashaste bro")
+       }
+     },
      //Borrado producto
      borrar: (req, res) => {
+      let camionAborrar = productosData.find((cadaElemento) => cadaElemento.id == req.params.id);
+      let imagenAborrar = path.join(__dirname, "../../public/img", camionAborrar.rutaImg) ;
+      if(fs.existsSync(imagenAborrar)){
+         fs.unlinkSync(imagenAborrar)
 
-      let productosActualizados = productosData.filter(cadaElemento => {
-        return cadaElemento.id != req.params.id
-      });
-
+      }         
+      let productoTerminado = productosData.filter((cadaElemento)=> cadaElemento.id != req.params.id)
       //Guardado físico
-      fs.writeFileSync(productFilePath, JSON.stringify(productosActualizados, null, 4), 'utf-8');
+      fs.writeFileSync(productFilePath, JSON.stringify(productoTerminado, null, 4), 'utf-8');
 
-      res.redirect('/');
-     }
-};
+      res.redirect('/');  
+      }
+
+      
+     
+}
 
 
 module.exports = productsController;

@@ -2,27 +2,17 @@
 const express = require('express');
 const router = express.Router();
 
-//Importo Path
-const path = require('path');
-
-//Importo multer + seteo multer
-const multer = require('multer');
-const storage = multer.diskStorage({
-    destination:(req, file, cb) => {
-        cb(null, path.join(__dirname, '../../public/img'));
-    },
-    filename: (req, file, cb) =>{
-        let nombreImg = 'camiones-' + Date.now() + path.extname(file.originalname);
-        cb(null, nombreImg);
-    }
-});
-const upload = multer({storage : storage});
+//Importo middlewares-multer
+const upload = require("../middlewares/multer"); 
 
 //Importo Controlador
 const controller = require('../controllers/productsController');
 
 //Vista Productos
 router.get('/productos', controller.productos);
+
+//Vista individual
+router.get('/detalle/:id', controller.detalle);
 
 //Vista Carrito
 router.get('/carrito', controller.carrito);
