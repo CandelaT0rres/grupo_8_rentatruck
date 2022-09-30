@@ -1,9 +1,11 @@
 //Importo Express + Ejecuto método Router
 const express = require('express');
 const router = express.Router();
+const validaciones = require('../middlewares/productsValidator');
 
 //Importo middlewares-multer
 const upload = require("../middlewares/multer"); 
+
 
 //Importo Controlador
 const controller = require('../controllers/productsController');
@@ -19,11 +21,11 @@ router.get('/carrito', controller.carrito);
 
 //Nuevo producto
 router.get('/cargar', controller.cargar);
-router.post('/cargar',upload.single('rutaImg'), controller.guardar);
+router.post('/cargar',upload.single('rutaImg'), validaciones, controller.guardar);
 
 //Editar producto
 router.get('/editar/:id', controller.editar);
-router.put('/editar/:id',upload.single('rutaImg'),controller.actualizar);
+router.put('/editar/:id',upload.single('rutaImg'), controller.actualizar);
 
 //Borrado producto
 router.delete('/borrar/:id', controller.borrar);

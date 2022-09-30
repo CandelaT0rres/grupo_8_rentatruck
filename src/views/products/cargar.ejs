@@ -22,35 +22,75 @@
                     <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/cargar" method="post" enctype="multipart/form-data"> 
                         <div class="col-md-6">
                         <label for="inputNoombre" class="form-label">Nombre/Descripción</label>
-                        <input type="text" class="form-control " id="inputNoombre" name="nombre">
+                        <input type="text" class="form-control " id="inputNoombre" name="nombre" value="<%= locals.oldData ? oldData.nombre : null %>">
+                        <% if (locals.errors && errors.nombre) { %>
+                            <h2>
+                                <%= errors.nombre.msg %> 
+                            </h2>
+                        <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputMarca" class="form-label">Marca</label>
-                            <input type="text" class="form-control" id="inputMarca" name="marca">
+                            <input type="text" class="form-control" id="inputMarca" name="marca" value="<%= locals.oldData ? oldData.marca : null %>">
+                            <% if (locals.errors && errors.marca) { %>
+                                <h2>
+                                    <%= errors.marca.msg %> 
+                                </h2>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputModelo" class="form-label">Modelo</label>
-                            <input type="text" class="form-control" id="inputModelo" name="modelo">
+                            <input type="text" class="form-control" id="inputModelo" name="modelo" value="<%= locals.oldData ? oldData.modelo : null %>">
+                            <% if (locals.errors && errors.modelo) { %>
+                                <h2>
+                                    <%= errors.modelo.msg %> 
+                                </h2>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputCarga" class="form-label">Tipo de Carga</label>
-                            <input type="text" class="form-control" id="inputCarga" name="tipoC">
+                            <input type="text" class="form-control" id="inputCarga" name="tipoC" value="<%= locals.oldData ? oldData.tipoC : null %>">
+                            <% if (locals.errors && errors.tipoC) { %>
+                                <h2>
+                                    <%= errors.tipoC.msg %> 
+                                </h2>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputOrigen" class="form-label">Origen</label>
-                            <input type="text" class="form-control" id="inputOrigen" name="origen">
+                            <input type="text" class="form-control" id="inputOrigen" name="origen" value="<%= locals.oldData ? oldData.origen : null %>">
+                            <% if (locals.errors && errors.origen) { %>
+                                <h2>
+                                    <%= errors.origen.msg %> 
+                                </h2>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputDestino" class="form-label">Destino</label>
-                            <input type="text" class="form-control" id="inputDestino" name="recorrido">
+                            <input type="text" class="form-control" id="inputDestino" name="recorrido" value="<%= locals.oldData ? oldData.recorrido : null %>">
+                            <% if (locals.errors && errors.recorrido) { %>
+                                <h2>
+                                    <%= errors.recorrido.msg %> 
+                                </h2>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputPrecio" class="form-label">Precio</label>
-                            <input type="number" class="form-control" id="inputPrecio" name="precioKm">
+                            <input type="number" class="form-control" id="inputPrecio" name="precioKm" value="<%= locals.oldData ? oldData.precioKm : null %>">
+                            <% if (locals.errors && errors.precioKm) { %>
+                                <h2>
+                                    <%= errors.precioKm.msg %> 
+                                </h2>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputFile" class="form-label">Imagen</label>
-                            <input type="file" enctype="" class="form-control" id="inputFile" name="rutaImg">
+                            <input type="file" enctype="" class="form-control" id="inputFile" name="rutaImg" accept="image/*">
+                            <% if (locals.errors && errors.rutaImg) { %>
+                                <h2>
+                                    <%= errors.rutaImg.msg %> 
+                                </h2>
+                            <% } %>
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn-home-inicio-sesion button-h">Guardar</button>

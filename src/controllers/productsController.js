@@ -1,7 +1,9 @@
 //Importación FileSystem + Path
 const fs = require('fs');
 const path = require('path');
-const { send } = require('process');
+
+// Requerimos express-validator
+const { validationResult } = require('express-validator');
 
 const productFilePath = path.join(__dirname, '../data/products.json');
 const productosData = JSON.parse(fs.readFileSync(productFilePath, 'utf-8'));
@@ -30,27 +32,34 @@ const productsController = {
      //Guardado producto
      guardar: (req, res) =>{
 
-      let idNuevo = (productosData[productosData.length - 1].id) + 1;
-   
-      let camionNuevo = {
-         "id": idNuevo,
-         "nombre": req.body.nombre,
-         "marca": req.body.marca,
-         "modelo": req.body.modelo,
-         "tipoC": req.body.tipoC,
-         "precioKm": parseInt(req.body.precioKm),
-         "rutaImg": req.file.filename,
-         "origen": req.body.origen,
-         "recorrido": req.body.recorrido
-      };
-      
-      //Guardado lógico
-      productosData.push(camionNuevo);
+      let errors = validationResult(req);
 
-      //Guardado físico
-      fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
+      if (errors.isEmpty()) {
+         let idNuevo = (productosData[productosData.length - 1].id) + 1;
+   
+         let camionNuevo = {
+            "id": idNuevo,
+            "nombre": req.body.nombre,
+            "marca": req.body.marca,
+            "modelo": req.body.modelo,
+            "tipoC": req.body.tipoC,
+            "precioKm": parseInt(req.body.precioKm),
+            "rutaImg": req.file.filename,
+            "origen": req.body.origen,
+            "recorrido": req.body.recorrido
+         };
          
-      res.redirect('/products/productos');
+         //Guardado lógico
+         productosData.push(camionNuevo);
+
+         //Guardado físico
+         fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
+            
+         res.redirect('/products/productos');
+      } else {
+         res.render('./products/cargar', {errors: errors.mapped(), oldData: req.body});
+      }
+
    
      },
      
