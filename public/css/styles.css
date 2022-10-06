@@ -300,6 +300,8 @@ display: flex;
 }
 
 
+
+
 .borde-imagen:hover{
     box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
     border-radius: 5px;
@@ -316,6 +318,12 @@ display: flex;
     background-size: cover;
     background-position: center;
 
+}
+.card-body{
+    height: 50vh;
+}
+.card-img-top{
+    height: 33vh;
 }
 
 .form-label{
