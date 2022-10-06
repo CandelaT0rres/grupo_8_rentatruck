@@ -215,9 +215,6 @@ display: flex;
     
 }
 
-
-
-
 /* CARRITO*/
 
 .logo{
@@ -263,6 +260,7 @@ display: flex;
 }
 
 @media only screen and (max-width:30rem) {
+
     table{
         width: 100%;
     }
@@ -292,8 +290,21 @@ display: flex;
 
 
     
+.imagenes{
+    width: 85%;
+    border-radius: 2em;
+}
+.borde-imagen{
+    transition: all 450ms;
+    
+}
 
 
+.borde-imagen:hover{
+    box-shadow: 0 5px 20px rgba(0,0,0, 0.9);
+    border-radius: 5px;
+    transform: scale(1.12);
+}
 
 
 
@@ -560,7 +571,6 @@ display: flex;
     align-items: center;
     height: 200px;
     
-   
    
 }
 .articulo-5{

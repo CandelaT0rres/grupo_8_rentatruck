@@ -3,16 +3,16 @@ const { body } = require('express-validator');
 
 // Crear validaciones
 const validaciones = [
-    body('nombre').notEmpty().withMessage('Debes completar el campo Nombre'),
-    body('marca').notEmpty().withMessage('Debes completar el campo Marca'),
-    body('modelo').notEmpty().withMessage('Debes completar el campo Modelo'),
-    body('tipoC').notEmpty().withMessage('Debes completar el campo Tipo de carga'),
-    body('origen').notEmpty().withMessage('Debes completar el campo Origen'),
-    body('recorrido').notEmpty().withMessage('Debes completar el campo Recorrido'),
-    body('precioKm').notEmpty().withMessage('Debes completar el campo Precio'),
+    body('nombre').notEmpty().withMessage('Debes ingresar un nombre'),
+    body('marca').notEmpty().withMessage('Debes ingresar una marca'),
+    body('modelo').notEmpty().withMessage('Debes ingresar un modelo'),
+    body('tipoC').notEmpty().withMessage('Debes agregar el tipo de carga'),
+    body('origen').notEmpty().withMessage('Debes ingresar un Origen'),
+    body('recorrido').notEmpty().withMessage('Debes ingresar un recorrido'),
+    body('precioKm').notEmpty().withMessage('Debes ingresar un recio'),
     body('rutaImg').custom((value, { req }) => {
         let file = req.file;
-        let accept = ['.jpg', '.png', '.gif'];
+        let accept = ['.jpg', '.png', '.gif', '.jpeg'];
 
         if (!file) {
             throw new Error('Debes cargar una imagen')

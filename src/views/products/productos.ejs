@@ -32,39 +32,33 @@
                 <div class="btn-txt">Nuevo Camión</div>
             </button>
             </a>
-            <div class="container my-3 ">
-                <div class="row my-custom-row justify-content-center">
-                  <% for (let d of productos) { %>
-                    
-                     <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">   
-                        <div class="card border-light mb-3 m-3" style="width: 20rem;">
-                             <img src="/img/<%= d.rutaImg %>" class="camiones card-img-top">
-                            <div class="card-body">
-                                <h1 class="fs-2 fw-bold"><%= d.nombre %></h1>
-                                <p> 
-                                    <ul class="list-group list-group-flush fw-bold">
-                                        <li  class="list-group-item ">Marca: <%= d.marca %></li>
-                                        <li  class="list-group-item">Modelo: <%= d.modelo %></li>
-                                        <li  class="list-group-item"> Tipo de carga: <br> <%= d.tipoC %></li>
-                                        <li  class="list-group-item">Precio por Km: $<%= d.precioKm %></li>
-                                    </ul>
-                                    </p>
-                                <div class="row">
-                                    <div class="col-12 row justify-content-around">
-                                        <button class="btn-home-inicio-sesion button-h"> <a href="/products/carrito" class="text-reset text-decoration-none">Contratar</a> </button>
-                                        <button class="btn-home-inicio-sesion button-h"> <a href="/products/editar/<%= d.id %> " class="text-reset text-decoration-none">Editar</a> </button>
-                                        <form action="/products/borrar/<%= d.id %>?_method=DELETE" method="post">
-                                            <button class="btn-home-inicio-sesion button-h">Borrado </button>
-                                        </form>
-                                    </div>  
-
-                                </div>                                  
+           
+                <div class="container my-3 ">
+                    <div class="row my-custom-row justify-content-center">
+                    <% for (let d of productos) { %>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                        <a href="/products/detalle/<%= d.id %>" class="text-decoration-none text-dark">
+                            <div class="card border-light mb-3 m-3" style="width: 20rem;">
+                                <img src="/img/<%= d.rutaImg %>" class="camiones card-img-top">
+                                <div class="card-body">
+                                    <h1 class="fs-2 fw-bold"><%= d.nombre %></h1>
+                                    <p> 
+                                        <ul class="list-group list-group-flush fw-bold">
+                                            <li  class="list-group-item ">Marca: <%= d.marca %></li>
+                                            <li  class="list-group-item">Modelo: <%= d.modelo %></li>
+                                            <li  class="list-group-item"> Tipo de carga: <br> <%= d.tipoC %></li>
+                                            <li  class="list-group-item">Precio por Km: $<%= d.precioKm %></li>
+                                        </ul>
+                                        </p>
+                                                               
+                                </div>
                             </div>
-                        </div>
-                    </div>               
-                <% } %> 
+                        </a>
+                        </div>               
+                    <% } %> 
+                    </div>
                 </div>
-            </div>
+            
             <form> 
                 <div class="mb-3 m-3">
                 <label for="exampleFormControlInput1" class="form-label">Dirección de correo electrónico</label>
