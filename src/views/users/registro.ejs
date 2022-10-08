@@ -18,7 +18,11 @@
             <form action="/user/registro" method="post" enctype="multipart/form-data" class="row g-3 fondo-registro">
                 <div class="col-md-4">
                   <label for="inputNombre4" class="form-label">Nombre/Razón social</label>
+<<<<<<< HEAD
                   <input type="text" name="nombre" class="form-control <%=locals.errors && errors.nombre ? 'is-invalid' : null %>" id="inputNombre4"  value="<%=locals.olData ? olData.nombre : null %>" >
+=======
+                  <input type="text" name="nombre" class="form-control <%= locals.errors && errors.nombre ? 'is-invalid' : null %> " id="inputNombre4"  value="<%= locals.olData ? olData.nombre : null%>">
+>>>>>>> 1517b3356f79a958357185181cf468590ac40ed7
 
                   <% if (locals.errors && errors.nombre) { %>
                     <h5 class = "text-danger fw-bold">
@@ -29,7 +33,11 @@
 
                 <div class="col-8">
                     <label for="inputAddress" class="form-label">Dirección</label>
+<<<<<<< HEAD
                     <input type="text" class="form-control <%=locals.errors && errors.direccion ? 'is-invalid' : null %> " id="inputAddress" name="direccion" value="<%= locals.olData ? olData.direccion : null %>">
+=======
+                    <input type="text" class="form-control <%= locals.errors && errors.direccion ? 'is-invalid' : null %> " id="inputAddress" name="direccion" value="<%= locals.olData ? olData.direccion : null %>">
+>>>>>>> 1517b3356f79a958357185181cf468590ac40ed7
 
                     <% if (locals.errors && errors.direccion) { %>
                         <h5 class = "text-danger fw-bold">
@@ -104,7 +112,11 @@
                         <% let paises = ['Argentina', 'Brasil', 'Uruguay', 'Chile', 'Paraguay', 'Bolivia', 'Venezuela']; %>
 
                         <% for (let cadaElemento of paises) {%> 
+<<<<<<< HEAD
                         <option value="<%= locals.olData && (cadaElemento === oldData.pais) ? 'selected' : null %> "> <%= cadaElemento %></option>
+=======
+                        <option value="<%= locals.olData && (cadaElemento === oldData.pais) ? 'selected' : null %>" > <%= cadaElemento %></option>
+>>>>>>> 1517b3356f79a958357185181cf468590ac40ed7
                        <% } %> 
 
                        <% if (locals.errors && errors.pais) { %>
@@ -127,7 +139,7 @@
                 </div>
                 <div class="col-md-6">
                     <label for="inputPassword2" class="form-label">Repita su contraseña</label>
-                    <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword2" name="password">
+                    <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword2" name="password2">
 
                     <% if (locals.errors && errors.password) { %>
                         <h5 class = "text-danger fw-bold">
