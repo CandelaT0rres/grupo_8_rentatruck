@@ -1,1 +1,17 @@
-[]
+[
+    {
+        "id": 1,
+        "nombre": "bernardo",
+        "direccion": "mi casa",
+        "apellido": "franco",
+        "direccion2": "",
+        "dni": "99999999",
+        "ciudad": "caba",
+        "provincia": "caba",
+        "email": "prueba@prueba.com",
+        "codigopostal": "1888",
+        "pais": "",
+        "password": "$2a$10$WExQy9po85QTobFgjsq/1uKQQbUGCLF7J86U2TvTIWKZDXzFwjEXO",
+        "img": "user-1665272215178.jpg"
+    }
+]

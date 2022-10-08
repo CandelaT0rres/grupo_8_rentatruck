@@ -1,6 +1,7 @@
-//Importación fs + path
+//Importación fs + path + bcrypt
 const path = require('path');
 const fs = require('fs');
+const bcrypt = require('bcryptjs');
 
 //Importación express-validator
 const {validationResult} = require('express-validator');
@@ -30,7 +31,7 @@ const userController = {
             'email' : req.body.email,
             'codigopostal' : req.body.codigopostal,
             'pais' : req.body.pais,
-            'password' : req.body.password,
+            'password' : bcrypt.hashSync(req.body.password, 10),
             'img' : req.file.filename
          }
          usuarios.push(usuarioNuevo);
@@ -45,6 +46,36 @@ const userController = {
     login: (req , res) => {
         res.render ('./users/login')
      },
+     procesoLogin: (req, res) => {
+      let datos = req.body;
+      let usuarioALoguearse;
+
+      /*usuarioALoguearse = usuarios.find((cadaUsuario) => {
+         cadaUsuario.email == datos.email
+      });*/
+
+      for (let o of usuarios) {
+         if (datos.email == o.email) {
+            if (bcrypt.compareSync(datos.password, o.password)) {
+               usuarioALoguearse = o;
+            }
+         }
+      };
+
+      req.session.usuarioLogueado = usuarioALoguearse;
+
+      if (datos.recordame != undefined) {
+         res.cookie('recordame', datos.email, { maxAge: (((1000 * 60) * 60) * 24) })
+      };
+
+      res.redirect('/');
+
+     },
+     logout: (req, res) => {
+      req.session.destroy();
+      res.clearCookie('recordame');
+      res.redirect('/');
+     }
 };
 
 
