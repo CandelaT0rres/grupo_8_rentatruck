@@ -16,8 +16,9 @@ app.use(express.json());
 const methodOverride = require('method-override');
 app.use(methodOverride('_method')); 
 
-//Haciendo estatica a public
+//Middlewares de aplicación
 app.use(express.static(path.join(__dirname,"../public")));
+const error404 = require('./middlewares/error404');
 
 //Seteo EJS
 app.set('views', path.join(__dirname, '../src/views'));
@@ -27,12 +28,11 @@ app.set('view engine', 'ejs');
 app.use('/', homeRouter);
 app.use('/products', productsRouter);
 app.use('/user', userRouter);
-app.use((req, res, next) => {
-    res.status(404).render('not-found');
-})
+
+//ERROR 404 
+app.use(error404);
 
 //Servidor
 app.listen(process.env.PORT || 3005, function() {
     console.log("Servidor corriendo en el puerto 3005");
 });
-

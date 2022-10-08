@@ -12,14 +12,12 @@ const storage = multer.diskStorage({
         cb(null, nombreImg);
     }
 });
+
 const upload = multer({storage : storage, fileFilter: (req, file, cb) => {
     let extencionesAceptadas = [".jpg", ".png", ".gif", ".jpeg"];
     let extencion = path.extname(file.originalname);
-    extencionesAceptadas.includes(extencion) ? cb(null,true): cb(null,false);
-   
-
-}  
-});
+    extencionesAceptadas.includes(extencion) ? cb(null,true): cb(null,false)}  
+} );
 
 module.exports = upload; 
 

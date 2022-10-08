@@ -2,7 +2,7 @@
 const fs = require('fs');
 const path = require('path');
 
-// Requerimos express-validator
+// Importación express-validator
 const { validationResult } = require('express-validator');
 
 const productFilePath = path.join(__dirname, '../data/products.json');
@@ -82,8 +82,8 @@ const productsController = {
      //Edición producto
      actualizar: (req, res) => {
       let errors = validationResult(req);
-      if (errors.isEmpty){
-            //Cuando encuentro el producto voy actualizando
+      if (errors.isEmpty()){
+         //Cuando encuentro el producto voy actualizando
          let imgAntigua; 
          for (let o of productosData) {
             if (o.id == req.params.id) {
@@ -99,15 +99,15 @@ const productsController = {
                break;
             }
          };
-         fs.unlinkSync(path.join(__dirname, "../../public/img/")+imgAntigua)
+         fs.unlinkSync(path.join(__dirname, "../../public/img/") + imgAntigua);
 
          //Guardado físico
          fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
 
          res.redirect('/');
       } else {
-         let camionEncontrado= productosData.find((cadaElemento)=> cadaElemento.id==req.params.id);
-         camionEncontrado? res.render("./products/editar", {camion: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
+         let camionEncontrado = productosData.find((cadaElemento)=> cadaElemento.id == req.params.id);
+         camionEncontrado? res.render("./products/editar", {producto: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
       }
       
      },
@@ -140,10 +140,8 @@ const productsController = {
       fs.writeFileSync(productFilePath, JSON.stringify(productoTerminado, null, 4), 'utf-8');
 
       res.redirect('/');  
-      }
-
-      
-     
+      }   
+    
 }
 
 
