@@ -22,35 +22,75 @@
                     <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/editar/<%= producto.id  %>?_method=PUT" method="post" enctype="multipart/form-data"> 
                         <div class="col-md-6">
                         <label for="inputNoombre" class="form-label">Nombre/Descripción</label>
-                        <input type="text" class="form-control" id="inputNoombre" name="nombre" value="<%= producto.nombre %> ">
+                        <input type="text" class="form-control" id="inputNoombre" name="nombre" value="<%= locals.oldData && oldData.nombre? oldData.nombre: producto.nombre %>">
+                        <% if (locals.errors && errors.nombre) { %>
+                            <h4 class = "text-light">
+                                <%= errors.nombre.msg %> 
+                            </h4>
+                        <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputMarca" class="form-label">Marca</label>
-                            <input type="text" class="form-control" id="inputMarca" name="marca" value="<%= producto.marca %> ">
+                            <input type="text" class="form-control" id="inputMarca" name="marca" value="<%= locals.oldData && oldData.marca? oldData.marca: producto.marca %> ">
+                            <% if (locals.errors && errors.marca) { %>
+                                <h4 class = "text-light">
+                                    <%= errors.marca.msg %> 
+                                </h4>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputModelo" class="form-label">Modelo</label>
-                            <input type="text" class="form-control" id="inputModelo" name="modelo" value="<%= producto.modelo %> ">
+                            <input type="text" class="form-control" id="inputModelo" name="modelo" value="<%= locals.oldData && oldData.modelo? oldData.modelo: producto.modelo %> ">
+                            <% if (locals.errors && errors.modelo) { %>
+                                <h4 class = "text-light">
+                                    <%= errors.modelo.msg %> 
+                                </h4>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputCarga" class="form-label">Tipo de Carga</label>
-                            <input type="text" class="form-control" id="inputCarga" name="tipoC" value="<%= producto.tipoC %> ">
+                            <input type="text" class="form-control" id="inputCarga" name="tipoC" value="<%= locals.oldData && oldData.tipoC? oldData.tipoC: producto.tipoC %> ">
+                            <% if (locals.errors && errors.tipoC) { %>
+                                <h4 class = "text-light">
+                                    <%= errors.tipoC.msg %> 
+                                </h4>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputOrigen" class="form-label">Origen</label>
-                            <input type="text" class="form-control" id="inputOrigen" name="origen" value="<%= producto.origen %> ">
+                            <input type="text" class="form-control" id="inputOrigen" name="origen" value="<%= locals.oldData && oldData.origen? oldData.origen: producto.origen %> ">
+                            <% if (locals.errors && errors.origen) { %>
+                                <h4 class = "text-light">
+                                    <%= errors.origen.msg %> 
+                                </h4>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputDestino" class="form-label">Destino</label>
-                            <input type="text" class="form-control" id="inputDestino" name="recorrido" value="<%= producto.recorrido%> ">
+                            <input type="text" class="form-control" id="inputDestino" name="recorrido" value="<%= locals.oldData && oldData.recorrido? oldData.recorrido: producto.recorrido %> ">
+                            <% if (locals.errors && errors.recorrido) { %>
+                                <h4 class = "text-light">
+                                    <%= errors.recorrido.msg %> 
+                                </h4>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputPrecio" class="form-label">Precio</label>
-                            <input type="text" class="form-control" id="inputPrecio" name="precioKm" value="<%= producto.precioKm %> ">
+                            <input type="text" class="form-control" id="inputPrecio" name="precioKm" value="<%= locals.oldData && oldData.preciokm? oldData.precioKm: producto.precioKm %> ">
+                            <% if (locals.errors && errors.precioKm) { %>
+                                <h4 class = "text-light">
+                                    <%= errors.precioKm.msg %> 
+                                </h4>
+                            <% } %>
                         </div>
                         <div class="col-md-6">
                             <label for="inputFile" class="form-label">Imagen</label>
-                            <input type="file" enctype="" class="form-control" id="inputFile" name="rutaImg" value="<%= producto.rutaImg %> ">
+                            <input type="file" enctype="" class="form-control" id="inputFile" name="rutaImg" value="<%= locals.oldData && oldData.rutaImg? oldData.rutaImg: producto.rutaImg %> ">
+                            <% if (locals.errors && errors.rutaImg) { %>
+                                <h4 class = "text-light">
+                                    <%= errors.rutaImg.msg %> 
+                                </h4>
+                            <% } %>
                         </div>
                         <div class="col-12">
                             <button type="submit" class="btn-home-inicio-sesion button-h">Guardar</button>

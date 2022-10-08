@@ -12,16 +12,10 @@ const validaciones = [
     body('precioKm').notEmpty().withMessage('Debes ingresar un recio'),
     body('rutaImg').custom((value, { req }) => {
         let file = req.file;
-        let accept = ['.jpg', '.png', '.gif', '.jpeg'];
 
         if (!file) {
-            throw new Error('Debes cargar una imagen')
-        } else {
-            let fileExtension = path.extname(file.originalname);
-            if (!accept.includes(fileExtension)) {
-                throw new Error('Las extenciones permitidas son .jpg, .png, .gif')
-            }
-        }
+            throw new Error('Debes cargar una imagen, las extenciones permitidas son: .jpg, .png, .gif, .jpeg')
+        } 
 
         return true;
     })

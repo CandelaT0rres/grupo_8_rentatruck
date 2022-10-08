@@ -78,31 +78,38 @@ const productsController = {
       };
      },
 
-     //Edición procuto
+
+     //Edición producto
      actualizar: (req, res) => {
+      let errors = validationResult(req);
+      if (errors.isEmpty){
+            //Cuando encuentro el producto voy actualizando
+         let imgAntigua; 
+         for (let o of productosData) {
+            if (o.id == req.params.id) {
+               imgAntigua = o.rutaImg;
+               o.nombre = req.body.nombre;
+               o.marca = req.body.marca;
+               o.modelo = req.body.modelo;
+               o.tipoC = req.body.tipoC;
+               o.precioKm = parseInt(req.body.precioKm);
+               o.rutaImg = req.file.filename;
+               o.origen = req.body.origen;
+               o.recorrido = req.body.recorrido;
+               break;
+            }
+         };
+         fs.unlinkSync(path.join(__dirname, "../../public/img/")+imgAntigua)
 
-      //Cuando encuentro el producto voy actualizando
-      let imgAntigua; 
-      for (let o of productosData) {
-         if (o.id == req.params.id) {
-            imgAntigua = o.rutaImg;
-            o.nombre = req.body.nombre;
-            o.marca = req.body.marca;
-            o.modelo = req.body.modelo;
-            o.tipoC = req.body.tipoC;
-            o.precioKm = parseInt(req.body.precioKm);
-            o.rutaImg = req.file.filename;
-            o.origen = req.body.origen;
-            o.recorrido = req.body.recorrido;
-            break;
-         }
-      };
-      fs.unlinkSync(path.join(__dirname, "../../public/img/")+imgAntigua)
+         //Guardado físico
+         fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
 
-      //Guardado físico
-      fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
-
-      res.redirect('/');
+         res.redirect('/');
+      } else {
+         let camionEncontrado= productosData.find((cadaElemento)=> cadaElemento.id==req.params.id);
+         camionEncontrado? res.render("./products/editar", {camion: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
+      }
+      
      },
      //Vista individual
      detalle: (req, res) => {
