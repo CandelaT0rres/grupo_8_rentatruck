@@ -13,6 +13,7 @@ const errors = [
     body('provincia').notEmpty().withMessage('Debe agregar una provincia'),
     body('email').notEmpty().withMessage('Debe ingresar un email')
         .isEmail().withMessage('ingrese un email valido'),
+    body('pais').notEmpty().withMessage('Seleccione su país'),
     body('password').notEmpty().withMessage('Debe ingresar la contraseña'),
     body('img').custom((value, { req }) => {
       if (!req.file) {
