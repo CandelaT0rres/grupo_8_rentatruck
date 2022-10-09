@@ -15,6 +15,11 @@ const validaciones = require('../middlewares/usersValidator');
 router.get('/registro',  controller.registro);
 router.post('/registro', upload.single('img'), validaciones, controller.nuevoUsuario);
 
+//Vista y edición de usuario
+router.get('/registro/:id', controller.editarUsuario);
+router.put('/registro/:id', upload.single('img'), validaciones, controller.updateUsuario);
+
+
 //Vista y proceso login
 router.get('/login', controller.login);
 router.post('/login', controller.procesoLogin);

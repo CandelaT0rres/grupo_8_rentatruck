@@ -1,17 +1,17 @@
 [
     {
         "id": 1,
-        "nombre": "bernardo",
-        "direccion": "mi casa",
-        "apellido": "franco",
-        "direccion2": "",
-        "dni": "99999999",
-        "ciudad": "caba",
-        "provincia": "caba",
+        "nombre": "Emiliano",
+        "direccion": "prueba",
+        "apellido": "prueba",
+        "direccion2": "prueba",
+        "dni": 22222222222,
+        "ciudad": "prueba",
+        "provincia": "prueba",
         "email": "prueba@prueba.com",
-        "codigopostal": "1888",
-        "pais": "",
-        "password": "$2a$10$WExQy9po85QTobFgjsq/1uKQQbUGCLF7J86U2TvTIWKZDXzFwjEXO",
-        "img": "user-1665272215178.jpg"
+        "codigopostal": 333333333,
+        "pais": "Uruguay",
+        "password": "$2a$10$KmD26rg23jXAjbWNQhDRLuTMi//4AiW0kvd9kLLDeUSGSIQu5ykZe",
+        "img": "user-1665345700349.png"
     }
 ]

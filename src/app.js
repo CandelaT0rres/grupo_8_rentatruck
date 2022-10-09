@@ -22,8 +22,9 @@ app.use(methodOverride('_method'));
 app.use(express.static(path.join(__dirname,"../public")));
 const error404 = require('./middlewares/error404');
 app.use(session({secret: 'Es un secreto papu', resave: false, saveUninitialized: false}));
-/***ACA VA EL MIDDLEWARE DE COOKIE RECORDAME***/
 app.use(cookieParser());
+const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
+app.use(userLoggedMiddleware);
 
 //Seteo EJS
 app.set('views', path.join(__dirname, '../src/views'));
