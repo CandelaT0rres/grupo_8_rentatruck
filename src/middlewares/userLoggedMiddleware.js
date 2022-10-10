@@ -5,8 +5,6 @@ let usuarios = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/users.js
 
 function userLoggedMiddleware(req, res, nex) {
     
-    if ()
-
     next();
 }
 

@@ -53,16 +53,5 @@
         "rutaImg": "camion-de-carga.jpg",
         "origen": "San Pablo",
         "recorrido": "Paraguay"
-    },
-    {
-        "id": 6,
-        "nombre": "Camión Frigorífico",
-        "marca": "Volvo",
-        "modelo": "Dayli",
-        "tipoC": "Productos frigoríficos",
-        "precioKm": 3000,
-        "rutaImg": "camion6.jpg",
-        "origen": "Asunción",
-        "recorrido": "San Pablo"
     }
 ]
