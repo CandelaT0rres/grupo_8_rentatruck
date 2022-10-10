@@ -38,7 +38,8 @@ const userController = {
             'email' : req.body.email,
             'codigopostal' : parseInt(req.body.codigopostal),
             'pais' : req.body.pais,
-            'password' : bcrypt.hashSync(req.body.password, 10),
+            'password': bcrypt.hashSync(req.body.password, 10),
+            'password2': bcrypt.hashSync(req.body.password2, 10),
             'img' : req.file.filename
          }
          usuarios.push(usuarioNuevo);
@@ -100,22 +101,36 @@ const userController = {
    procesoLogin: (req, res) => {
       let datos = req.body;
       let usuarioALoguearse;
+      let errors = validationResult(req);
 
-      for (let o of usuarios) {
-         if (datos.email == o.email) {
-            if (bcrypt.compareSync(datos.password, o.password)) {
-               usuarioALoguearse = o;
+      if (errors.isEmpty()) {
+         for (let o of usuarios) {
+            if (datos.email == o.email) {
+               if (bcrypt.compareSync(datos.password, o.password)) {
+                  usuarioALoguearse = o;
+               }
             }
-         }
-      };
+         };
 
-      req.session.usuarioLogueado = usuarioALoguearse;
+         if (usuarioALoguearse == undefined) {
+            res.render('./users/login', { error: {
+               credencial: {
+                  msg: 'Credenciales inválidas'
+               }
+            } });
+         } else {
+            req.session.usuarioLogueado = usuarioALoguearse;
+   
+         if (datos.recordame != undefined) {
+            res.cookie('recordame', datos.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
+         };
+   
+         res.redirect('/');
+         };
 
-      if (datos.recordame != undefined) {
-         res.cookie('recordame', datos.email, { maxAge: (((1000 * 60) * 60) * 24) })
-      };
-
-      res.redirect('/');
+      } else {
+         res.render('./users/login', { errors: errors.mapped(), oldData: datos });
+      }
 
    },
 
