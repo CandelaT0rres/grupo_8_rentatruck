@@ -44,25 +44,14 @@
         "recorrido": "Montevideo"
     },
     {
-        "id": 5,
-        "nombre": "Camión de carga",
-        "marca": "Volvo",
-        "modelo": "Dayli",
-        "tipoC": "Productos hogareños",
-        "precioKm": 3500,
-        "rutaImg": "camion-de-carga.jpg",
-        "origen": "San Pablo",
-        "recorrido": "Paraguay"
-    },
-    {
         "id": 6,
-        "nombre": "Camión Frigorífico",
-        "marca": "Volvo",
-        "modelo": "Dayli",
-        "tipoC": "Productos frigoríficos",
-        "precioKm": 3000,
-        "rutaImg": "camion6.jpg",
-        "origen": "Asunción",
-        "recorrido": "San Pablo"
+        "nombre": "asdasd",
+        "marca": "asdasd  ",
+        "modelo": "asdasd  ",
+        "tipoC": "asdasd  ",
+        "precioKm": 1111,
+        "rutaImg": "producto-1666482151519.png",
+        "origen": "sadasda  ",
+        "recorrido": "asdasda  "
     }
 ]

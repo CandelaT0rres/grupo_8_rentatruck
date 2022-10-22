@@ -22,7 +22,7 @@ router.get('/registro', guestMiddleware,  controller.registro);
 router.post('/registro', upload.single('img'), validaciones, controller.nuevoUsuario);
 
 //Vista y edición de usuario
-router.get('/registro/:id', controller.editarUsuario);
+router.get('/registro/:id', authMiddleware, controller.editarUsuario);
 router.put('/registro/:id', upload.single('img'), validaciones, controller.updateUsuario);
 
 

@@ -1,6 +1,7 @@
 //Importación FileSystem + Path
 const fs = require('fs');
 const path = require('path');
+const sharp = require('sharp');
 
 // Importación express-validator
 const { validationResult } = require('express-validator');
@@ -37,12 +38,16 @@ const productsController = {
      },
 
      //Guardado producto
-     guardar: (req, res) =>{
+     guardar: async(req, res) =>{
 
       let errors = validationResult(req);
 
       if (errors.isEmpty()) {
-   
+
+         let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
+         .toFile(path.join(__dirname, '../../public/img/') + img);
+
          let camionNuevo = {
             "id": geneadorID(),
             "nombre": req.body.nombre,
@@ -50,7 +55,7 @@ const productsController = {
             "modelo": req.body.modelo,
             "tipoC": req.body.tipoC,
             "precioKm": parseInt(req.body.precioKm),
-            "rutaImg": req.file.filename,
+            "rutaImg": img,
             "origen": req.body.origen,
             "recorrido": req.body.recorrido
          };
@@ -76,10 +81,15 @@ const productsController = {
      },
 
      //Edición producto
-     actualizar: (req, res) => {
+     actualizar: async(req, res) => {
       let errors = validationResult(req);
       if (errors.isEmpty()){
+
          //Cuando encuentro el producto voy actualizando
+         let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
+         .toFile(path.join(__dirname, '../../public/img/') + img);
+
          let imgAntigua; 
          for (let o of productosData) {
             if (o.id == req.params.id) {
@@ -89,7 +99,7 @@ const productsController = {
                o.modelo = req.body.modelo;
                o.tipoC = req.body.tipoC;
                o.precioKm = parseInt(req.body.precioKm);
-               o.rutaImg = req.file.filename;
+               o.rutaImg = img;
                o.origen = req.body.origen;
                o.recorrido = req.body.recorrido;
                break;
