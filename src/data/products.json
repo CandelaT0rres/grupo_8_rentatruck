@@ -1,14 +1,14 @@
 [
     {
         "id": 1,
-        "nombre": "Camión de automóviles",
-        "marca": "Scania",
-        "modelo": "310 Turbo",
-        "tipoC": "Automóviles",
+        "nombre": "Camión de automóviles  ",
+        "marca": "Scania      ",
+        "modelo": "310 Turbo      ",
+        "tipoC": "Automóviles      ",
         "precioKm": 7000,
-        "rutaImg": "camion1.jpg",
-        "origen": "C.A.B.A",
-        "recorrido": "Córdoba Capital"
+        "rutaImg": "camiones-1665340587420.jpg",
+        "origen": "C.A.B.A     ",
+        "recorrido": "Córdoba Capital      "
     },
     {
         "id": 2,

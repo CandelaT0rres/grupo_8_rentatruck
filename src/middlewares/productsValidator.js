@@ -1,3 +1,4 @@
+//Importo path + express-validator
 const path = require('path');
 const { body } = require('express-validator');
 
@@ -11,12 +12,9 @@ const validaciones = [
     body('recorrido').notEmpty().withMessage('Debes ingresar un recorrido'),
     body('precioKm').notEmpty().withMessage('Debes ingresar un recio'),
     body('rutaImg').custom((value, { req }) => {
-        let file = req.file;
-
-        if (!file) {
+        if (!req.file) {
             throw new Error('Debes cargar una imagen, las extenciones permitidas son: .jpg, .png, .gif, .jpeg')
         } 
-
         return true;
     })
 ]

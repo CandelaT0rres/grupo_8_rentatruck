@@ -5,9 +5,8 @@ const router = express.Router();
 //Importo validaciones
 const validaciones = require('../middlewares/productsValidator');
 
-//Importo middlewares-multer
-const upload = require("../middlewares/multerProducts"); 
-
+//Importo multer
+const upload = require('../middlewares/multerProducts');
 
 //Importo Controlador
 const controller = require('../controllers/productsController');
@@ -23,11 +22,11 @@ router.get('/carrito', controller.carrito);
 
 //Nuevo producto
 router.get('/cargar', controller.cargar);
-router.post('/cargar',upload.single('rutaImg'), validaciones, controller.guardar); //Guardar un producto nuevo
+router.post('/cargar', upload.single('rutaImg'), validaciones, controller.guardar); //Guardar un producto nuevo
 
 //Editar producto
 router.get('/editar/:id', controller.editar);
-router.put('/editar/:id',upload.single('rutaImg'), validaciones, controller.actualizar);
+router.put('/editar/:id', upload.single('rutaImg'), validaciones, controller.actualizar);
 
 //Borrado producto
 router.delete('/borrar/:id', controller.borrar);
