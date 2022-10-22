@@ -133,6 +133,11 @@ const userController = {
       }
 
    },
+   //Perfil
+
+   perfil: (req, res) => {
+      res.render('./users/perfil', {user: req.session.usuarioLogueado});
+   },
 
    logout: (req, res) => {
       req.session.destroy();

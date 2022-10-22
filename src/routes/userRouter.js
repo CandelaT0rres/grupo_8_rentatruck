@@ -30,6 +30,9 @@ router.put('/registro/:id', upload.single('img'), validaciones, controller.updat
 router.get('/login', logueadoMiddleware, controller.login);
 router.post('/login', validacionesLogin, controller.procesoLogin);
 
+//Perfil
+router.get('/perfil', guestMiddleware, controller.perfil);
+
 //LOGOUT USUARIO
 router.get('/logout', authMiddleware, controller.logout);
 
