@@ -8,13 +8,122 @@
     <header>
         <%- include('../partials/header') %>
     </header>
-    <main>
+    <main style="height: 65vh">
         <section>
-            <article>
-                <div>
-                    
-                </div>
-            </article>
+            <div class="container emp-profile m-3 p-4">
+                    <div class="row justify-content-end">
+                       
+                        <div class="col-md-4">
+                            <div class="profile-head">
+                                        <h5>
+                                           <%= user.nombre %> 
+                                        </h5>
+                                        <h6>
+                                            <%= user.apellido %> 
+                                        </h6>
+                                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                 </ul>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                           <a href="/user/registro/<%= user.id %>"> <button type="submit" class="btn-home-inicio-sesion button-h">Editar perfil</button> </a>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-md-4">
+                            <div class="profile-img">
+                                <img src="/img/img-users/<%= user.img %>" alt="img <%= user.nombre %> "/>
+                            </div>
+                        </div>
+                       
+                        <div class="col-md-4">
+                            <div class="tab-content profile-tab" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Nombre</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><%= user.nombre %></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Email</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><%= user.email %></p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Dirección</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><%= user.direccion %> </p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>País</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p><%= user.pais %> </p>
+                                                </div>
+                                            </div>
+                                </div>
+                                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Experience</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>Expert</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Hourly Rate</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>10$/hr</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Total Projects</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>230</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>English Level</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>Expert</p>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label>Availability</label>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p>6 months</p>
+                                                </div>
+                                            </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <label>Your Bio</label><br/>
+                                            <p>Your detail description</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>         
+            </div>
         </section>
     </main>
     <footer>

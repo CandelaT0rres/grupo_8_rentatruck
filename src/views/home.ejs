@@ -35,7 +35,8 @@
                 
                 <article class="col ">
                     <div class="row"> 
-                    
+                        <% if (!locals.userLogueado) { %>
+                            
                         <div class="col text-end">
                             <button class="btn-home-inicio-sesion button-h"><a href="/user/login" class="text-reset text-decoration-none"> Login </a></button>
                         </div>
@@ -43,7 +44,8 @@
                         <div class=" col text-start">
                             <button class="btn-home-inicio-sesion button-h"><a href="/user/registro" class="text-reset text-decoration-none"> Registrarme </a></button>
                         </div>
-                    
+                       
+                        <% } %>
                     </div>
 
         

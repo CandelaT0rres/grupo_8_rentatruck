@@ -31,7 +31,7 @@ router.get('/login', logueadoMiddleware, controller.login);
 router.post('/login', validacionesLogin, controller.procesoLogin);
 
 //Perfil
-router.get('/perfil', guestMiddleware, controller.perfil);
+router.get('/perfil', authMiddleware, controller.perfil);
 
 //LOGOUT USUARIO
 router.get('/logout', authMiddleware, controller.logout);
