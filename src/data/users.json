@@ -1,17 +1,18 @@
 [
     {
-        "id": 1,
-        "nombre": "Emiliano",
-        "direccion": "prueba",
-        "apellido": "prueba",
-        "direccion2": "prueba",
-        "dni": 22222222222,
-        "ciudad": "prueba",
-        "provincia": "prueba",
+        "id": 6,
+        "nombre": "PRUEBA",
+        "direccion": "PRUEBA",
+        "apellido": "PRUEBA",
+        "direccion2": "PRUEBA",
+        "dni": 444,
+        "ciudad": "PRUEBA",
+        "provincia": "PRUEBA",
         "email": "prueba@prueba.com",
-        "codigopostal": 333333333,
-        "pais": "Uruguay",
-        "password": "$2a$10$KmD26rg23jXAjbWNQhDRLuTMi//4AiW0kvd9kLLDeUSGSIQu5ykZe",
-        "img": "user-1665345700349.png"
+        "codigopostal": 45,
+        "pais": "Argentina",
+        "password": "$2a$10$CEmruuNKNlUeeAfoZW70J.2RWUgMZ9Z1UWF7BQXfihmNHKoEOppei",
+        "password2": "$2a$10$b3ZAxbc/K4Z4Cvmz3npJRuxx.cAy65u/oHv0L4s24NvcYidGoRnIy",
+        "img": "user-1666572289494.png"
     }
 ]

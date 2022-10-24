@@ -27,12 +27,14 @@
         <main id="margen-productos-sm"> 
 
             <br><br><br>
-            <a href="/products/cargar"class=""><button class="icon-btn add-btn">
-                <div class="add-icon"></div>
-                <div class="btn-txt">Nuevo Camión</div>
-            </button>
-            </a>
-           
+            <% if (locals.userLogueado) { %>
+                <a href="/products/cargar"class=""><button class="icon-btn add-btn">
+                    <div class="add-icon"></div>
+                    <div class="btn-txt">Nuevo Camión</div>
+                </button>
+                </a>
+                <% } %>
+                
                 <div class="container my-3 ">
                     <div class="row my-custom-row justify-content-center">
                     <% for (let d of productos) { %>

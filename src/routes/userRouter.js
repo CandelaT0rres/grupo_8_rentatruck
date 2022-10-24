@@ -22,13 +22,16 @@ router.get('/registro', guestMiddleware,  controller.registro);
 router.post('/registro', upload.single('img'), validaciones, controller.nuevoUsuario);
 
 //Vista y edición de usuario
-router.get('/registro/:id', controller.editarUsuario);
+router.get('/registro/:id', authMiddleware, controller.editarUsuario);
 router.put('/registro/:id', upload.single('img'), validaciones, controller.updateUsuario);
 
 
 //Vista y proceso login
 router.get('/login', logueadoMiddleware, controller.login);
 router.post('/login', validacionesLogin, controller.procesoLogin);
+
+//Perfil
+router.get('/perfil', authMiddleware, controller.perfil);
 
 //LOGOUT USUARIO
 router.get('/logout', authMiddleware, controller.logout);

@@ -44,6 +44,7 @@
         "recorrido": "Montevideo"
     },
     {
+<<<<<<< HEAD
         "id": 5,
         "nombre": "Camión de carga",
         "marca": "Volvo",
@@ -53,5 +54,16 @@
         "rutaImg": "camion-de-carga.jpg",
         "origen": "San Pablo",
         "recorrido": "Paraguay"
+=======
+        "id": 7,
+        "nombre": "Camión Frigorifico",
+        "marca": "Scania     ",
+        "modelo": "X     ",
+        "tipoC": "Congelados     ",
+        "precioKm": 2000,
+        "rutaImg": "producto-1666572109918.jpg",
+        "origen": "La Plata     ",
+        "recorrido": "Córdoba     "
+>>>>>>> 37fbeec25afbbe72468c96ceb038899c7c412d84
     }
 ]

@@ -5,6 +5,7 @@ const usersFilePath = path.join(__dirname, '../data/users.json');
 const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
 function userLoggedMiddleware (req, res, next) {
+    
     if (req.cookies.recordame != undefined && req.session.usuarioLogueado == undefined) {
         let usuarioALoguearse;
         for (let o of users) {
@@ -13,11 +14,14 @@ function userLoggedMiddleware (req, res, next) {
                 break;
             }
         };
-
+        
         req.session.usuarioLogueado = usuarioALoguearse;
-
     };
-
+    res.locals.userLogueado = false;
+    if (req.session.usuarioLogueado){
+        res.locals.userLogueado = true;
+        res.locals.usuarioLogueadoVistas = req.session.usuarioLogueado;
+    }
     next();
 
 };
