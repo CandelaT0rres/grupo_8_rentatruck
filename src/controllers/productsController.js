@@ -44,7 +44,7 @@ const productsController = {
 
       if (errors.isEmpty()) {
 
-         let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         let img = `${'camiones-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
          .toFile(path.join(__dirname, '../../public/img/') + img);
 
@@ -85,11 +85,12 @@ const productsController = {
       let errors = validationResult(req);
       if (errors.isEmpty()){
 
-         //Cuando encuentro el producto voy actualizando
+         //Sharp
          let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
          .toFile(path.join(__dirname, '../../public/img/') + img);
-
+         
+         //Cuando encuentro el producto voy actualizando
          let imgAntigua; 
          for (let o of productosData) {
             if (o.id == req.params.id) {

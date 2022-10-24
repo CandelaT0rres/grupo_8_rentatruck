@@ -1,7 +1,8 @@
-//Importación fs + path + bcrypt
+//Importación fs + path + bcrypt + shar
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
+const sharp = require('sharp');
 
 //Importación express-validator
 const {validationResult} = require('express-validator');
@@ -23,9 +24,18 @@ const userController = {
     },
    
    //Creación de usuario
-   nuevoUsuario: (req, res) =>{
+   nuevoUsuario: async (req, res) =>{
       let errors = validationResult(req);
       if(errors.isEmpty()){
+ 
+         //Sharp
+         let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         await sharp(req.file.buffer)
+            .resize(400, 400 , {fit:'contain', background:'#fff'})
+            .toFormat('jpeg')
+            .jpeg({quality: 50})
+            .toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
+
          let usuarioNuevo = {
             'id' : generadorId(), 
             'nombre' : req.body.nombre,
@@ -40,7 +50,7 @@ const userController = {
             'pais' : req.body.pais,
             'password': bcrypt.hashSync(req.body.password, 10),
             'password2': bcrypt.hashSync(req.body.password2, 10),
-            'img' : req.file.filename
+            'img' : img
          }
          usuarios.push(usuarioNuevo);
          fs.writeFileSync(pathUsuarios, JSON.stringify(usuarios, null , 4) , 'utf-8');
@@ -57,7 +67,7 @@ const userController = {
       usuarioEncontrado ? res.render('./users/user-edit', {usuario: usuarioEncontrado}) : res.send('No existe el usuario');
    },
 
-   updateUsuario : (req, res) => {
+   updateUsuario: async (req, res) => {
 
       let errors = validationResult(req);
       if(errors.isEmpty()){
@@ -66,6 +76,14 @@ const userController = {
          let product = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
          let imgToDelete = path.join(__dirname, '../../public/img/img-users/', product.img);
          fs.existsSync(imgToDelete) ? fs.unlinkSync(imgToDelete) : null;
+
+         //Sharp
+         let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         await sharp(req.file.buffer).
+            resize(400, 400 , {fit:'contain', background:'#fff'}).
+            toFormat('jpeg').
+            jpeg({quality: 50}).
+            toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
 
          for ( let cadaElemento of usuarios){
             if (cadaElemento.id == req.params.id) {
@@ -80,7 +98,7 @@ const userController = {
                cadaElemento.codigopostal = parseInt(req.body.codigopostal);
                cadaElemento.pais = req.body.pais;
                cadaElemento.password = bcrypt.hashSync(req.body.password, 10);
-               cadaElemento.img = req.file.filename;
+               cadaElemento.img = img;
                break;
             }
          }
@@ -93,7 +111,7 @@ const userController = {
       }
    },
 
-   //Vista Form Login
+   //Vista Login
    login: (req , res) => {
         res.render ('./users/login')
    },

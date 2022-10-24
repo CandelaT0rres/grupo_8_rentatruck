@@ -44,14 +44,14 @@
         "recorrido": "Montevideo"
     },
     {
-        "id": 6,
-        "nombre": "asdasd",
-        "marca": "asdasd  ",
-        "modelo": "asdasd  ",
-        "tipoC": "asdasd  ",
-        "precioKm": 1111,
-        "rutaImg": "producto-1666482151519.png",
-        "origen": "sadasda  ",
-        "recorrido": "asdasda  "
+        "id": 7,
+        "nombre": "Camión Frigorifico",
+        "marca": "Scania     ",
+        "modelo": "X     ",
+        "tipoC": "Congelados     ",
+        "precioKm": 2000,
+        "rutaImg": "producto-1666572109918.jpg",
+        "origen": "La Plata     ",
+        "recorrido": "Córdoba     "
     }
 ]
