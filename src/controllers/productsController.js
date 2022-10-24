@@ -12,8 +12,13 @@ const productosData = JSON.parse(fs.readFileSync(productFilePath, 'utf-8'));
 
 //Generador ID
 function geneadorID() {
-   ultimoProducto = productosData.pop();
-   return ultimoProducto ? ultimoProducto.id + 1 : 1;
+   let ultimoId
+   if (productosData.length != 0) {
+      ultimoId = (productosData[productosData.length-1].id)+1;
+   } else {
+      ultimoId = 1;
+   };
+   return ultimoId;
 };
 
 const productsController = {

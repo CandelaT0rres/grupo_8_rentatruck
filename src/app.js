@@ -24,7 +24,7 @@ const error404 = require('./middlewares/error404');
 app.use(session({secret: 'Es un secreto papu', resave: false, saveUninitialized: false}));
 app.use(cookieParser());
 const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
-//app.use(userLoggedMiddleware);
+app.use(userLoggedMiddleware);
 
 //Seteo EJS
 app.set('views', path.join(__dirname, '../src/views'));

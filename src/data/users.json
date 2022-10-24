@@ -9,10 +9,25 @@
         "ciudad": "PRUEBA",
         "provincia": "PRUEBA",
         "email": "prueba@prueba.com",
-        "codigopostal": 45,
+        "codigopostal": 333333333,
+        "pais": "Uruguay",
+        "password": "$2a$10$UrHZ6uzzBZ9ALdzJhFEAXeUCqXVF82jCwEb7MeluXzLqjkFYhSoCi",
+        "img": "user-1666650681388.jpg"
+    },
+    {
+        "id": 2,
+        "nombre": "Berni",
+        "direccion": "casa",
+        "apellido": "Franco",
+        "direccion2": "dpto",
+        "dni": 11111111,
+        "ciudad": "caba",
+        "provincia": "caba",
+        "email": "test@test.com",
+        "codigopostal": 1888,
         "pais": "Argentina",
-        "password": "$2a$10$CEmruuNKNlUeeAfoZW70J.2RWUgMZ9Z1UWF7BQXfihmNHKoEOppei",
-        "password2": "$2a$10$b3ZAxbc/K4Z4Cvmz3npJRuxx.cAy65u/oHv0L4s24NvcYidGoRnIy",
-        "img": "user-1666572289494.png"
+        "password": "$2a$10$E/7WjRIdNUnXJ1ZeGX2epO62ZIlLuoGnmuIvFGHh44Y5cD16NaX9a",
+        "password2": "$2a$10$KFB0FIANJb86xpReroCOOuTdjpUQDdyUulL9tqORZ1Df48avciCjy",
+        "img": "user-1666644903168.jpg"
     }
 ]

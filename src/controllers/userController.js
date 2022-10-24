@@ -13,8 +13,13 @@ let usuarios = JSON.parse(fs.readFileSync(pathUsuarios, 'utf-8'));
 
 //Geneador ID
 function generadorId (){
-   let ultimoUsuario = usuarios.pop();
-   return ultimoUsuario ? ultimoUsuario.id + 1 : 1;
+   let ultimoId
+   if (usuarios.length != 0) {
+      ultimoId = (usuarios[usuarios.length-1].id)+1;
+   } else {
+      ultimoId = 1;
+   };
+   return ultimoId;
 }
 
 const userController = {
@@ -31,7 +36,7 @@ const userController = {
          //Sharp
          let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer)
-            .resize(400, 400 , {fit:'contain', background:'#fff'})
+            .resize(300, 300 , {fit:'contain', background:'#fff'})
             .toFormat('jpeg')
             .jpeg({quality: 50})
             .toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
@@ -80,7 +85,7 @@ const userController = {
          //Sharp
          let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer).
-            resize(400, 400 , {fit:'contain', background:'#fff'}).
+            resize(300, 300 , {fit:'contain', background:'#fff'}).
             toFormat('jpeg').
             jpeg({quality: 50}).
             toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
