@@ -12,8 +12,15 @@ let usuarios = JSON.parse(fs.readFileSync(pathUsuarios, 'utf-8'));
 
 //Geneador ID
 function generadorId (){
-   let ultimoUsuario = usuarios.pop();
-   return ultimoUsuario ? ultimoUsuario.id + 1 : 1;
+   /*let ultimoUsuario = usuarios.pop();
+   return ultimoUsuario ? ultimoUsuario.id + 1 : 1;*/
+   let ultimoId
+   if (usuarios.length != 0) {
+      ultimoId = (usuarios[usuarios.length-1].id)+1;
+   } else {
+      ultimoId = 1;
+   };
+   return ultimoId;
 }
 
 const userController = {
