@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <%- include('../partials/head') %>
+
+        <title>Productos</title>
+        
+    </head>
+
+    <body class="body-productos">
+
+        <header>
+            <nav class="navbar fondo-registro">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="/" id="principio">
+                         <img src="/img/logo.jpg" id="logo" class="logo rounded-pill">
+                    </a>
+                    <p class="text-center-productos">Una empresa que se proyecta a futuro.</p>
+                    <form class="d-flex" role="Buscar">
+                        <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
+                        <button class="btn-home-inicio-sesion button-h" type="submit">Buscar</button>
+                    </form>
+                </div>
+            </nav>               
+        </header>
+
+        <main id="margen-productos-sm"> 
+
+            <br><br><br>
+            <% if (locals.userLogueado) { %>
+                <a href="/products/cargar"class=""><button class="icon-btn add-btn">
+                    <div class="add-icon"></div>
+                    <div class="btn-txt">Nuevo Camión</div>
+                </button>
+                </a>
+                <% } %>
+                
+                <div class="container my-3 ">
+                    <div class="row my-custom-row justify-content-center">
+                    <% for (let d of productos) { %>
+                        <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
+                        <a href="/products/detalle/<%= d.id %>" class="text-decoration-none text-dark">
+                            <div class="card border-light mb-3 m-3" style="width: 20rem;">
+                                <img src="/img/<%= d.rutaImg %>" class="camiones card-img-top">
+                                <div class="card-body">
+                                    <h1 class="fs-2 fw-bold"><%= d.nombre %></h1>
+                                    <p> 
+                                        <ul class="list-group list-group-flush fw-bold">
+                                            <li  class="list-group-item ">Marca: <%= d.marca %></li>
+                                            <li  class="list-group-item">Modelo: <%= d.modelo %></li>
+                                            <li  class="list-group-item"> Tipo de carga: <br> <%= d.tipoC %></li>
+                                            <li  class="list-group-item">Precio por Km: $<%= d.precioKm %></li>
+                                        </ul>
+                                        </p>
+                                                               
+                                </div>
+                            </div>
+                        </a>
+                        </div>               
+                    <% } %> 
+                    </div>
+                </div>
+            
+            <form> 
+                <div class="mb-3 m-3">
+                <label for="exampleFormControlInput1" class="form-label">Dirección de correo electrónico</label>
+                <input type="email" class="form-control border border-light" id="exampleFormControlInput1" placeholder="nombre@ejemplo.com">
+               </div>
+               <div class="mb-3 m-3">
+                 <label for="exampleFormControlTextarea1" class="form-label">Opiniones:</label>
+                 <textarea class="form-control border border-light" id="exampleFormControlTextarea1" rows="3"></textarea>
+                 <button class="btn-home-inicio-sesion button-h"> <a href="./carrito" class="text-reset text-decoration-none">Enviar</a> </button>
+                 <button class="btn-home-inicio-sesion button-h"> <a href="./carrito" class="text-reset text-decoration-none">Borrar</a> </button>
+              </div>
+            </form>
+        </main>
+
+        <footer class="text-light fondo-registro mt-3">
+            <a href="#principio" class="text-reset text-decoration-none"><i class="bi bi-arrow-up-circle-fill fs-1" id="top"></i></a> 
+            <%- include('../partials/footer') %>
+        </footer>
+    </body>
+</html>

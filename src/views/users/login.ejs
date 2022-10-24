@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title>login</title>
+</head>
+</html>
+
+    <body>
+        <main class="main-login">
+            <section class="section-login">
+            <video muted autoplay loop class="video-login">
+                <source src="/video/production ID_5171156.mp4">
+            </video> 
+        
+          <div class="container container-login">
+                <div class="col col-login" >
+                    <h2 class=" text-center py-1">Bienvenidos</h2>
+                    <div class="text-end text-end-login">
+                        <a href="/"><img src="/img/logo.jpg" width="90" alt="" class="logo-login rounded-pill"></a>
+                    </div>
+
+                    
+                    <form action="/user/login" method="POST">
+                        <% if (locals.error && error.credencial) { %>
+                            <h5 class="text-danger">
+                                <%= error.credencial.msg %>
+                            </h5>
+                        <% } %>
+                        <div class="mb-3">
+                            <label for="E-mail" class="form-label">E-mail</label>
+                            <input type="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" value="<%= locals.oldData && oldData.email ? oldData.email : null %>" name="email" id="E-mail" aria-describedby="emailHelp">
+                            <% if (locals.errors && errors.email) { %>
+                                <h5 class="text-danger">
+                                    <%= errors.email.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+                        <div class="mb-4">
+                            <label for="contraseña" class="form-label">Contraseña</label>
+                            <input type="password" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" name="password" id="contraseña">
+                            <% if (locals.errors && errors.password) { %>
+                                <h5 class="text-danger">
+                                    <%= errors.password.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+                        <div class="mb-4 form-check">
+                            <input type="checkbox" class="form-check-input" name="recordame" id="recordame">
+                            <label class="form-check-label" for="recordame">Recordar cuenta</label>
+                        </div>
+                            <div class="d-grid iniciar-sesion">
+                            <button type="submit" class="btn-home-inicio-sesion button-h">Ingresar</button>
+                        </div>
+                        <div class="my-4 no-tienes-cuenta">
+                            <span>No tenes cuenta? <a href="/user/registro"> Registrate</a></span> <br>
+                            <span>No recordas la contraseña? <a href="#">Recupera la contraseña</a></span>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+          </section>  
+        </main>
+        <footer><h1></h1></footer>
+    
+    </body>
+
+</html>

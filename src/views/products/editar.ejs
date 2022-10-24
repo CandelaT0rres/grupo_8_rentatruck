@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title>Cargar</title>
+</head>
+<body class="registro">
+    <div class="container">
+        <header class="container-fluid" id="principio">
+            <div class="row justify-content-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <h1 class="fw-normal text-dark fw-bold">Rent-A-Truck</h1>
+                    <a href="/"><img class ="logo rounded-pill" src="/img/logo.jpg" alt="logo"></a>
+                    <h3 class="fw-bold text-dark">Editar producto : <%= producto.nombre %> </h2>
+                </div>
+            </div>
+        </header>
+        <main>
+            <div class="container">
+                <div class="row justify-content-center align-items-center">
+                
+                    <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/editar/<%= producto.id  %>?_method=PUT" method="post" enctype="multipart/form-data"> 
+                        <div class="col-md-6">
+                        <label for="inputNoombre" class="form-label">Nombre/Descripción</label>
+                        <input type="text" class="form-control  <%= locals.errors && errors.nombre ? 'is-invalid' : null %>" id="inputNoombre" name="nombre" value="<%= locals.oldData && oldData.nombre? oldData.nombre: producto.nombre %>">
+
+                        <% if (locals.errors && errors.nombre) { %>
+                            <h5 class = "text-danger">
+                                <%= errors.nombre.msg %> 
+                            </h5>
+                        <% } %>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputMarca" class="form-label">Marca</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.marca ? 'is-invalid' : null %>" id="inputMarca" name="marca" value="<%= locals.oldData && oldData.marca? oldData.marca: producto.marca %> ">
+
+                            <% if (locals.errors && errors.marca) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.marca.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputModelo" class="form-label">Modelo</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.modelo ? 'is-invalid' : null %>" id="inputModelo" name="modelo" value="<%= locals.oldData && oldData.modelo? oldData.modelo: producto.modelo %> ">
+
+                            <% if (locals.errors && errors.modelo) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.modelo.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputCarga" class="form-label">Tipo de Carga</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.tipoC ? 'is-invalid' : null %>" id="inputCarga" name="tipoC" value="<%= locals.oldData && oldData.tipoC? oldData.tipoC: producto.tipoC %> ">
+
+                            <% if (locals.errors && errors.tipoC) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.tipoC.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputOrigen" class="form-label">Origen</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.origen ? 'is-invalid' : null %>" id="inputOrigen" name="origen" value="<%= locals.oldData && oldData.origen? oldData.origen: producto.origen %> ">
+
+                            <% if (locals.errors && errors.origen) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.origen.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputDestino" class="form-label">Destino</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.recorrido ? 'is-invalid' : null %>" id="inputDestino" name="recorrido" value="<%= locals.oldData && oldData.recorrido? oldData.recorrido: producto.recorrido %> ">
+
+                            <% if (locals.errors && errors.recorrido) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.recorrido.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputPrecio" class="form-label">Precio</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.precioKm ? 'is-invalid' : null %>" id="inputPrecio" name="precioKm" value="<%= locals.oldData && oldData.preciokm? oldData.precioKm: producto.precioKm %> ">
+
+                            <% if (locals.errors && errors.precioKm) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.precioKm.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="inputFile" class="form-label">Imagen</label>
+                            <input type="file" enctype="" class="form-control  <%= locals.errors && errors.rutaImg ? 'is-invalid' : null %>" id="inputFile" name="rutaImg" value="<%= locals.oldData && oldData.rutaImg? oldData.rutaImg: producto.rutaImg %> ">
+
+                            <% if (locals.errors && errors.rutaImg) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.rutaImg.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+
+                        <div class="col-12">
+                            <button type="submit" class="btn-home-inicio-sesion button-h">Guardar</button>
+                          </div>
+                    </form>
+                </div>
+            </div> 
+        </main>
+    </div>
+
+        <footer class="text-dark bg-light mt-3">
+        <%- include('../partials/footer') %>
+        </footer>
+</body>
+</html>

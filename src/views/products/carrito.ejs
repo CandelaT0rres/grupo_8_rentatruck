@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title>Carrito</title>
+</head>
+    <body class="body-carrito">
+    
+            <header>
+                <nav class="navbar navbar-expand-sm navbar-light bg-light">
+                    
+                    <div class="container-fluid">
+
+                        <a class="navbar-brand" href="/"><img src="/img/logo.jpg" alt="Logo" class="logo rounded-pill"></a> 
+                        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+                            <div class="navbar-nav ms-auto">
+                                <a class="nav-link fw-bold" href="/products/productos/">Productos</a>
+                                <a class="nav-link fw-bold" href="/user/login">Login</a>
+                                <a class="nav-link fw-bold" href="/user/registro">Registrate</a>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+            </header>
+
+            <main>
+                <section class="conteiner">
+
+                    <article>
+                        <div class="row d-flex justify-content-center align-items-center">
+                            
+                            <h2 class="text-white fw-bold d-flex justify-content-center" >Carrito</h2>
+                            
+                            <div class="col-md-8 col-lg-8 col-xl-8">
+                                
+                                <table class=" table table table-ligth table-hover table-carrito-background table-sm table-borderless">
+                                    
+                                    <thead>
+                                        <tr class="table-dark">
+                                            <th scope="col" class="centrado-carrito"></th>
+                                            <th scope="col"class="centrado-carrito">Camión</th>
+                                            <th scope="col" class="centrado-carrito">Recorrido</th>
+                                            <th scope="col" class="centrado-carrito">Precio</th>
+                                            <th scope="col" class="centrado-carrito">Cantidad</th>
+                                        </tr>
+                                    </thead>
+                                   
+                                    <tbody>
+                                        <% for (let i of productos) { %>
+                                            <tr>
+                                                <th scope="row" class="centrado-carrito">1</th>
+                                                <td class="table-carrito-camiones centrado-carrito" data-title="Camión">
+                                                    <img src="/img/<%= i.rutaImg %>" alt="camión-carga-blanco" >
+                                                </td>
+                                                <td class="table-carrito-recorrido centrado-carrito "  data-title="Recorrido">
+                                                    <p class="lead"> Origen: <%= i.origen %> Destino: <%= i.recorrido %></p>
+                                                </td>
+                                                <td class="table-carrito-precio centrado-carrito" data-title="Precio">
+                                                    <p class="lead">u$s<%= i.precioKm %>/km</p>
+                                                </td>
+                                                <td class="table-carrito-cantidad centrado-carrito" data-title="Cantidad">
+                                                    <input type="number" min="1" value="1" class="input-carrito-cantidad">
+                                                    <button class="btn-home-inicio-sesion button-h "> Eliminar </a></button>
+                                                </td>
+                                              </tr>
+                                        <% } %>
+                                    </tbody>
+
+                                    <tfoot>
+                                        ...
+                                      </tfoot>
+
+                                </table>
+
+                                <br><br>
+
+                                <div class="row mx-4">
+                                
+                                    <div class="col col-md-11 col-lg-11 col-xl-11">
+                                        <h3 class="total-carrito-items text-danger">Total: $<%= total %></h3>
+                                    </div>
+                                    
+                                    <div class="col col-md-1 col-lg-1 col-xl-1">
+                                        <button class="btn btn-danger p-3" id="#button-carrito-buy">BUY</button>
+                                    </div>
+                                
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </article>
+          
+                    <br><br>
+                
+                </section>
+
+            
+            </main>
+
+            <footer class="bg-light p-3">
+                <p class="text-center m-0 text-muted text-black"> Todos los derechos son reservados Rent a Truck - "Una empresa que se proyecta a futuro" </p>
+            </footer>
+        
+            <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.2/dist/umd/popper.min.js" integrity="sha384-q9CRHqZndzlxGLOj+xrdLDJa9ittGte1NksRmgJKeCV9DrM7Kz868XYqsKWPpAmn" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+    </body>
+</html>
