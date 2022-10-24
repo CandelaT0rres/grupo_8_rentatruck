@@ -2,6 +2,7 @@
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
+const sharp = require('sharp');
 
 //Importación express-validator
 const {validationResult} = require('express-validator');
@@ -12,8 +13,6 @@ let usuarios = JSON.parse(fs.readFileSync(pathUsuarios, 'utf-8'));
 
 //Geneador ID
 function generadorId (){
-   /*let ultimoUsuario = usuarios.pop();
-   return ultimoUsuario ? ultimoUsuario.id + 1 : 1;*/
    let ultimoId
    if (usuarios.length != 0) {
       ultimoId = (usuarios[usuarios.length-1].id)+1;
@@ -30,9 +29,14 @@ const userController = {
     },
    
    //Creación de usuario
-   nuevoUsuario: (req, res) =>{
+   nuevoUsuario: async(req, res) =>{
       let errors = validationResult(req);
       if(errors.isEmpty()){
+
+         let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         await sharp(req.file.buffer).resize(360, 395, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
+         .toFile(path.join(__dirname, '../../public/img/img-users/') + img);
+
          let usuarioNuevo = {
             'id' : generadorId(), 
             'nombre' : req.body.nombre,
@@ -47,7 +51,7 @@ const userController = {
             'pais' : req.body.pais,
             'password': bcrypt.hashSync(req.body.password, 10),
             'password2': bcrypt.hashSync(req.body.password2, 10),
-            'img' : req.file.filename
+            'img' : img
          }
          usuarios.push(usuarioNuevo);
          fs.writeFileSync(pathUsuarios, JSON.stringify(usuarios, null , 4) , 'utf-8');

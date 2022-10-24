@@ -21,13 +21,13 @@
         "apellido": "Franco",
         "direccion2": "dpto",
         "dni": 11111111,
-        "ciudad": "CABA",
-        "provincia": "Ciudad Autónoma de Buenos Aires",
+        "ciudad": "caba",
+        "provincia": "caba",
         "email": "test@test.com",
         "codigopostal": 1888,
         "pais": "Argentina",
-        "password": "$2a$10$4OdBnEqEvGfdxNbxcG8XeOzo47loZjAz3gdVcdlpaDk.w9hBySTpO",
-        "password2": "$2a$10$TbhmJkft1GX5aYgW9BGID.q/G45RSi9uD2x89UNPG5493XWWRBhBG",
-        "img": "user-1666644135791.jpg"
+        "password": "$2a$10$E/7WjRIdNUnXJ1ZeGX2epO62ZIlLuoGnmuIvFGHh44Y5cD16NaX9a",
+        "password2": "$2a$10$KFB0FIANJb86xpReroCOOuTdjpUQDdyUulL9tqORZ1Df48avciCjy",
+        "img": "user-1666644903168.jpg"
     }
 ]

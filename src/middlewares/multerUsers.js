@@ -1,23 +1,16 @@
-//Importo path 
+//Importo Path
 const path = require('path');
 
-//Importo multer + seteo
+//Importo multer + seteo multer
 const multer = require('multer');
-const storage = multer.diskStorage({
-    destination:(req, file, cb)=>{
-        cb(null, path.join(__dirname, '../../public/img/img-users'));
-    },
-    filename:(req, file, cb) => {
-        let imgName = 'user-' + Date.now() + path.extname(file.originalname);
-        cb(null, imgName);
-    }
-});
+const storage = multer.memoryStorage();
 
-const upload = multer({storage : storage, 
-    fileFilter: (req, file, cb) => {
-        let extencionesAceptadas = [".jpg", ".png", ".gif", ".jpeg"];
-        let extencion = path.extname(file.originalname);
-        extencionesAceptadas.includes(extencion) ? cb(null, true) : cb(null, false)} 
-    });
+const fileFilter = (req, file, cb) => {
+    let type = file.mimetype.startsWith('image/');
+    let extencionesAceptadas = [".jpg", ".png", ".gif", ".jpeg"];
+    let extencion = path.extname(file.originalname);
+    type && extencionesAceptadas.includes(extencion) ? cb(null,true): cb(null,false)};
 
-module.exports = upload;
+const upload = multer({storage : storage, fileFilter: fileFilter} );
+
+module.exports = upload; 
