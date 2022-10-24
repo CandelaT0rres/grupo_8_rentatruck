@@ -46,12 +46,12 @@
     {
         "id": 6,
         "nombre": "asdasd",
-        "marca": "asdasd  ",
-        "modelo": "asdasd  ",
-        "tipoC": "asdasd  ",
+        "marca": "asdasd     ",
+        "modelo": "asdasd     ",
+        "tipoC": "asdasd     ",
         "precioKm": 1111,
-        "rutaImg": "producto-1666482151519.png",
-        "origen": "sadasda  ",
-        "recorrido": "asdasda  "
+        "rutaImg": "producto-1666650651833.png",
+        "origen": "sadasda     ",
+        "recorrido": "asdasda     "
     }
 ]

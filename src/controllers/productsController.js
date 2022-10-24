@@ -12,8 +12,13 @@ const productosData = JSON.parse(fs.readFileSync(productFilePath, 'utf-8'));
 
 //Generador ID
 function geneadorID() {
-   ultimoProducto = productosData.pop();
-   return ultimoProducto ? ultimoProducto.id + 1 : 1;
+   let ultimoProducto;
+   if (productosData.length != 0) {
+      ultimoProducto = (productosData[productosData.length-1].id)+1;
+   } else {
+      ultimoProducto = 1;
+   };
+   return ultimoProducto;
 };
 
 const productsController = {
@@ -45,7 +50,7 @@ const productsController = {
       if (errors.isEmpty()) {
 
          let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
-         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
+         await sharp(req.file.buffer).resize(318, 235, {fit: "fill" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
          .toFile(path.join(__dirname, '../../public/img/') + img);
 
          let camionNuevo = {

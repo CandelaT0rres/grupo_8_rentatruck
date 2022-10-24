@@ -13,7 +13,7 @@ let usuarios = JSON.parse(fs.readFileSync(pathUsuarios, 'utf-8'));
 
 //Geneador ID
 function generadorId (){
-   let ultimoId
+   let ultimoId;
    if (usuarios.length != 0) {
       ultimoId = (usuarios[usuarios.length-1].id)+1;
    } else {
