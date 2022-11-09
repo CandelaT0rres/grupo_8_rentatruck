@@ -1,6 +1,5 @@
-
 module.exports = (sequelize, dataTypes) => {
-    let alias = "Vehiculo"
+    let alias = "Producto"
     let columnas = {
         id : {
             type : dataTypes.INTEGER,
@@ -8,51 +7,44 @@ module.exports = (sequelize, dataTypes) => {
             allowNull : false,
             autoIncrement : true
         },
-        modelo: { 
+        nombre: { 
             type: dataTypes.STRING,
             allowNull : false
             
         },
-        patente:{
+        peso: {
             type: dataTypes.STRING,
             allowNull : false
         },
-        km : {
-            type: dataTypes.STRING,
-            allowNull : false
-        },
-        fecha_creacion :{
-            type: dataTypes.DATE,
-            allowNull : false
-        },
-        fecha_baja: {
-            type: dataTypes.DATE,
-            allowNull : false
-        },
-        precio_KM: { 
+        ancho: {
             type: dataTypes.NUMBER,
             allowNull : false
         },
-        id_marca: {
-            type: dataTypes.INTEGER,
-            allowNull : false
-
-        },
-        id_usuario: { 
-            type: dataTypes.INTEGER,
+        largo: {
+            type: dataTypes.NUMBER,
             allowNull : false
         },
+        profundidad: {
+            type: dataTypes.NUMBER,
+            allowNull : false
+        },
+       
         id_tipo_mercaderia: {
             type: dataTypes.INTEGER,
-            allowNull : false 
-        }                     
+            allowNull : false
+
+        },
+        id_paquete: { 
+            type: dataTypes.INTEGER,
+            allowNull : false
+        }                    
     };
+    
     let configuracion = {
-        tablaName : "vehiculo",
+        tablaName : "producto",
         timestamps : false
     };
-    const Vehiculo = sequelize.define(alias, columnas, configuracion);
+    const Producto = sequelize.define(alias, columnas, configuracion);
     
-    return Vehiculo;
+    return Producto;
 }
-
