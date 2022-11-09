@@ -31,14 +31,14 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING,
             allowNull : false
         },
-        id_rol: {
-            type: dataTypes.INTEGER,
-            allowNull : false
-        },
         contra: {
             type: dataTypes.STRING,
             allowNull : false
-        }                    
+        }, 
+        id_rol: {
+            type: dataTypes.INTEGER,
+            allowNull : false
+        }                  
     };
     
     let configuracion = {

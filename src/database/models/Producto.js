@@ -34,12 +34,12 @@ module.exports = (sequelize, dataTypes) => {
             allowNull : false
 
         },
-        id_paquete: { 
+        id_paquete_viaje: { 
             type: dataTypes.INTEGER,
             allowNull : false
         }                    
     };
-    
+
     let configuracion = {
         tablaName : "producto",
         timestamps : false

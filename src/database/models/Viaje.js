@@ -7,19 +7,11 @@ module.exports = (sequelize, dataTypes) => {
             allowNull : false,
             autoIncrement : true
         },
-        id_paquete_viaje: { 
-            type: dataTypes.INTEGER,
-            allowNull : false 
-        },
-        id_vehiculo: {
-            type: dataTypes.INTEGER,
-            allowNull : false
-        },
         tiempo_salida: {
             type: dataTypes.DATE,
             allowNull : false
         },
-        tiempo_llegada:{
+        tiempo_llegada: {
             type: dataTypes.DATE,
             allowNull : false
         },
@@ -31,15 +23,24 @@ module.exports = (sequelize, dataTypes) => {
             type: dataTypes.STRING,
             allowNull : false
         },
-        cantidad_KM: {
+        cantidad_km: {
             type: dataTypes.STRING,
             allowNull : false
-
         },
         id_estado_viaje: { 
             type: dataTypes.INTEGER,
             allowNull : false
-        },                    
+        },  
+        id_vehiculo: {
+            type: dataTypes.INTEGER,
+            allowNull : false
+        },
+
+        id_paquete_viaje: { 
+            type: dataTypes.INTEGER,
+            allowNull : false 
+        }
+                           
     };
     let configuracion = {
         tablaName : "viaje",
