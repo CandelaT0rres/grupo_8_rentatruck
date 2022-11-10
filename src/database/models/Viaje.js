@@ -43,7 +43,7 @@ module.exports = (sequelize, dataTypes) => {
                            
     };
     let configuracion = {
-        tablaName : "viaje",
+        tableName : "viaje",
         timestamps : false
     };
     const Viaje = sequelize.define(alias, columnas, configuracion);

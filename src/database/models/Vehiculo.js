@@ -48,7 +48,7 @@ module.exports = (sequelize, dataTypes) => {
         }                     
     };
     let configuracion = {
-        tablaName : "vehiculo",
+        tableName : "vehiculo",
         timestamps : false
     };
     const Vehiculo = sequelize.define(alias, columnas, configuracion);
