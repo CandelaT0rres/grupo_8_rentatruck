@@ -14,10 +14,17 @@ module.exports = (sequelize, dataTypes) => {
     };
     
     let configuracion = {
-        tablaName : "estado_viaje",
+        tableName : "estado_viaje",
         timestamps : false
     };
     const Estado_viaje = sequelize.define(alias, columnas, configuracion);
-    
+
+    Estado_viaje.associate = function (models) {
+        Estado_viaje.belongsTo(models.Viaje, {
+            as: 'estado_viaje',
+            foreignKey: 'id_estado_viaje'
+        })
+        
+    };
     return Estado_viaje;
 }

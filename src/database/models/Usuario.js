@@ -42,11 +42,18 @@ module.exports = (sequelize, dataTypes) => {
     };
     
     let configuracion = {
-        tablaName : "usuario",
+        tableName : "usuario",
         timestamps : false
     };
     const Usuario = sequelize.define(alias, columnas, configuracion);
     
+    Usuario.associate = function (models) {
+        Usuario.belongsTo(models.Rol, {
+            as: 'usuarios',
+            foreignKey: 'id_rol'
+        })
+    }
+
     return Usuario;
 }
 

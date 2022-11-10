@@ -47,6 +47,11 @@ module.exports = (sequelize, dataTypes) => {
         timestamps : false
     };
     const Viaje = sequelize.define(alias, columnas, configuracion);
-    
+    Viaje.associate = function (models) {
+        Viaje.hasMany(models.Estado_viaje, {
+            as: 'estado_viaje',
+            foreignKey: 'id_estado_viaje'
+        })
+    }
     return Viaje;
 }
