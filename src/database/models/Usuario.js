@@ -52,6 +52,14 @@ module.exports = (sequelize, dataTypes) => {
             as: 'usuarios',
             foreignKey: 'id_rol'
         })
+
+        Usuario.belongsToMany(models.Vehiculo,{
+            as: 'vehiculos',
+            through: 'vehiculo_usuario',
+            foreignKey: 'id_usuario',
+            otherKey: 'id_vehiculo',
+            timestamps: false
+        })
     }
 
     return Usuario;
