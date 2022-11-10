@@ -12,6 +12,7 @@ const productosData = JSON.parse(fs.readFileSync(productFilePath, 'utf-8'));
 
 //Generador ID
 function geneadorID() {
+<<<<<<< HEAD
    let ultimoProducto;
    if (productosData.length != 0) {
       ultimoProducto = (productosData[productosData.length-1].id)+1;
@@ -19,6 +20,15 @@ function geneadorID() {
       ultimoProducto = 1;
    };
    return ultimoProducto;
+=======
+   let ultimoId
+   if (productosData.length != 0) {
+      ultimoId = (productosData[productosData.length-1].id)+1;
+   } else {
+      ultimoId = 1;
+   };
+   return ultimoId;
+>>>>>>> 8f0cf2bcf0712afca321403de0b728f9edadeff2
 };
 
 const productsController = {
@@ -49,8 +59,13 @@ const productsController = {
 
       if (errors.isEmpty()) {
 
+<<<<<<< HEAD
          let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer).resize(318, 235, {fit: "fill" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
+=======
+         let img = `${'camiones-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
+>>>>>>> 8f0cf2bcf0712afca321403de0b728f9edadeff2
          .toFile(path.join(__dirname, '../../public/img/') + img);
 
          let camionNuevo = {
@@ -90,11 +105,12 @@ const productsController = {
       let errors = validationResult(req);
       if (errors.isEmpty()){
 
-         //Cuando encuentro el producto voy actualizando
+         //Sharp
          let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
          .toFile(path.join(__dirname, '../../public/img/') + img);
-
+         
+         //Cuando encuentro el producto voy actualizando
          let imgAntigua; 
          for (let o of productosData) {
             if (o.id == req.params.id) {

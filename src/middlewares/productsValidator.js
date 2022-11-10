@@ -10,7 +10,7 @@ const validaciones = [
     body('tipoC').notEmpty().withMessage('Debes agregar el tipo de carga'),
     body('origen').notEmpty().withMessage('Debes ingresar un Origen'),
     body('recorrido').notEmpty().withMessage('Debes ingresar un recorrido'),
-    body('precioKm').notEmpty().withMessage('Debes ingresar un recio'),
+    body('precioKm').notEmpty().withMessage('Debes ingresar un precio'),
     body('rutaImg').custom((value, { req }) => {
         if (!req.file) {
             throw new Error('Debes cargar una imagen, las extenciones permitidas son: .jpg, .png, .gif, .jpeg')

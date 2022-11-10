@@ -2,48 +2,49 @@
     {
         "id": 1,
         "nombre": "Camión de automóviles  ",
-        "marca": "Scania      ",
-        "modelo": "310 Turbo      ",
-        "tipoC": "Automóviles      ",
+        "marca": "Scania       ",
+        "modelo": "310 Turbo       ",
+        "tipoC": "Automóviles       ",
         "precioKm": 7000,
-        "rutaImg": "camiones-1665340587420.jpg",
-        "origen": "C.A.B.A     ",
-        "recorrido": "Córdoba Capital      "
+        "rutaImg": "producto-1666650796559.jpg",
+        "origen": "C.A.B.A      ",
+        "recorrido": "Córdoba Capital       "
     },
     {
         "id": 2,
         "nombre": "Camión Térmico  ",
-        "marca": "Mercedes Benz  ",
-        "modelo": "Dayli  ",
-        "tipoC": "Productos congelados  ",
+        "marca": "Mercedes Benz   ",
+        "modelo": "Dayli   ",
+        "tipoC": "Productos congelados   ",
         "precioKm": 4000,
-        "rutaImg": "camiones-1664507728731.jpg",
-        "origen": "La Plata  ",
-        "recorrido": "Rosario  "
+        "rutaImg": "producto-1666650806838.jpg",
+        "origen": "La Plata   ",
+        "recorrido": "Rosario   "
     },
     {
         "id": 3,
         "nombre": "Camión de envasados",
-        "marca": "Volvo",
-        "modelo": "Dayli",
-        "tipoC": "Productos envasados",
+        "marca": "Volvo ",
+        "modelo": "Dayli ",
+        "tipoC": "Productos envasados ",
         "precioKm": 2000,
-        "rutaImg": "camion-fletero.jpg",
-        "origen": "Montevideo",
-        "recorrido": "Mendoza"
+        "rutaImg": "producto-1666650817936.jpg",
+        "origen": "Montevideo ",
+        "recorrido": "Mendoza "
     },
     {
         "id": 4,
         "nombre": "Camión de madera",
-        "marca": "Volvo",
-        "modelo": "Dayli",
-        "tipoC": "Productos de madera",
+        "marca": "Volvo ",
+        "modelo": "Dayli ",
+        "tipoC": "Productos de madera ",
         "precioKm": 2999,
-        "rutaImg": "camiones-con-barro.jpg",
-        "origen": "Rosario",
-        "recorrido": "Montevideo"
+        "rutaImg": "producto-1666650871831.jpg",
+        "origen": "Rosario ",
+        "recorrido": "Montevideo "
     },
     {
+<<<<<<< HEAD
         "id": 6,
         "nombre": "asdasd",
         "marca": "asdasd     ",
@@ -53,5 +54,27 @@
         "rutaImg": "producto-1666650651833.png",
         "origen": "sadasda     ",
         "recorrido": "asdasda     "
+=======
+        "id": 7,
+        "nombre": "Camión Frigorifico",
+        "marca": "Scania     ",
+        "modelo": "X     ",
+        "tipoC": "Congelados     ",
+        "precioKm": 2000,
+        "rutaImg": "producto-1666572109918.jpg",
+        "origen": "La Plata     ",
+        "recorrido": "Córdoba     "
+    },
+    {
+        "id": 8,
+        "nombre": "Camión de Carga",
+        "marca": "Scania",
+        "modelo": "X-2000",
+        "tipoC": "Insumos de obra",
+        "precioKm": 2000,
+        "rutaImg": "camiones-1666650407432.jpg",
+        "origen": "CABA",
+        "recorrido": "La Plata"
+>>>>>>> 8f0cf2bcf0712afca321403de0b728f9edadeff2
     }
 ]

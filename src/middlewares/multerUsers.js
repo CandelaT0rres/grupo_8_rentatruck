@@ -1,8 +1,8 @@
-//Importo Path
+//Importo Path  multer
 const path = require('path');
-
-//Importo multer + seteo multer
 const multer = require('multer');
+
+//Seteo Multer
 const storage = multer.memoryStorage();
 
 const fileFilter = (req, file, cb) => {
