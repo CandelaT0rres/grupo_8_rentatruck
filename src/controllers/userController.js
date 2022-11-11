@@ -6,7 +6,8 @@ const sharp = require('sharp');
 const {validationResult} = require('express-validator');
 
 //Importación Modelo
-const db = require('../database/models');
+
+
 
 //Geneador ID
 // function generadorId (){
@@ -41,16 +42,16 @@ const userController = {
             .jpeg({quality: 50})
             .toFile(`${this.pathImg})}${img}`);
             
-            db.Usuario.create({ 
-               'nombre' : req.body.nombre,
-               'dni' : parseInt(req.body.dni),
-               'telefono' : req.body.telefono,
-               'apellido': req.body.apellido,
-               'direccion' : req.body.direccion,
-               'email' : req.body.email,
-               'contra': bcrypt.hashSync(req.body.password, 10),
-               'img' : img
-            });
+            // db.Usuario.create({ 
+            //    'nombre' : req.body.nombre,
+            //    'dni' : parseInt(req.body.dni),
+            //    'telefono' : req.body.telefono,
+            //    'apellido': req.body.apellido,
+            //    'direccion' : req.body.direccion,
+            //    'email' : req.body.email,
+            //    'contra': bcrypt.hashSync(req.body.password, 10),
+            //    'img' : img
+            // });
             res.redirect('/user/login');     
       }else{
          res.render('./users/registro', {errors: errors.mapped(), oldData: req.body});
