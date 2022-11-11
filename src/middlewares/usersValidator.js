@@ -12,6 +12,7 @@ const errors = [
     body('telefono').notEmpty().withMessage('Debe ingresar un n° de contacto'),
     body('email').notEmpty().withMessage('Debe ingresar un email')
         .isEmail().withMessage('ingrese un email valido'),
+    body('id_rol').notEmpty().withMessage('Seleccione un rol porfavor'),
     body('password').notEmpty().withMessage('Debe ingresar la contraseña'),
     body('img').custom((value, { req }) => {
       if (!req.file) {

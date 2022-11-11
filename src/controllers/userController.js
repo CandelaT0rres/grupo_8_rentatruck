@@ -8,18 +8,6 @@ const {validationResult} = require('express-validator');
 //Importación Modelo
 const db = require('../database/models');
 
-
-//Geneador ID
-// function generadorId (){
-//    let ultimoId
-//    if (usuarios.length != 0) {
-//       ultimoId = (usuarios[usuarios.length-1].id)+1;
-//    } else {
-//       ultimoId = 1;
-//    };
-//    return ultimoId;
-// }
-
 const userController = {
    
    pathImg: path.join(__dirname, '../../public/img/img-users/'),
@@ -30,7 +18,7 @@ const userController = {
          .then((rol) => {
             res.render ('./users/registro', {rol})
          })
-         .catch((err) => {console.log('No existe rol' + err)})
+         .catch((err) => {console.log(`${'Rol no encontrado'}${err}`)})
     },
    
    //Creación de usuario
@@ -44,7 +32,7 @@ const userController = {
             .resize(300, 300 , {fit:'contain', background:'#fff'})
             .toFormat('jpeg')
             .jpeg({quality: 50})
-            .toFile(`${this.pathImg})}${img}`);
+            .toFile(`${this.pathImg}${img}`);
             
             db.Usuario.create({
                'id_rol':  req.body.id_rol,
@@ -65,8 +53,13 @@ const userController = {
 
    //Vista y edición de usuario
    editarUsuario: (req, res) => {
-      let usuarioEncontrado = usuarios.find((cadaElemento) =>  cadaElemento.id == req.params.id);
-      usuarioEncontrado ? res.render('./users/user-edit', {usuario: usuarioEncontrado}) : res.send('No existe el usuario');
+      db.Usuario.findByPk(req.params.id)
+         .then((usuarioEncontrado) => {
+            res.render('./users/user-edit', {usuario: usuarioEncontrado})
+         })
+         .catch((err) => {
+            res.send(`${'No existe el usuario'}${err}`)
+         })
    },
 
    updateUsuario: async (req, res) => {
@@ -74,10 +67,14 @@ const userController = {
       let errors = validationResult(req);
       if(errors.isEmpty()){
          
-         //Borro img unlinkSync() recibe como parametro el path completo del archivo
-         let product = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
-         let imgToDelete = path.join(__dirname, '../../public/img/img-users/', product.img);
-         fs.existsSync(imgToDelete) ? fs.unlinkSync(imgToDelete) : null;
+         //Borro img unlink() recibe como parametro el path completo del archivo
+         db.Usuario.findByPk(req.params.id)
+            then((usuarioEncontrado) => {
+               fs.unlink(`${this.pathImg}${usuarioEncontrado.img}`)
+            })
+            .catch((err) => {
+               console.log(`${err}${'imagen de usuario no encontrada'}`);
+            });
 
          //Sharp
          let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
@@ -85,34 +82,37 @@ const userController = {
             resize(300, 300 , {fit:'contain', background:'#fff'}).
             toFormat('jpeg').
             jpeg({quality: 50}).
-            toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
+            toFile(`${this.pathImg}${img}`);
 
-         for ( let cadaElemento of usuarios){
-            if (cadaElemento.id == req.params.id) {
-               cadaElemento.nombre = req.body.nombre;
-               cadaElemento.apellido = req.body.apellido
-               cadaElemento.direccion = req.body.direccion;
-               cadaElemento.direccion2 = req.body.direccion2;
-               cadaElemento.dni = parseInt(req.body.dni);
-               cadaElemento.ciudad = req.body.ciudad;
-               cadaElemento.provincia = req.body.provincia;
-               cadaElemento.email = req.body.email;
-               cadaElemento.codigopostal = parseInt(req.body.codigopostal);
-               cadaElemento.pais = req.body.pais;
-               cadaElemento.password = bcrypt.hashSync(req.body.password, 10);
-               cadaElemento.img = img;
-               break;
-            }
-         }
-         fs.writeFileSync(pathUsuarios, JSON.stringify(usuarios, null, 4) , 'utf-8');
-         res.redirect('/');
-
+         db.Usuario.update({
+            'id_rol':  req.body.id_rol,
+            'nombre' : req.body.nombre,
+            'dni' : parseInt(req.body.dni),
+            'telefono' : req.body.telefono,
+            'apellido': req.body.apellido,
+            'direccion' : req.body.direccion,
+            'email' : req.body.email,
+            'contra': bcrypt.hashSync(req.body.password, 10),
+            'img' : img
+         },{
+            where: {id :req.params.id}
+         })
+            .then(() =>{
+               res.redirect('/');
+            })
+            .catch((err) => {
+               console.log(`${err}${'Error al actualizar usuario'}`);
+            });
       }else{
-         let usuarioEncontrado = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
-         usuarioEncontrado ? res.render('./users/user-edit', {usuario: usuarioEncontrado , errors: errors.mapped(), oldData : req.body}) : res.send('No existe el usuario');
+         db.Usuario.findByPk(req.params.id)
+            .then((usuarioEncontrado) => {
+               es.render('./users/user-edit', {usuario: usuarioEncontrado , errors: errors.mapped(), oldData : req.body})
+            })
+            .catch((err) => {
+               res.send(`${'No existe el usuario'}${err}` )
+            });
       }
    },
-
    //Eliminar usuario
 
    borrar: (req, res) => {
@@ -123,7 +123,6 @@ const userController = {
          .catch((err) => {
             console.log(`${err}${'imagen de usuario no encontrada'}`);
          });
-         
       db.Usuario.destroy(
          {where: {id: req.params.id}})
          .then(() => {res.redirect('/')})
@@ -136,37 +135,30 @@ const userController = {
    },
    
    procesoLogin: (req, res) => {
-      let datos = req.body;
-      let usuarioALoguearse;
       let errors = validationResult(req);
-
       if (errors.isEmpty()) {
-         for (let o of usuarios) {
-            if (datos.email == o.email) {
-               if (bcrypt.compareSync(datos.password, o.password)) {
-                  usuarioALoguearse = o;
-               }
+      db.Usuario.findOne({where: {email: req.body.email}})
+         .then((usuarioALoguearse) => {
+            if (bcryp.compareSync(req.body.password, usuarioALoguearse.password)) {
+               return req.session.usuarioLogueado = usuarioALoguearse;
             }
-         };
-
-         if (usuarioALoguearse == undefined) {
+         })
+         .then((usuarioALoguearse) => {
+            if (datos.recordame != undefined) {
+               res.cookie('recordame', datos.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
+            };
+            res.redirect('profile');
+         })
+         .catch(() =>{
             res.render('./users/login', { error: {
                credencial: {
                   msg: 'Credenciales inválidas'
                }
-            } });
-         } else {
-            req.session.usuarioLogueado = usuarioALoguearse;
-   
-         if (datos.recordame != undefined) {
-            res.cookie('recordame', datos.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
-         };
-   
-         res.redirect('/');
-         };
+            }});
+         })
 
       } else {
-         res.render('./users/login', { errors: errors.mapped(), oldData: datos });
+         res.render('./users/login', { errors: errors.mapped(), oldData: req.body });
       }
 
    },
