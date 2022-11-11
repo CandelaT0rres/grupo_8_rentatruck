@@ -26,7 +26,11 @@ const userController = {
 
    //Vista Form Registro 
    registro: (req , res) => {
-       res.render ('./users/registro')
+      db.Rol.findAll()
+         .then((rol) => {
+            res.render ('./users/registro', {rol})
+         })
+         .catch((err) => {console.log('No existe rol' + err)})
     },
    
    //Creación de usuario
@@ -42,7 +46,8 @@ const userController = {
             .jpeg({quality: 50})
             .toFile(`${this.pathImg})}${img}`);
             
-            db.Usuario.create({ 
+            db.Usuario.create({
+               'id_rol':  req.body.id_rol,
                'nombre' : req.body.nombre,
                'dni' : parseInt(req.body.dni),
                'telefono' : req.body.telefono,
@@ -106,6 +111,23 @@ const userController = {
          let usuarioEncontrado = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
          usuarioEncontrado ? res.render('./users/user-edit', {usuario: usuarioEncontrado , errors: errors.mapped(), oldData : req.body}) : res.send('No existe el usuario');
       }
+   },
+
+   //Eliminar usuario
+
+   borrar: (req, res) => {
+      db.Usuario.findByPk(req.params.id)
+         .then((usuarioEncontrado) => {
+            fs.unlink(`${this.pathImg}${usuarioEncontrado.img}`)
+         })
+         .catch((err) => {
+            console.log(`${err}${'imagen de usuario no encontrada'}`);
+         });
+         
+      db.Usuario.destroy(
+         {where: {id: req.params.id}})
+         .then(() => {res.redirect('/')})
+         .catch((err) => {console.log(`${err}${'Error al eliminar usuario'}`)});
    },
 
    //Vista Login

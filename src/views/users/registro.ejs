@@ -107,6 +107,20 @@
                             <% } %>
                       
                     </div>
+                    <div class="col-md-6 mt-4">
+                  <select name="id_rol" id="" class="form-control <%= locals.errors && errors.rol ? 'is-invalid' : null %>">
+                      <% rol.forEach((cadaElemento) => { %>
+                          
+                          <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
+    
+                      <% }) %> 
+                  </select>
+                        <% if (locals.errors && errors.rol) { %>
+                            <h5 class = "text-danger">
+                                <%= errors.rol.msg %> 
+                            </h5>
+                            <% } %>          
+                    </div>
     
                     <div class="col-12 my-2">
                       <button type="submit" class="btn-home-inicio-sesion button-h">Registrarme</button>
