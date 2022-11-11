@@ -44,7 +44,7 @@ const userController = {
             .resize(300, 300 , {fit:'contain', background:'#fff'})
             .toFormat('jpeg')
             .jpeg({quality: 50})
-            .toFile(`${this.pathImg})}${img}`);
+            .toFile(`${this.pathImg}${img}`);
             
             db.Usuario.create({
                'id_rol':  req.body.id_rol,
