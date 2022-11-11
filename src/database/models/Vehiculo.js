@@ -48,11 +48,37 @@ module.exports = (sequelize, dataTypes) => {
         }                     
     };
     let configuracion = {
-        tablaName : "vehiculo",
+        tableName : "vehiculo",
         timestamps : false
     };
+
     const Vehiculo = sequelize.define(alias, columnas, configuracion);
-    
+     Vehiculo.associate = function (models) {
+
+        Vehiculo.belongsTo(models.Marca, {
+            as: 'marca',
+            foreignKey: 'id_marca'
+        })
+
+        Vehiculo.belongsToMany(models.Usuario,{
+            as: 'usuarios',
+            through: 'vehiculo_usuario',
+            foreignKey: 'id_vehiculo',
+            otherKey: 'id_usuario',
+            timestamps: false
+        })
+
+        Vehiculo.hasMany(models.Viaje,{
+            as: 'viajes',
+            foreignKey: 'id_vehiculo'
+        })
+
+        Vehiculo.belongsTo(models.Tipo_mercaderia,{
+            as: 'tipo_mercaderia',
+            foreignKey: 'id_tipo_mercaderia'
+        })
+
+     }
     return Vehiculo;
 }
 

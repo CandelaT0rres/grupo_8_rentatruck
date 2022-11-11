@@ -1,28 +1,29 @@
-//Importación fs + path + bcrypt + shar
+//Importación fs + path + bcrypt + sharp + Express-Validator
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const sharp = require('sharp');
-
-//Importación express-validator
 const {validationResult} = require('express-validator');
 
-//Usuarios
-let pathUsuarios = path.join(__dirname, '../data/users.json');
-let usuarios = JSON.parse(fs.readFileSync(pathUsuarios, 'utf-8'));
+//Importación Modelo
+const db = require('../database/models');
+
 
 //Geneador ID
-function generadorId (){
-   let ultimoId;
-   if (usuarios.length != 0) {
-      ultimoId = (usuarios[usuarios.length-1].id)+1;
-   } else {
-      ultimoId = 1;
-   };
-   return ultimoId;
-}
+// function generadorId (){
+//    let ultimoId
+//    if (usuarios.length != 0) {
+//       ultimoId = (usuarios[usuarios.length-1].id)+1;
+//    } else {
+//       ultimoId = 1;
+//    };
+//    return ultimoId;
+// }
 
 const userController = {
+   
+   pathImg: path.join(__dirname, '../../public/img/img-users/'),
+
    //Vista Form Registro 
    registro: (req , res) => {
        res.render ('./users/registro')
@@ -39,28 +40,19 @@ const userController = {
             .resize(300, 300 , {fit:'contain', background:'#fff'})
             .toFormat('jpeg')
             .jpeg({quality: 50})
-            .toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
-
-         let usuarioNuevo = {
-            'id' : generadorId(), 
-            'nombre' : req.body.nombre,
-            'direccion' : req.body.direccion,
-            'apellido': req.body.apellido,
-            'direccion2' : req.body.direccion2,
-            'dni' : parseInt(req.body.dni),
-            'ciudad': req.body.ciudad,
-            'provincia' : req.body.provincia,
-            'email' : req.body.email,
-            'codigopostal' : parseInt(req.body.codigopostal),
-            'pais' : req.body.pais,
-            'password': bcrypt.hashSync(req.body.password, 10),
-            'password2': bcrypt.hashSync(req.body.password2, 10),
-            'img' : img
-         }
-         usuarios.push(usuarioNuevo);
-         fs.writeFileSync(pathUsuarios, JSON.stringify(usuarios, null , 4) , 'utf-8');
-         res.redirect('/user/login');
-         
+            .toFile(`${this.pathImg})}${img}`);
+            
+            db.Usuario.create({ 
+               'nombre' : req.body.nombre,
+               'dni' : parseInt(req.body.dni),
+               'telefono' : req.body.telefono,
+               'apellido': req.body.apellido,
+               'direccion' : req.body.direccion,
+               'email' : req.body.email,
+               'contra': bcrypt.hashSync(req.body.password, 10),
+               'img' : img
+            });
+            res.redirect('/user/login');     
       }else{
          res.render('./users/registro', {errors: errors.mapped(), oldData: req.body});
       }
