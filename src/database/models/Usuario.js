@@ -1,5 +1,7 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = "Usuario"
+
+    let alias = "Usuario";
+    
     let columnas = {
         id: {
             type : dataTypes.INTEGER,
@@ -38,7 +40,11 @@ module.exports = (sequelize, dataTypes) => {
         id_rol: {
             type: dataTypes.INTEGER,
             allowNull : false
-        }                  
+        },
+        img: {
+            type: dataTypes.STRING,
+            allowNull: false
+        }                 
     };
     
     let configuracion = {

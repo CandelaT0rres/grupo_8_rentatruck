@@ -8,10 +8,6 @@ const {validationResult} = require('express-validator');
 //Importación Modelo
 const db = require('../database/models');
 
-//Usuarios
-let pathUsuarios = path.join(__dirname, '../data/users.json');
-let usuarios = JSON.parse(fs.readFileSync(pathUsuarios, 'utf-8'));
-
 //Geneador ID
 // function generadorId (){
 //    let ultimoId
@@ -52,7 +48,7 @@ const userController = {
                'apellido': req.body.apellido,
                'direccion' : req.body.direccion,
                'email' : req.body.email,
-               'password': bcrypt.hashSync(req.body.password, 10),
+               'contra': bcrypt.hashSync(req.body.password, 10),
                'img' : img
             });
             res.redirect('/user/login');     

@@ -10,10 +10,8 @@ const errors = [
     body('apellido').notEmpty().withMessage('Debe ingresar su apellido o nombre Fantasía'),
     body('dni').notEmpty().withMessage('Debe ingresar DNI'),
     body('telefono').notEmpty().withMessage('Debe ingresar un n° de contacto'),
-    body('provincia').notEmpty().withMessage('Debe agregar una provincia'),
     body('email').notEmpty().withMessage('Debe ingresar un email')
         .isEmail().withMessage('ingrese un email valido'),
-    body('pais').notEmpty().withMessage('Seleccione su país'),
     body('password').notEmpty().withMessage('Debe ingresar la contraseña'),
     body('img').custom((value, { req }) => {
       if (!req.file) {

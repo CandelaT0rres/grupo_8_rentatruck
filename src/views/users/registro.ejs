@@ -17,6 +17,7 @@
 
     </header>
     <main class='container'>
+        
         <div class="d-flex justify-content-center">
             <div class="row section-1-home container ">
                 <form action="/user/registro" method="post" enctype="multipart/form-data" class="row g-3 fondo-registro">
@@ -53,7 +54,7 @@
                     </div>
                     <div class="col-md-6">
                           <label for="telefono" class="form-label">Teléfono</label>
-                          <input type="number" class="form-control" id="telefono" placeholder="telefono" name="telefono" value="<%= locals.oldData ? oldData.telefono : null %>">
+                          <input type="number" class="form-control" id="telefono" name="telefono" value="<%= locals.oldData ? oldData.telefono : null %>">
                     </div>
                     <div class="col-md-6">
                         <label for="inputDNI4" class="form-label">DNI o CUIT</label>
@@ -114,9 +115,6 @@
             </div>
         </div>
     </main>
-    <footer class='m-4'>
-        <%- include('../partials/footer') %>
-
-    </footer>
+   
 </body>
 </html>
