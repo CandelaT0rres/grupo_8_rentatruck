@@ -9,7 +9,7 @@ const errors = [
     body('direccion').notEmpty().withMessage('Debe ingresar una dirección'),
     body('apellido').notEmpty().withMessage('Debe ingresar su apellido o nombre Fantasía'),
     body('dni').notEmpty().withMessage('Debe ingresar DNI'),
-    body('ciudad').notEmpty().withMessage('Debe agregar una ciudad'),
+    body('telefono').notEmpty().withMessage('Debe ingresar un n° de contacto'),
     body('provincia').notEmpty().withMessage('Debe agregar una provincia'),
     body('email').notEmpty().withMessage('Debe ingresar un email')
         .isEmail().withMessage('ingrese un email valido'),
