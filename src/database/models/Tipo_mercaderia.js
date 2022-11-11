@@ -18,6 +18,19 @@ module.exports = (sequelize, dataTypes) => {
         timestamps : false
     };
     const Tipo_mercaderia = sequelize.define(alias, columnas, configuracion);
+
+    Tipo_mercaderia.associate = function (models) {
+
+        Tipo_mercaderia.hasMany(models.Vehiculo, {
+            as: 'vehiculo',
+            foreignKey: 'id_tipo_mercaderia'
+        })
+
+        Tipo_mercaderia.hasMany(models.Producto, {
+            as: 'producto',
+            foreignKey: 'id_tipo_mercaderia'
+        })
+    }
     
     return Tipo_mercaderia;
 }
