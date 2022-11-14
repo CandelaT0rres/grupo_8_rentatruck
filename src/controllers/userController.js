@@ -37,7 +37,7 @@ const userController = {
    nuevoUsuario: async (req, res) =>{
       let errors = validationResult(req);
       if(errors.isEmpty()){
- 
+         
          //Sharp
          let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer)
