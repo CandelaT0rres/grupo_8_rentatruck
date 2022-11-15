@@ -6,10 +6,6 @@ const sharp = require('sharp');
 // Importación express-validator
 const { validationResult } = require('express-validator');
 
-//productos
-const productFilePath = path.join(__dirname, '../data/products.json');
-const productosData = JSON.parse(fs.readFileSync(productFilePath, 'utf-8'));
-
 //Generador ID
 function geneadorID() {
    let ultimoId
