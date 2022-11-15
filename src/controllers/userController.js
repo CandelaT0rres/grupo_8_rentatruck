@@ -167,6 +167,7 @@ const userController = {
                if (req.body.recordame) {
                   res.cookie('recordame', usuarioALoguearse.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
                };
+               res.redirect('/user/perfil');
             }else {
                res.render('./users/login', { error: {
                   credencial: {
@@ -174,12 +175,6 @@ const userController = {
                   }
                }});
             }
-         })
-         .then((usuarioALoguearse2) => {
-            if (req.body.recordame != undefined) {
-               res.cookie('recordame', usuarioALoguearse2.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
-            };
-            res.redirect('/user/perfil');
          })
          .catch(() =>{
             res.render('./users/login', { error: {
