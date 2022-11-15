@@ -139,15 +139,15 @@ const userController = {
       if (errors.isEmpty()) {
       db.Usuario.findOne({where: {email: req.body.email}})
          .then((usuarioALoguearse) => {
-            if (bcryp.compareSync(req.body.password, usuarioALoguearse.password)) {
+            if (bcrypt.compareSync(req.body.password, usuarioALoguearse.contra)) {
                return req.session.usuarioLogueado = usuarioALoguearse;
             }
          })
-         .then((usuarioALoguearse) => {
-            if (datos.recordame != undefined) {
-               res.cookie('recordame', datos.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
+         .then((usuarioALoguearse2) => {
+            if (req.body.recordame != undefined) {
+               res.cookie('recordame', usuarioALoguearse2.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
             };
-            res.redirect('profile');
+            res.redirect('/user/perfil');
          })
          .catch(() =>{
             res.render('./users/login', { error: {
