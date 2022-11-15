@@ -103,6 +103,16 @@ const productsController = {
       let datos = req.body;
       let errors = validationResult(req);
       if (errors.isEmpty()){
+
+         db.Vehiculo.findByPk(req.params.id)
+            .then(camionEncontrado => {
+               let imagenAborrar = path.join(__dirname, '../../public/img/' + camionEncontrado.ruta_img) ;
+               fs.existsSync(imagenAborrar) ? fs.unlinkSync(imagenAborrar) : null;
+            })
+            .catch(err => {
+               console.log(err);
+            })
+
          let img = `${'camiones-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer).
          resize(500, 500, {fit:"contain" , background:'#fff'}).
@@ -122,40 +132,15 @@ const productsController = {
                id: req.params.id
             }
          })
-         //Eliminación img
-         let camionAborrar = productosData.find((cadaElemento) => cadaElemento.id == req.params.id);
-         let imagenAborrar = path.join(__dirname, "../../public/img", camionAborrar.rutaImg) ;
-         fs.existsSync(imagenAborrar) ? fs.unlinkSync(imagenAborrar) : null;
-         //Sharp
-         /*let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
-         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
-         .toFile(path.join(__dirname, '../../public/img/') + img);*/
-         
-         //Cuando encuentro el producto voy actualizando
-         let imgAntigua; 
-         for (let o of productosData) {
-            if (o.id == req.params.id) {
-               imgAntigua = o.rutaImg;
-               o.nombre = req.body.nombre;
-               o.marca = req.body.marca;
-               o.modelo = req.body.modelo;
-               o.tipoC = req.body.tipoC;
-               o.precioKm = parseInt(req.body.precioKm);
-               o.rutaImg = img;
-               o.origen = req.body.origen;
-               o.recorrido = req.body.recorrido;
-               break;
-            }
-         };
-         fs.unlinkSync(path.join(__dirname, "../../public/img/") + imgAntigua);
+            .then(() => {
+               res.redirect('/');
+            })
 
-         //Guardado físico
-         fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
-
-         res.redirect('/');
       } else {
-         let camionEncontrado = productosData.find((cadaElemento)=> cadaElemento.id == req.params.id);
-         camionEncontrado? res.render("./products/editar", {producto: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
+         db.Vehiculo.findByPk(req.params.id)
+            .then(camionEncontrado => {
+               camionEncontrado? res.render("./products/editar", {producto: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
+            })
       }
       
      },
@@ -173,17 +158,20 @@ const productsController = {
      },
      //Borrado producto
      borrar: (req, res) => {
-         //Eliminación img
-         let camionAborrar = productosData.find((cadaElemento) => cadaElemento.id == req.params.id);
-         let imagenAborrar = path.join(__dirname, "../../public/img", camionAborrar.rutaImg) ;
-         fs.existsSync(imagenAborrar) ? fs.unlinkSync(imagenAborrar) : null;
-         
-         //Eliminación camión
-         let productoTerminado = productosData.filter((cadaElemento)=> cadaElemento.id != req.params.id)
-         //Guardado físico
-         fs.writeFileSync(productFilePath, JSON.stringify(productoTerminado, null, 4), 'utf-8');
-
-         res.redirect('/');  
+      db.Vehiculo.findByPk(req.params.id)
+         .then((vehiculoEncontrado) => {
+            let imagenABorrar=`${ path.join(__dirname, '../../public/img/')}${vehiculoEncontrado.ruta_img}`;
+            fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
+         })
+         .catch((err) => {
+            console.log(`${err}${'imagen de vehiculo no encontrada'}`);
+         });
+         setTimeout(() => {
+            db.Vehiculo.destroy(
+               {where: {id: req.params.id}})
+               .then(() => {res.redirect('/')})
+               .catch((err) => {console.log(`${err}${'Error al eliminar vehiculo'}`)});
+         }, '3000')
       }   
     
 }
