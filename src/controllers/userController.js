@@ -32,7 +32,7 @@ const userController = {
             .resize(300, 300 , {fit:'contain', background:'#fff'})
             .toFormat('jpeg')
             .jpeg({quality: 50})
-            .toFile(`${this.pathImg}${img}`);
+            .toFile(`${ path.join(__dirname, '../../public/img/img-users/')}${img}`);
             
             db.Usuario.create({
                'id_rol':  req.body.id_rol,
@@ -53,14 +53,20 @@ const userController = {
 
    //Vista y edición de usuario
    editarUsuario: (req, res) => {
-      db.Usuario.findByPk(req.params.id)
-         .then((usuarioEncontrado) => {
-            res.render('./users/user-edit', {usuario: usuarioEncontrado})
+      let usuario= db.Usuario.findByPk(req.params.id);
+      let rol= db.Rol.findAll();
+      Promise.all([
+         usuario, rol
+      ])
+         .then(([usuario,rol]) => {
+            res.render('./users/user-edit', {usuario: usuario, rol: rol});
          })
          .catch((err) => {
             res.send(`${'No existe el usuario'}${err}`)
          })
+         
    },
+
 
    updateUsuario: async (req, res) => {
 
@@ -70,7 +76,8 @@ const userController = {
          //Borro img unlink() recibe como parametro el path completo del archivo
          db.Usuario.findByPk(req.params.id)
             then((usuarioEncontrado) => {
-               fs.unlink(`${this.pathImg}${usuarioEncontrado.img}`)
+            let imagenABorrar= path.join(__dirname, '../../public/img/img-users/') + usuarioEncontrado.img;
+            fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
             })
             .catch((err) => {
                console.log(`${err}${'imagen de usuario no encontrada'}`);
@@ -82,35 +89,40 @@ const userController = {
             resize(300, 300 , {fit:'contain', background:'#fff'}).
             toFormat('jpeg').
             jpeg({quality: 50}).
-            toFile(`${this.pathImg}${img}`);
+            toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
 
          db.Usuario.update({
-            'id_rol':  req.body.id_rol,
-            'nombre' : req.body.nombre,
-            'dni' : parseInt(req.body.dni),
-            'telefono' : req.body.telefono,
-            'apellido': req.body.apellido,
-            'direccion' : req.body.direccion,
-            'email' : req.body.email,
-            'contra': bcrypt.hashSync(req.body.password, 10),
-            'img' : img
+               'nombre' : req.body.nombre,
+               'dni' : parseInt(req.body.dni),
+               'telefono' : req.body.telefono,
+               'apellido': req.body.apellido,
+               'direccion' : req.body.direccion,
+               'email' : req.body.email,
+               'contra': bcrypt.hashSync(req.body.password, 10),
+               'id_rol': req.body.id_rol,
+               'img' : img
          },{
-            where: {id :req.params.id}
+            where: {id:req.params.id}
          })
             .then(() =>{
-               res.redirect('/');
+               res.redirect('/user/perfil');
             })
             .catch((err) => {
                console.log(`${err}${'Error al actualizar usuario'}`);
             });
       }else{
-         db.Usuario.findByPk(req.params.id)
-            .then((usuarioEncontrado) => {
-               es.render('./users/user-edit', {usuario: usuarioEncontrado , errors: errors.mapped(), oldData : req.body})
+         let usuario= db.Usuario.findByPk(req.params.id);
+         let rol= db.Rol.findAll();
+         Promise.all([
+            usuario, rol
+         ])
+            .then(([usuario,rol]) => {
+               res.render('./users/user-edit', {usuario: usuario, rol: rol, errors: errors.mapped(), oldData : req.body});
             })
             .catch((err) => {
-               res.send(`${'No existe el usuario'}${err}` )
-            });
+               res.send(`${'No existe el usuario'}${err}`)
+            })
+
       }
    },
    //Eliminar usuario
@@ -118,7 +130,8 @@ const userController = {
    borrar: (req, res) => {
       db.Usuario.findByPk(req.params.id)
          .then((usuarioEncontrado) => {
-            fs.unlink(`${this.pathImg}${usuarioEncontrado.img}`)
+            let imagenABorrar=`${ path.join(__dirname, '../../public/img/img-users/')}${usuarioEncontrado.img}`;
+            fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
          })
          .catch((err) => {
             console.log(`${err}${'imagen de usuario no encontrada'}`);
@@ -165,7 +178,15 @@ const userController = {
    //Perfil
 
    perfil: (req, res) => {
-      res.render('./users/perfil', {user: req.session.usuarioLogueado});
+      db.Usuario.findOne({
+         where: {
+            email: req.session.usuarioLogueado.email
+         }
+      })
+      .then ((user) => {
+       res.render('./users/perfil', {user});
+      })
+      
    },
 
    logout: (req, res) => {
