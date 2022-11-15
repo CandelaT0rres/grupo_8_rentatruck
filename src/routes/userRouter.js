@@ -36,13 +36,6 @@ router.get('/perfil', authMiddleware, controller.perfil);
 //LOGOUT USUARIO
 router.get('/logout', authMiddleware, controller.logout);
 
-// RUTA DE PRUEBA LOGIN
-router.get('/check', function (req, res) {
-    if (req.session.usuarioLogueado == undefined) {
-        res.send('No estas logueado')
-    } else {
-        res.send('Estas logueado')
-    }
-});
+router.delete('/deleteUser/:id', authMiddleware, controller.borrar);
 
 module.exports = router;

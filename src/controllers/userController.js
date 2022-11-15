@@ -75,8 +75,8 @@ const userController = {
          
          //Borro img unlink() recibe como parametro el path completo del archivo
          db.Usuario.findByPk(req.params.id)
-            then((usuarioEncontrado) => {
-            let imagenABorrar= path.join(__dirname, '../../public/img/img-users/') + usuarioEncontrado.img;
+            .then((usuarioEncontrado) => {
+            let imagenABorrar = path.join(__dirname, '../../public/img/img-users/') + usuarioEncontrado.img;
             fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
             })
             .catch((err) => {
@@ -121,8 +121,7 @@ const userController = {
             })
             .catch((err) => {
                res.send(`${'No existe el usuario'}${err}`)
-            })
-
+            });
       }
    },
    //Eliminar usuario
@@ -130,16 +129,25 @@ const userController = {
    borrar: (req, res) => {
       db.Usuario.findByPk(req.params.id)
          .then((usuarioEncontrado) => {
-            let imagenABorrar=`${ path.join(__dirname, '../../public/img/img-users/')}${usuarioEncontrado.img}`;
+            let imagenABorrar=`${path.join(__dirname, '../../public/img/img-users/')}${usuarioEncontrado.img}`;
             fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
          })
          .catch((err) => {
             console.log(`${err}${'imagen de usuario no encontrada'}`);
          });
-      db.Usuario.destroy(
-         {where: {id: req.params.id}})
-         .then(() => {res.redirect('/')})
-         .catch((err) => {console.log(`${err}${'Error al eliminar usuario'}`)});
+         setTimeout(() => {
+            db.Usuario.destroy(
+               {where: {id: req.params.id}})
+               .then(() => {
+                  
+                  req.session.destroy();
+                  res.clearCookie('recordame');
+                  res.redirect('/')})
+                  
+               .catch((err) => {console.log(`${err}${'Error al eliminar usuario'}`)});
+            
+            
+         }, '3000')
    },
 
    //Vista Login
@@ -154,13 +162,20 @@ const userController = {
       db.Usuario.findOne({where: {email: req.body.email}})
          .then((usuarioALoguearse) => {
             if (bcrypt.compareSync(req.body.password, usuarioALoguearse.contra)) {
-               return req.session.usuarioLogueado = usuarioALoguearse;
+               req.session.usuarioLogueado = usuarioALoguearse;
+               
+               if (req.body.recordame) {
+                  res.cookie('recordame', usuarioALoguearse.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
+               };
+            }else {
+               res.render('./users/login', { error: {
+                  credencial: {
+                     msg: 'Credenciales inválidas'
+                  }
+               }});
             }
          })
-         .then((usuarioALoguearse2) => {
-            if (req.body.recordame != undefined) {
-               res.cookie('recordame', usuarioALoguearse2.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
-            };
+         .then(() => {
             res.redirect('/user/perfil');
          })
          .catch(() =>{
