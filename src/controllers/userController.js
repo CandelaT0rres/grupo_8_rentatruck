@@ -143,7 +143,7 @@ const userController = {
                return req.session.usuarioLogueado = usuarioALoguearse;
             }
          })
-         .then((usuarioALoguearse) => {
+         .then(() => {
             if (datos.recordame != undefined) {
                res.cookie('recordame', datos.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
             };
