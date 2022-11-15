@@ -2,26 +2,25 @@
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
+const db = require('../database/models');
 
 // Importación express-validator
 const { validationResult } = require('express-validator');
-
-//Generador ID
-function geneadorID() {
-   let ultimoId
-   if (productosData.length != 0) {
-      ultimoId = (productosData[productosData.length-1].id)+1;
-   } else {
-      ultimoId = 1;
-   };
-   return ultimoId;
-};
+const { promiseImpl } = require('ejs');
 
 const productsController = {
 
    //Muestro vista productos
     productos: (req , res) => {
-      res.render ('./products/productos', {productos: productosData});
+      db.Vehiculo.findAll({
+         include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}, {association: 'tipo_mercaderia'}, {association: 'usuarios'}]
+      })
+         .then(productos => {
+            res.render ('./products/productos', {productos});
+         })
+         .catch(err => {
+            console.log(err);
+         })
     },
     
     //Muestro vista Carrito
@@ -35,7 +34,15 @@ const productsController = {
      
      //Muestro form nuevo producto
      cargar: (req, res) => {
-      res.render('./products/cargar')
+      let marcas = db.Marca.findAll();
+      let tipo_mercaderia = db.Tipo_mercaderia.findAll();
+         Promise.all([marcas, tipo_mercaderia])
+            .then(([marcas, tipo_mercaderia]) => {
+               res.render('./products/cargar', {marcas: marcas, tipo_mercaderia: tipo_mercaderia})
+            })
+            .catch(err => {
+               console.log(err);
+            })
      },
 
      //Guardado producto
@@ -43,32 +50,36 @@ const productsController = {
 
       let errors = validationResult(req);
 
+      let datos = req.body;
+
       if (errors.isEmpty()) {
 
          let img = `${'camiones-'}${Date.now()}${path.extname(req.file.originalname)}`;
-         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
-         .toFile(path.join(__dirname, '../../public/img/') + img);
+         await sharp(req.file.buffer).
+         resize(500, 500, {fit:"contain" , background:'#fff'}).
+         toFormat('jpeg').
+         jpeg({quality: 50}).
+         toFile(path.join(__dirname, '../../public/img/') + img);
+         db.Vehiculo.create({
+            modelo: datos.modelo,
+            patente: datos.patente,
+            km: datos.km,
+            fecha_creacion: Date.now(),
+            precio_km: datos.precio_km,
+            ruta_img: img,
+            id_marca: datos.marcas,
+            id_tipo_mercaderia: datos.tipo_mercaderia,
+            id_usuario: req.session.usuarioLogueado.id
+         })
+            .then(() => {
+               res.redirect('/products/productos')
+            })
+            .catch(err => {
+               console.log(err);
+            })
 
-         let camionNuevo = {
-            "id": geneadorID(),
-            "nombre": req.body.nombre,
-            "marca": req.body.marca,
-            "modelo": req.body.modelo,
-            "tipoC": req.body.tipoC,
-            "precioKm": parseInt(req.body.precioKm),
-            "rutaImg": img,
-            "origen": req.body.origen,
-            "recorrido": req.body.recorrido
-         };
-         //Guardado lógico
-         productosData.push(camionNuevo);
-
-         //Guardado físico
-         fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
-            
-         res.redirect('/products/productos');
       } else {
-         res.render('./products/cargar', {errors: errors.mapped(), oldData: req.body});
+         res.send(errors)
       }
 
    
