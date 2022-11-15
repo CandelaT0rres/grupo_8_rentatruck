@@ -1,18 +1,15 @@
-const fs = require('fs');
-const path = require('path');
-
+const db = require('../database/models');
 function userLoggedMiddleware (req, res, next) {
     
     if (req.cookies.recordame != undefined && req.session.usuarioLogueado == undefined) {
         let usuarioALoguearse;
-        for (let o of users) {
-            if (req.cookies.recordame == o.email) {
-                usuarioALoguearse = o;
-                break;
-            }
-        };
-        
-        req.session.usuarioLogueado = usuarioALoguearse;
+        db.Usuario.findByPk(req.cookies.recordame)
+            .then(usuarioCookie => {
+                usuarioALoguearse = usuarioCookie;
+                req.session.usuarioLogueado = usuarioALoguearse;
+                res.locals.userLogueado = true;
+                res.locals.usuarioLogueadoVistas = usuarioALoguearse;
+            })
     };
     res.locals.userLogueado = false;
     if (req.session.usuarioLogueado){

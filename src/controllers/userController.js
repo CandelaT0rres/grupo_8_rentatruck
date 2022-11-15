@@ -140,14 +140,12 @@ const userController = {
       db.Usuario.findOne({where: {email: req.body.email}})
          .then((usuarioALoguearse) => {
             if (bcrypt.compareSync(req.body.password, usuarioALoguearse.contra)) {
-               return req.session.usuarioLogueado = usuarioALoguearse;
+               req.session.usuarioLogueado = usuarioALoguearse;
+               if (req.body.recordame != undefined) {
+                  res.cookie('recordame', usuarioALoguearse.id, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
+               };
+               res.redirect('/user/perfil');
             }
-         })
-         .then((usuarioALoguearse2) => {
-            if (req.body.recordame != undefined) {
-               res.cookie('recordame', usuarioALoguearse2.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
-            };
-            res.redirect('/user/perfil');
          })
          .catch(() =>{
             res.render('./users/login', { error: {
