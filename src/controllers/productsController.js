@@ -2,26 +2,25 @@
 const fs = require('fs');
 const path = require('path');
 const sharp = require('sharp');
+const db = require('../database/models');
 
 // Importación express-validator
 const { validationResult } = require('express-validator');
-
-//Generador ID
-function geneadorID() {
-   let ultimoId
-   if (productosData.length != 0) {
-      ultimoId = (productosData[productosData.length-1].id)+1;
-   } else {
-      ultimoId = 1;
-   };
-   return ultimoId;
-};
+const { promiseImpl } = require('ejs');
 
 const productsController = {
 
    //Muestro vista productos
     productos: (req , res) => {
-      res.render ('./products/productos', {productos: productosData});
+      db.Vehiculo.findAll({
+         include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}, {association: 'tipo_mercaderia'}, {association: 'usuarios'}]
+      })
+         .then(productos => {
+            res.render ('./products/productos', {productos});
+         })
+         .catch(err => {
+            console.log(err);
+         })
     },
     
     //Muestro vista Carrito
@@ -35,7 +34,15 @@ const productsController = {
      
      //Muestro form nuevo producto
      cargar: (req, res) => {
-      res.render('./products/cargar')
+      let marcas = db.Marca.findAll();
+      let tipo_mercaderia = db.Tipo_mercaderia.findAll();
+         Promise.all([marcas, tipo_mercaderia])
+            .then(([marcas, tipo_mercaderia]) => {
+               res.render('./products/cargar', {marcas: marcas, tipo_mercaderia: tipo_mercaderia})
+            })
+            .catch(err => {
+               console.log(err);
+            })
      },
 
      //Guardado producto
@@ -43,32 +50,36 @@ const productsController = {
 
       let errors = validationResult(req);
 
+      let datos = req.body;
+
       if (errors.isEmpty()) {
 
          let img = `${'camiones-'}${Date.now()}${path.extname(req.file.originalname)}`;
-         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
-         .toFile(path.join(__dirname, '../../public/img/') + img);
+         await sharp(req.file.buffer).
+         resize(500, 500, {fit:"contain" , background:'#fff'}).
+         toFormat('jpeg').
+         jpeg({quality: 50}).
+         toFile(path.join(__dirname, '../../public/img/') + img);
+         db.Vehiculo.create({
+            modelo: datos.modelo,
+            patente: datos.patente,
+            km: datos.km,
+            fecha_creacion: Date.now(),
+            precio_km: datos.precio_km,
+            ruta_img: img,
+            id_marca: datos.marcas,
+            id_tipo_mercaderia: datos.tipo_mercaderia,
+            id_usuario: req.session.usuarioLogueado.id
+         })
+            .then(() => {
+               res.redirect('/products/productos')
+            })
+            .catch(err => {
+               console.log(err);
+            })
 
-         let camionNuevo = {
-            "id": geneadorID(),
-            "nombre": req.body.nombre,
-            "marca": req.body.marca,
-            "modelo": req.body.modelo,
-            "tipoC": req.body.tipoC,
-            "precioKm": parseInt(req.body.precioKm),
-            "rutaImg": img,
-            "origen": req.body.origen,
-            "recorrido": req.body.recorrido
-         };
-         //Guardado lógico
-         productosData.push(camionNuevo);
-
-         //Guardado físico
-         fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
-            
-         res.redirect('/products/productos');
       } else {
-         res.render('./products/cargar', {errors: errors.mapped(), oldData: req.body});
+         res.send(errors)
       }
 
    
@@ -76,78 +87,91 @@ const productsController = {
      
      //Muestro form editar producto
      editar: (req, res) => {
-         let camionBuscado = productosData.find((cadaElemento) => cadaElemento.id == req.params.id);
-         camionBuscado ?  res.render('./products/editar', {producto: camionBuscado}) :  res.send('Error camión no encontrado');
-
+         let marcas = db.Marca.findAll()
+         let tipo_mercaderia = db.Tipo_mercaderia.findAll()
+         let producto = db.Vehiculo.findByPk(req.params.id, {
+            include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}]
+         })
+         Promise.all([producto, marcas, tipo_mercaderia])
+            .then(([producto, marcas, tipo_mercaderia]) => {
+               res.render('./products/editar', {producto, marcas, tipo_mercaderia})
+            })
      },
 
      //Edición producto
      actualizar: async(req, res) => {
+      let datos = req.body;
       let errors = validationResult(req);
       if (errors.isEmpty()){
 
-         //Sharp
-         let img = `${'producto-'}${Date.now()}${path.extname(req.file.originalname)}`;
-         await sharp(req.file.buffer).resize(500, 500, {fit:"contain" , background:'#fff'}).jpeg({quality: 50, chromaSubsampling: '4:4:4'})
-         .toFile(path.join(__dirname, '../../public/img/') + img);
-         
-         //Cuando encuentro el producto voy actualizando
-         let imgAntigua; 
-         for (let o of productosData) {
-            if (o.id == req.params.id) {
-               imgAntigua = o.rutaImg;
-               o.nombre = req.body.nombre;
-               o.marca = req.body.marca;
-               o.modelo = req.body.modelo;
-               o.tipoC = req.body.tipoC;
-               o.precioKm = parseInt(req.body.precioKm);
-               o.rutaImg = img;
-               o.origen = req.body.origen;
-               o.recorrido = req.body.recorrido;
-               break;
+         db.Vehiculo.findByPk(req.params.id)
+            .then(camionEncontrado => {
+               let imagenAborrar = path.join(__dirname, '../../public/img/' + camionEncontrado.ruta_img) ;
+               fs.existsSync(imagenAborrar) ? fs.unlinkSync(imagenAborrar) : null;
+            })
+            .catch(err => {
+               console.log(err);
+            })
+
+         let img = `${'camiones-'}${Date.now()}${path.extname(req.file.originalname)}`;
+         await sharp(req.file.buffer).
+         resize(500, 500, {fit:"contain" , background:'#fff'}).
+         toFormat('jpeg').
+         jpeg({quality: 50}).
+         toFile(path.join(__dirname, '../../public/img/') + img);
+         db.Vehiculo.update({
+            id_marca: datos.marca,
+            modelo: datos.modelo,
+            patente: datos.patente,
+            id_tipo_mercaderia: datos.tipo_mercaderia,
+            km: datos.km,
+            precio_km: datos.precio_km,
+            ruta_img: img
+         }, {
+            where: {
+               id: req.params.id
             }
-         };
-         fs.unlinkSync(path.join(__dirname, "../../public/img/") + imgAntigua);
+         })
+            .then(() => {
+               res.redirect('/');
+            })
 
-         //Guardado físico
-         fs.writeFileSync(productFilePath, JSON.stringify(productosData, null, 4), 'utf-8');
-
-         res.redirect('/');
       } else {
-         let camionEncontrado = productosData.find((cadaElemento)=> cadaElemento.id == req.params.id);
-         camionEncontrado? res.render("./products/editar", {producto: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
+         db.Vehiculo.findByPk(req.params.id)
+            .then(camionEncontrado => {
+               camionEncontrado? res.render("./products/editar", {producto: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
+            })
       }
       
      },
      //Vista individual
      detalle: (req, res) => {
-         let elementoCamion = null;
-         let detalleId = req.params.id 
-         for(cadaElemento of productosData){
-            if (cadaElemento.id == detalleId){
-               elementoCamion = cadaElemento
-               break
-            }
-         }
-         if(elementoCamion != null){
-            res.render("products/detalle", {camion: elementoCamion})
-         } else{
-            res.send("flashaste bro")
-         }
+         db.Vehiculo.findByPk(req.params.id, {
+            include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}]
+         })
+            .then(camion => {
+               res.render('products/detalle', {camion})
+            })
+            .catch(err => {
+               res.send(err)
+            })
      },
      //Borrado producto
      borrar: (req, res) => {
-         //Eliminación img
-         let camionAborrar = productosData.find((cadaElemento) => cadaElemento.id == req.params.id);
-         let imagenAborrar = path.join(__dirname, "../../public/img", camionAborrar.rutaImg) ;
-         fs.existsSync(imagenAborrar) ? fs.unlinkSync(imagenAborrar) : null;
-         
-         //Eliminación camión
-         let productoTerminado = productosData.filter((cadaElemento)=> cadaElemento.id != req.params.id)
-         //Guardado físico
-         fs.writeFileSync(productFilePath, JSON.stringify(productoTerminado, null, 4), 'utf-8');
-
-         res.redirect('/');  
+      db.Vehiculo.findByPk(req.params.id)
+         .then((vehiculoEncontrado) => {
+            let imagenABorrar=`${ path.join(__dirname, '../../public/img/')}${vehiculoEncontrado.ruta_img}`;
+            fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
+         })
+         .catch((err) => {
+            console.log(`${err}${'imagen de vehiculo no encontrada'}`);
+         });
+         setTimeout(() => {
+            db.Vehiculo.destroy(
+               {where: {id: req.params.id}})
+               .then(() => {res.redirect('/')})
+               .catch((err) => {console.log(`${err}${'Error al eliminar vehiculo'}`)});
+         }, '3000')
       }   
     
 }

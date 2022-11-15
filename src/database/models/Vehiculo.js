@@ -27,11 +27,15 @@ module.exports = (sequelize, dataTypes) => {
         },
         fecha_baja: {
             type: dataTypes.DATE,
-            allowNull : false
+            allowNull : true
         },
-        precio_KM: { 
+        precio_km: { 
             type: dataTypes.NUMBER,
             allowNull : false
+        },
+        ruta_img: {
+            type: dataTypes.STRING,
+            allowNull: true
         },
         id_marca: {
             type: dataTypes.INTEGER,
@@ -56,7 +60,7 @@ module.exports = (sequelize, dataTypes) => {
      Vehiculo.associate = function (models) {
 
         Vehiculo.belongsTo(models.Marca, {
-            as: 'marca',
+            as: 'marcas',
             foreignKey: 'id_marca'
         })
 

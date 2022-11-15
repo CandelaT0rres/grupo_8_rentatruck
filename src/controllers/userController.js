@@ -143,7 +143,7 @@ const userController = {
                   req.session.destroy();
                   res.clearCookie('recordame');
                   res.redirect('/')})
-                  
+
                .catch((err) => {console.log(`${err}${'Error al eliminar usuario'}`)});
             
             
@@ -175,7 +175,10 @@ const userController = {
                }});
             }
          })
-         .then(() => {
+         .then((usuarioALoguearse2) => {
+            if (req.body.recordame != undefined) {
+               res.cookie('recordame', usuarioALoguearse2.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
+            };
             res.redirect('/user/perfil');
          })
          .catch(() =>{
