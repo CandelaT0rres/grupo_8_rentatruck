@@ -74,7 +74,7 @@
                             <label for="km" class="form-label">Kilometraje</label>
                             <input type="text" class="form-control  <%= locals.errors && errors.km ? 'is-invalid' : null %>" id="km" name="km" value="<%= locals.oldData ? oldData.km : null %>">
 
-                            <% if (locals.errors && errors.origen) { %>
+                            <% if (locals.errors && errors.km) { %>
                                 <h5 class = "text-danger">
                                     <%= errors.km.msg %> 
                                 </h5>

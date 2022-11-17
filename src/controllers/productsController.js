@@ -79,7 +79,15 @@ const productsController = {
             })
 
       } else {
-         res.send(errors)
+         let marcas = db.Marca.findAll();
+         let tipo_mercaderia = db.Tipo_mercaderia.findAll();
+         Promise.all([marcas, tipo_mercaderia])
+            .then(([marcas, tipo_mercaderia]) => {
+               res.render('./products/cargar', {marcas: marcas, tipo_mercaderia: tipo_mercaderia, errors: errors.mapped()})
+            })
+            .catch(err => {
+               console.log(err);
+            })
       }
 
    
@@ -120,7 +128,7 @@ const productsController = {
          jpeg({quality: 50}).
          toFile(path.join(__dirname, '../../public/img/') + img);
          db.Vehiculo.update({
-            id_marca: datos.marca,
+            id_marca: datos.marcas,
             modelo: datos.modelo,
             patente: datos.patente,
             id_tipo_mercaderia: datos.tipo_mercaderia,
@@ -137,9 +145,17 @@ const productsController = {
             })
 
       } else {
-         db.Vehiculo.findByPk(req.params.id)
-            .then(camionEncontrado => {
-               camionEncontrado? res.render("./products/editar", {producto: camionEncontrado, errors:errors.mapped(), oldData:req.body}): null;
+
+         console.log('ENTRE A ERRORES');
+
+         let marcas = db.Marca.findAll()
+         let tipo_mercaderia = db.Tipo_mercaderia.findAll()
+         let producto = db.Vehiculo.findByPk(req.params.id, {
+            include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}]
+         })
+         Promise.all([producto, marcas, tipo_mercaderia])
+            .then(([producto, marcas, tipo_mercaderia]) => {
+               res.render('./products/editar', {producto, marcas, tipo_mercaderia, errors: errors.mapped(), oldData: req.body})
             })
       }
       
@@ -171,7 +187,7 @@ const productsController = {
                {where: {id: req.params.id}})
                .then(() => {res.redirect('/')})
                .catch((err) => {console.log(`${err}${'Error al eliminar vehiculo'}`)});
-         }, '3000')
+         }, '500')
       }   
     
 }

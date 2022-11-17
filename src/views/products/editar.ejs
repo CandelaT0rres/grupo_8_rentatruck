@@ -21,8 +21,8 @@
                 
                     <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/editar/<%= producto.id  %>?_method=PUT" method="post" enctype="multipart/form-data"> 
                         <div class="col-md-6">
-                        <label for="marca" class="form-label">Marca</label>
-                        <select name="marca" id="marca" class="form-control">
+                        <label for="marcas" class="form-label">Marca</label>
+                        <select name="marcas" id="marcas" class="form-control">
                             <% marcas.forEach(marcas => { %>
                                 <% if (producto.id_marca == marcas.id) { %>
                                  <option value="<%= marcas.id %>" selected><%= marcas.nombre %></option>
@@ -31,7 +31,7 @@
                                 <% } %> 
                             <% }) %>
                         </select>
-                        <% if (locals.errors && errors.nombre) { %>
+                        <% if (locals.errors && errors.marcas) { %>
                             <h5 class = "text-danger">
                                 <%= errors.nombre.msg %> 
                             </h5>
@@ -68,9 +68,9 @@
                                     <% } %> 
                                 <% }) %>
                             </select>
-                            <% if (locals.errors && errors.tipoC) { %>
+                            <% if (locals.errors && errors.tipo_mercaderia) { %>
                                 <h5 class = "text-danger">
-                                    <%= errors.tipoC.msg %> 
+                                    <%= errors.tipo_mercaderia.msg %> 
                                 </h5>
                             <% } %>
                         </div>
