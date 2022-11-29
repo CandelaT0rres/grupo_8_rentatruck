@@ -28,7 +28,7 @@
         <main id="margen-productos-sm"> 
 
             <br><br><br>
-            <% if (locals.userLogueado) { %>
+            <% if (locals.usuarioLogueadoVistas.id_rol == 1) { %>
                 <a href="/products/cargar"class=""><button class="icon-btn add-btn">
                     <div class="add-icon"></div>
                     <div class="btn-txt">Nuevo Camión</div>

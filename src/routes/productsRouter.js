@@ -9,7 +9,6 @@ const upload = require('../middlewares/multerProducts');
 //Middlewares
 const authMiddleware = require('../middlewares/authMiddleware');
 
-
 //Importo Controlador
 const controller = require('../controllers/productsController');
 
