@@ -47,7 +47,10 @@ const userController = {
             });
             res.redirect('/user/login');     
       }else{
-         res.render('./users/registro', {errors: errors.mapped(), oldData: req.body});
+         db.Rol.findAll()
+            .then(rol => {
+               res.render('./users/registro', {errors: errors.mapped(), oldData: req.body, rol});
+            })
       }
    },
 

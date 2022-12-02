@@ -21,7 +21,7 @@
         
         <div class="d-flex justify-content-center">
             <div class="row section-1-home container ">
-                <form action="/user/registro" method="post" enctype="multipart/form-data" class="row g-3 fondo-registro">
+                <form action="/user/registro" method="post" enctype="multipart/form-data" class="row g-3 fondo-registro" id="formulario-registro">
                     <div class="col-md-6">
                       <label for="inputNombre4" class="form-label">Nombre/Razón social</label>
                       <input type="text" name="nombre" class="form-control <%=locals.errors && errors.nombre ? 'is-invalid' : null %>" id="inputNombre4"  value="<%=locals.oldData ? oldData.nombre : null %>" >
@@ -104,7 +104,7 @@
                             <% } %>
                       </div>
                     <div class="col-md-6 mt-4">
-                  
+                        <label for="img" class="form-label">Imágen de perfil</label>
                         <input type="file" name="img" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %>">
                         <% if (locals.errors && errors.img) { %>
                             <h5 class = "text-danger">
@@ -114,18 +114,19 @@
                       
                     </div>
                     <div class="col-md-6 mt-4">
-                  <select name="id_rol" id="id_rol" class="form-control <%= locals.errors && errors.rol ? 'is-invalid' : null %>">
-                    <% rol.forEach((cadaElemento) => { %>
-                        <% if (cadaElemento.nombre != 'Administrador') { %> 
-                        <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
-                          <% } %> 
-                    <% }) %> 
-                  </select>
+                        <label for="id_rol" class="form-label">Tipo de usuario</label>
+                        <select name="id_rol" id="id_rol" class="form-control <%= locals.errors && errors.rol ? 'is-invalid' : null %>">
+                        <% rol.forEach((cadaElemento) => { %>
+                            <% if (cadaElemento.nombre != 'Administrador') { %> 
+                            <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
+                            <% } %> 
+                        <% }) %> 
+                        </select>
                         <% if (locals.errors && errors.rol) { %>
                             <h5 class = "text-danger">
                                 <%= errors.rol.msg %> 
                             </h5>
-                            <% } %>          
+                        <% } %>          
                     </div>
     
                     <div class="col-12 my-2">
