@@ -3,6 +3,7 @@
 <head>
     <%- include('../partials/head') %>
     <title>Registro</title>
+    <script src="/js/registro.js"></script>
 </head>
 
 <body class="container registro">
@@ -76,6 +77,12 @@
                             </h5>
                             <% } %>
                     </div>
+                    <div class="col-md-6 licencia none">
+                        <label for="licencia" class="form-label">Nº de Licencia</label>
+                        <input type="number" class="form-control <%= locals.errors && errors.licencia ? 'is-invalid' : null %>" id="licencia" name="licencia" id="licencia" value="<%= locals.oldData ? oldData.licencia : null %>">
+    
+                        <h5 id="licenciaH5"></h5>
+                    </div>
                     <div class="col-md-6">
                       <label for="inputPassword4" class="form-label">Contraseña</label>
                       <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password">
@@ -108,7 +115,7 @@
                       
                     </div>
                     <div class="col-md-6 mt-4">
-                  <select name="id_rol" id="" class="form-control <%= locals.errors && errors.rol ? 'is-invalid' : null %>">
+                  <select name="id_rol" id="id_rol" class="form-control <%= locals.errors && errors.rol ? 'is-invalid' : null %>">
                     <% rol.forEach((cadaElemento) => { %>
                         <% if (cadaElemento.nombre != 'Administrador') { %> 
                         <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
