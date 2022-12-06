@@ -23,9 +23,9 @@
             <div class="row section-1-home container ">
                 <form action="/user/registro" method="post" enctype="multipart/form-data" class="row g-3 fondo-registro" id="formulario-registro">
                     <div class="col-md-6">
-                      <label for="inputNombre4" class="form-label">Nombre/Razón social</label>
-                      <input type="text" name="nombre" class="form-control <%=locals.errors && errors.nombre ? 'is-invalid' : null %>" id="inputNombre4"  value="<%=locals.oldData ? oldData.nombre : null %>" >
-    
+                        <label for="nombre" class="form-label">Nombre/Razón social</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control <%=locals.errors && errors.nombre ? 'is-invalid' : null %>" id="nombre"  value="<%=locals.oldData ? oldData.nombre : null %>" >
+                        <h5 class="none" id="errorNombre"></h5>
                       <% if (locals.errors && errors.nombre) { %>
                         <h5 class = "text-danger">
                             <%= errors.nombre.msg %> 
@@ -34,9 +34,9 @@
                     </div>
     
                     <div class="col-md-6">
-                        <label for="inputAddress" class="form-label">Dirección</label>
-                        <input type="text" class="form-control <%=locals.errors && errors.direccion ? 'is-invalid' : null %> " id="inputAddress" name="direccion" value="<%= locals.oldData ? oldData.direccion : null %>">
-    
+                        <label for="direccion" class="form-label">Dirección</label>
+                        <input type="text" class="form-control <%=locals.errors && errors.direccion ? 'is-invalid' : null %> " id="direccion" name="direccion" value="<%= locals.oldData ? oldData.direccion : null %>">
+                        <h5 id="errorDireccion" class="none"></h5>
                         <% if (locals.errors && errors.direccion) { %>
                             <h5 class = "text-danger">
                                 <%= errors.direccion.msg %> 
@@ -44,9 +44,9 @@
                             <% } %>
                     </div>
                     <div class="col-md-6">
-                        <label for="inputApellido4" class="form-label">Apellido/Nombre Fantasía</label>
-                        <input type="text" class="form-control <%= locals.errors && errors.apellido ? 'is-invalid' : null %>" id="inputApellido4" name="apellido" value="<%= locals.oldData ? oldData.apellido : null %>">
-    
+                        <label for="apellido" class="form-label">Apellido/Nombre Fantasía</label>
+                        <input type="text" class="form-control <%= locals.errors && errors.apellido ? 'is-invalid' : null %>" id="apellido" name="apellido" value="<%= locals.oldData ? oldData.apellido : null %>">
+                        <h5 class="none" id="errorApellido"></h5>
                         <% if (locals.errors && errors.apellido) { %>
                             <h5 class = "text-danger">
                                 <%= errors.apellido.msg %> 
@@ -56,11 +56,12 @@
                     <div class="col-md-6">
                           <label for="telefono" class="form-label">Teléfono</label>
                           <input type="number" class="form-control" id="telefono" name="telefono" value="<%= locals.oldData ? oldData.telefono : null %>">
+                          <h5 class="none" id="errorTelefono"></h5>
                     </div>
                     <div class="col-md-6">
-                        <label for="inputDNI4" class="form-label">DNI o CUIT</label>
-                        <input type="number" class="form-control <%= locals.errors && errors.dni ? 'is-invalid' : null %>" id="inputDNI4" name="dni" value="<%= locals.oldData ? oldData.dni : null %>">
-    
+                        <label for="dni" class="form-label">DNI o CUIT</label>
+                        <input type="number" class="form-control <%= locals.errors && errors.dni ? 'is-invalid' : null %>" id="dni" name="dni" value="<%= locals.oldData ? oldData.dni : null %>">
+                        <h5 class="none" id="errorDni"></h5>
                         <% if (locals.errors && errors.dni) { %>
                             <h5 class = "text-danger">
                                 <%= errors.dni.msg %> 
@@ -80,7 +81,7 @@
                     <div class="col-md-6 licencia none">
                         <label for="licencia" class="form-label">Nº de Licencia</label>
                         <input type="number" class="form-control <%= locals.errors && errors.licencia ? 'is-invalid' : null %>" id="licencia" name="licencia" id="licencia" value="<%= locals.oldData ? oldData.licencia : null %>">
-                        <h5 id="licenciaH5"></h5>
+                        <h5 class= 'none' id="licenciaH5"></h5>
                     </div>
                     <div class="col-md-6">
                       <label for="inputPassword4" class="form-label">Contraseña</label>
