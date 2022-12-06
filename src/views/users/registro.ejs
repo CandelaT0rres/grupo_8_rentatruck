@@ -69,9 +69,9 @@
                             <% } %>
                     </div>
                     <div class="col-md-6">
-                        <label for="inputEmail4" class="form-label">E-Mail</label>
-                        <input type="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" id="inputEmail4" name="email" value="<%= locals.oldData ? oldData.email : null %>">
-    
+                        <label for="email" class="form-label">E-Mail</label>
+                        <input type="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" id="email" name="email" value="<%= locals.oldData ? oldData.email : null %>">
+                        <h5 class="none" id="errorEmail"></h5>
                         <% if (locals.errors && errors.email) { %>
                             <h5 class = "text-danger">
                                 <%= errors.email.msg %> 

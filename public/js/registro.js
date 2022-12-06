@@ -11,6 +11,11 @@ window.addEventListener('load', function() {
     let errorApellido = document.querySelector('#errorApellido');
     let inputTelefono = document.querySelector('#telefono');
     let errorTelefono = document.querySelector('#errorTelefono');
+    let inputDni = document.querySelector('#dni');
+    let errorDni = document.querySelector('#errorDni');
+    const expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
+    let inputEmail = document.querySelector('#email');
+    let errorEmail = document.querySelector('#errorEmail');
     let formularioRegistro = document.querySelector('#formulario-registro');
     let boton = document.querySelector('.btn-home-inicio-sesion');
 
@@ -93,6 +98,43 @@ window.addEventListener('load', function() {
             errorTelefono.classList.add('none');
             inputTelefono.classList.remove('is-invalid');
             inputTelefono.classList.add('is-valid');
+        };
+    });
+
+    inputDni.addEventListener('focusout', function() {
+        if (inputDni.value.length == 0) {
+            errorDni.classList.remove('none');
+            errorDni.classList.add('text-danger');
+            errorDni.innerText = 'Debes ingresar un Número de documento';
+            inputDni.classList.add('is-invalid');
+        } else if (inputDni.value.length < 6) {
+            errorDni.classList.remove('none');
+            errorDni.classList.add('text-danger');
+            errorDni.innerText = 'Debe tener al menos 6 caracteres';
+            inputDni.classList.add('is-invalid');
+        } else {
+            errorDni.classList.add('none');
+            inputDni.classList.remove('is-invalid');
+            inputDni.classList.add('is-valid');
+        };
+    });
+
+    inputEmail.addEventListener('focusout', function() {
+        let esValido = expReg.test(inputEmail.value);
+        if (inputEmail.value.length == 0) {
+            errorEmail.classList.remove('none');
+            errorEmail.classList.add('text-danger');
+            errorEmail.innerText = 'Debes ingresar un correo electrónico';
+            inputEmail.classList.add('is-invalid');
+        } else if (esValido == false) {
+            errorEmail.classList.remove('none');
+            errorEmail.classList.add('text-danger');
+            errorEmail.innerText = 'El correo electrónico no es válido';
+            inputEmail.classList.add('is-invalid');
+        } else {
+            errorEmail.classList.add('none');
+            inputEmail.classList.remove('is-invalid');
+            inputEmail.classList.add('is-valid');
         };
     });
 
