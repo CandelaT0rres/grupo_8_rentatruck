@@ -16,9 +16,14 @@ window.addEventListener('load', function() {
     const expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
     let inputEmail = document.querySelector('#email');
     let errorEmail = document.querySelector('#errorEmail');
+    let inputPass = document.querySelector('#password');
+    let errorPass = document.querySelector('#errorPassword');
+    let inputPass2 = document.querySelector('#password2');
+    let errorPass2 = document.querySelector('#errorPassword2');
+    let img = document.querySelector('#img');
+    let errorImg = document.querySelector('#errorImg');
     let formularioRegistro = document.querySelector('#formulario-registro');
-    let boton = document.querySelector('.btn-home-inicio-sesion');
-
+    console.log(img.value);
     rol.addEventListener('change', function() {
         if (rol.value == 3) {
             if (licencia.classList.contains('none')) {
@@ -29,7 +34,7 @@ window.addEventListener('load', function() {
         }
     })
 
-    inputNombre.addEventListener('focusout', function() {
+    inputNombre.addEventListener('change', function() {
         if (inputNombre.value.length == 0) {
             errorNombre.classList.remove('none');
             inputNombre.classList.add('is-invalid');
@@ -47,7 +52,7 @@ window.addEventListener('load', function() {
         }
     });
 
-    inputDireccion.addEventListener('focusout', function() {
+    inputDireccion.addEventListener('change', function() {
         if (inputDireccion.value.length == 0) {
             errorDireccion.classList.remove('none');
             inputDireccion.classList.add('is-invalid');
@@ -65,7 +70,7 @@ window.addEventListener('load', function() {
         }
     });
 
-    inputApellido.addEventListener('focusout', function() {
+    inputApellido.addEventListener('change', function() {
         if (inputApellido.value.length == 0) {
             errorApellido.classList.remove('none');
             inputApellido.classList.add('is-invalid');
@@ -83,7 +88,7 @@ window.addEventListener('load', function() {
         };
     });
 
-    inputTelefono.addEventListener('focusout', function() {
+    inputTelefono.addEventListener('change', function() {
         if (inputTelefono.value.length == 0) {
             errorTelefono.classList.remove('none');
             inputTelefono.classList.add('is-invalid');
@@ -101,7 +106,7 @@ window.addEventListener('load', function() {
         };
     });
 
-    inputDni.addEventListener('focusout', function() {
+    inputDni.addEventListener('change', function() {
         if (inputDni.value.length == 0) {
             errorDni.classList.remove('none');
             errorDni.classList.add('text-danger');
@@ -119,7 +124,7 @@ window.addEventListener('load', function() {
         };
     });
 
-    inputEmail.addEventListener('focusout', function() {
+    inputEmail.addEventListener('change', function() {
         let esValido = expReg.test(inputEmail.value);
         if (inputEmail.value.length == 0) {
             errorEmail.classList.remove('none');
@@ -138,21 +143,85 @@ window.addEventListener('load', function() {
         };
     });
 
-    inputLicencia.addEventListener('focusout', function(e) {
+    inputLicencia.addEventListener('change', function(e) {
         if (inputLicencia.value.length < 1) {
             errorLicencia.classList.remove('none');
             errorLicencia.classList.add('text-danger');
             inputLicencia.classList.add('is-invalid');
-            errorLicencia.innerText = 'Debes completar este campo'
+            errorLicencia.innerText = 'Debes completar este campo';
         } else if (inputLicencia.value.length < 6) {
             errorLicencia.classList.remove('none');
             errorLicencia.classList.add('text-danger');
             inputLicencia.classList.add('is-invalid');
-            errorLicencia.innerText = 'Debe tener 6 caracteres como mínimo'
+            errorLicencia.innerText = 'Debe tener 6 caracteres como mínimo';
         } else {
-            errorLicencia.classList.add('none')
+            errorLicencia.classList.add('none');
             inputLicencia.classList.remove('is-invalid');
-            inputLicencia.classList.add('is-valid')
+            inputLicencia.classList.add('is-valid');
+        };
+    });
+
+    inputPass.addEventListener('change', function() {
+        if (inputPass.value.length == 0) {
+            errorPass.classList.remove('none');
+            errorPass.classList.add('text-danger');
+            errorPass.innerText = 'Debes ingresar una contraseña';
+            inputPass.classList.add('is-invalid');
+        } else if (inputPass.value.length < 6) {
+            errorPass.classList.remove('none');
+            errorPass.classList.add('text-danger');
+            errorPass.innerText = 'Debe tener 6 caracteres como mínimo';
+            inputPass.classList.add('is-invalid');
+        } else {
+            errorPass.classList.add('none');
+            inputPass.classList.remove('is-invalid');
+            inputPass.classList.add('is-valid');
+        };
+    });
+
+    inputPass2.addEventListener('change', function() {
+        if (inputPass2.value.length == 0) {
+            errorPass2.classList.remove('none');
+            errorPass2.classList.add('text-danger');
+            errorPass2.innerText = 'Debes ingresar una contraseña';
+            inputPass2.classList.add('is-invalid');
+        } else if (inputPass2.value.length < 6) {
+            errorPass2.classList.remove('none');
+            errorPass2.classList.add('text-danger');
+            errorPass2.innerText = 'Debe tener 6 caracteres como mínimo';
+            inputPass2.classList.add('is-invalid');
+        } else {
+            errorPass2.classList.add('none');
+            inputPass2.classList.remove('is-invalid');
+            inputPass2.classList.add('is-valid');
+            if (inputPass.value.length >= 6) {
+                if (inputPass.value != inputPass2.value) {
+                    errorPass2.classList.remove('none');
+                    errorPass2.classList.add('text-danger');
+                    errorPass2.innerText = 'Las contraseñas no coinciden';
+                    inputPass2.classList.add('is-invalid');
+                    inputPass.classList.add('is-invalid');
+                } else {
+                    inputPass.classList.remove('is-invalid');
+                    inputPass.classList.add('is-valid');
+                }
+            }
+        };
+    });
+
+    img.addEventListener('change', function() {
+        let filePath = img.value;
+        let extencionesPermitidas = /(.jpg|.jpeg|.png|.gif)$/i;
+        if (!extencionesPermitidas.exec(filePath)) {
+            errorImg.classList.remove('none');
+            errorImg.classList.add('text-danger');
+            errorImg.innerText = 'El formato de imágen no es válido';
+            img.classList.add('is-invalid');
+        } else {
+            errorImg.classList.add('none');
+            img.classList.remove('is-invalid');
+            img.classList.add('is-valid');
         }
     })
+
 })

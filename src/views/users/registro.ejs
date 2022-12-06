@@ -84,9 +84,9 @@
                         <h5 class= 'none' id="licenciaH5"></h5>
                     </div>
                     <div class="col-md-6">
-                      <label for="inputPassword4" class="form-label">Contraseña</label>
-                      <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword4" name="password">
-    
+                        <label for="password" class="form-label">Contraseña</label>
+                        <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="password" name="password">
+                        <h5 class="none" id="errorPassword"></h5>
                       <% if (locals.errors && errors.password) { %>
                         <h5 class = "text-danger">
                             <%= errors.password.msg %> 
@@ -95,18 +95,19 @@
                     </div>
                     
                     <div class="col-md-6">
-                        <label for="inputPassword2" class="form-label">Repita su contraseña</label>
-                        <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="inputPassword2" name="password2">
-    
-                        <% if (locals.errors && errors.password) { %>
+                        <label for="password2" class="form-label">Repita su contraseña</label>
+                        <input type="password" class="form-control <%= locals.errors && errors.password2 ? 'is-invalid' : null %>" id="password2" name="password2">
+                        <h5 class="none" id="errorPassword2"></h5>
+                        <% if (locals.errors && errors.password2) { %>
                             <h5 class = "text-danger">
-                                <%= errors.password.msg %> 
+                                <%= errors.password2.msg %> 
                             </h5>
                             <% } %>
                       </div>
                     <div class="col-md-6 mt-4">
                         <label for="img" class="form-label">Imágen de perfil</label>
-                        <input type="file" name="img" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %>">
+                        <input type="file" name="img" id="img" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %>">
+                        <h5 class="none" id="errorImg"></h5>
                         <% if (locals.errors && errors.img) { %>
                             <h5 class = "text-danger">
                                 <%= errors.img.msg %> 
