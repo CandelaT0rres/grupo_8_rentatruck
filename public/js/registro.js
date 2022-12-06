@@ -23,16 +23,15 @@ window.addEventListener('load', function() {
     let img = document.querySelector('#img');
     let errorImg = document.querySelector('#errorImg');
     let formularioRegistro = document.querySelector('#formulario-registro');
-    console.log(img.value);
     rol.addEventListener('change', function() {
         if (rol.value == 3) {
             if (licencia.classList.contains('none')) {
-                licencia.classList.remove('none')
+                licencia.classList.remove('none');
             }
         } else {
-            licencia.classList.add('none')
-        }
-    })
+            licencia.classList.add('none');
+        };
+    });
 
     inputNombre.addEventListener('change', function() {
         if (inputNombre.value.length == 0) {
@@ -177,6 +176,18 @@ window.addEventListener('load', function() {
             inputPass.classList.remove('is-invalid');
             inputPass.classList.add('is-valid');
         };
+        if (inputPass2.value.length >= 6) {
+            if (inputPass2.value != inputPass2.value) {
+                errorPass.classList.remove('none');
+                errorPass.classList.add('text-danger');
+                errorPass.innerText = 'Las contraseñas no coinciden';
+                inputPass.classList.add('is-invalid');
+                inputPass2.classList.add('is-invalid');
+            } else {
+                inputPass2.classList.remove('is-invalid');
+                inputPass2.classList.add('is-valid');
+            };
+        };
     });
 
     inputPass2.addEventListener('change', function() {
@@ -204,8 +215,8 @@ window.addEventListener('load', function() {
                 } else {
                     inputPass.classList.remove('is-invalid');
                     inputPass.classList.add('is-valid');
-                }
-            }
+                };
+            };
         };
     });
 
@@ -221,7 +232,14 @@ window.addEventListener('load', function() {
             errorImg.classList.add('none');
             img.classList.remove('is-invalid');
             img.classList.add('is-valid');
-        }
+        };
+    });
+
+    formularioRegistro.addEventListener('submit', function(e) {
+        if (inputNombre.value.length == 0 || inputApellido.value.length == 0 || inputDireccion.value.length == 0 || inputDni.value.length == 0 || inputEmail.value.length == 0 || inputPass.value.length == 0 || inputPass2.value.length == 0 || inputTelefono.value.length == 0 || (rol.value == 3 && inputLicencia.value.length == 0) || (inputPass.value != inputPass2.value) || inputNombre.value.length < 6 || inputApellido.value.length < 6 || inputDireccion.value.length < 6 || inputDni.value.length < 6 || inputEmail.value.length < 6 || inputPass.value.length < 6 || inputPass2.value.length < 6 || inputTelefono.value.length < 6 || (rol.value == 3 && inputLicencia.value.length < 6) || !extencionesPermitidas.exec(filePath)) {
+            e.preventDefault();
+        };
+
     })
 
 })
