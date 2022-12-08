@@ -24,113 +24,66 @@
                 <form action="/user/registro" method="post" enctype="multipart/form-data" class="row g-3 fondo-registro" id="formulario-registro">
                     <div class="col-md-6">
                         <label for="nombre" class="form-label">Nombre/Razón social</label>
-                        <input type="text" name="nombre" id="nombre" class="form-control <%=locals.errors && errors.nombre ? 'is-invalid' : null %>" id="nombre"  value="<%=locals.oldData ? oldData.nombre : null %>" >
+                        <input type="text" name="nombre" id="nombre" class="form-control" id="nombre">
                         <h5 class="none" id="errorNombre"></h5>
-                      <% if (locals.errors && errors.nombre) { %>
-                        <h5 class = "text-danger">
-                            <%= errors.nombre.msg %> 
-                        </h5>
-                    <% } %>
                     </div>
     
                     <div class="col-md-6">
                         <label for="direccion" class="form-label">Dirección</label>
-                        <input type="text" class="form-control <%=locals.errors && errors.direccion ? 'is-invalid' : null %> " id="direccion" name="direccion" value="<%= locals.oldData ? oldData.direccion : null %>">
+                        <input type="text" class="form-control" id="direccion" name="direccion">
                         <h5 id="errorDireccion" class="none"></h5>
-                        <% if (locals.errors && errors.direccion) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.direccion.msg %> 
-                            </h5>
-                            <% } %>
                     </div>
                     <div class="col-md-6">
                         <label for="apellido" class="form-label">Apellido/Nombre Fantasía</label>
-                        <input type="text" class="form-control <%= locals.errors && errors.apellido ? 'is-invalid' : null %>" id="apellido" name="apellido" value="<%= locals.oldData ? oldData.apellido : null %>">
+                        <input type="text" class="form-control" id="apellido" name="apellido">
                         <h5 class="none" id="errorApellido"></h5>
-                        <% if (locals.errors && errors.apellido) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.apellido.msg %> 
-                            </h5>
-                            <% } %>
                     </div>
                     <div class="col-md-6">
                           <label for="telefono" class="form-label">Teléfono</label>
-                          <input type="number" class="form-control" id="telefono" name="telefono" value="<%= locals.oldData ? oldData.telefono : null %>">
+                          <input type="number" class="form-control" id="telefono" name="telefono">
                           <h5 class="none" id="errorTelefono"></h5>
                     </div>
                     <div class="col-md-6">
                         <label for="dni" class="form-label">DNI o CUIT</label>
-                        <input type="number" class="form-control <%= locals.errors && errors.dni ? 'is-invalid' : null %>" id="dni" name="dni" value="<%= locals.oldData ? oldData.dni : null %>">
+                        <input type="number" class="form-control" id="dni" name="dni">
                         <h5 class="none" id="errorDni"></h5>
-                        <% if (locals.errors && errors.dni) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.dni.msg %> 
-                            </h5>
-                            <% } %>
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label">E-Mail</label>
-                        <input type="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" id="email" name="email" value="<%= locals.oldData ? oldData.email : null %>">
+                        <input type="email" class="form-control" id="email" name="email">
                         <h5 class="none" id="errorEmail"></h5>
-                        <% if (locals.errors && errors.email) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.email.msg %> 
-                            </h5>
-                            <% } %>
                     </div>
                     <div class="col-md-6 licencia none">
                         <label for="licencia" class="form-label">Nº de Licencia</label>
-                        <input type="number" class="form-control <%= locals.errors && errors.licencia ? 'is-invalid' : null %>" id="licencia" name="licencia" id="licencia" value="<%= locals.oldData ? oldData.licencia : null %>">
+                        <input type="number" class="form-control" id="licencia" name="licencia" id="licencia">
                         <h5 class= 'none' id="licenciaH5"></h5>
                     </div>
                     <div class="col-md-6">
                         <label for="password" class="form-label">Contraseña</label>
-                        <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password">
                         <h5 class="none" id="errorPassword"></h5>
-                      <% if (locals.errors && errors.password) { %>
-                        <h5 class = "text-danger">
-                            <%= errors.password.msg %> 
-                        </h5>
-                        <% } %>
                     </div>
                     
                     <div class="col-md-6">
                         <label for="password2" class="form-label">Repita su contraseña</label>
-                        <input type="password" class="form-control <%= locals.errors && errors.password2 ? 'is-invalid' : null %>" id="password2" name="password2">
+                        <input type="password" class="form-control" id="password2" name="password2">
                         <h5 class="none" id="errorPassword2"></h5>
-                        <% if (locals.errors && errors.password2) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.password2.msg %> 
-                            </h5>
-                            <% } %>
                       </div>
                     <div class="col-md-6 mt-4">
                         <label for="img" class="form-label">Imágen de perfil</label>
-                        <input type="file" name="img" id="img" class="form-control <%= locals.errors && errors.img ? 'is-invalid' : null %>">
-                        <h5 class="none" id="errorImg"></h5>
-                        <% if (locals.errors && errors.img) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.img.msg %> 
-                            </h5>
-                            <% } %>
-                      
+                        <input type="file" name="img" id="img" class="form-control">
+                        <h5 class="none" id="errorImg"></h5>                      
                     </div>
                     <div class="col-md-6 mt-4">
                         <label for="id_rol" class="form-label">Tipo de usuario</label>
-                        <select name="id_rol" id="id_rol" class="form-control <%= locals.errors && errors.rol ? 'is-invalid' : null %>">
+                        <select name="id_rol" id="id_rol" class="form-control">
                         <% rol.forEach((cadaElemento) => { %>
                             <% if (cadaElemento.nombre != 'Administrador') { %> 
                             <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
                             <% } %> 
                         <% }) %> 
-                        </select>
-                        <% if (locals.errors && errors.rol) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.rol.msg %> 
-                            </h5>
-                        <% } %>          
+                        </select>        
                     </div>
-    
                     <div class="col-12 my-2">
                       <button type="submit" class="btn-home-inicio-sesion button-h">Registrarme</button>
                     </div>
