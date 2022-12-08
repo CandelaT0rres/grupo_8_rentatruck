@@ -1,5 +1,3 @@
-const Vehiculo = require("./Vehiculo");
-
 module.exports = (sequelize, dataTypes) => {
     let alias = "Viaje"
     let columnas = {
@@ -45,7 +43,7 @@ module.exports = (sequelize, dataTypes) => {
                            
     };
     let configuracion = {
-        tablaName : "viaje",
+        tableName : "viaje",
         timestamps : false
     };
 

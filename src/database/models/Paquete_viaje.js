@@ -15,6 +15,7 @@ module.exports = (sequelize, dataTypes) => {
     };
     const Paquete_viaje = sequelize.define(alias,columnas,configuracion);
     Paquete_viaje.associate= function (models){
+        
         Paquete_viaje.hasMany(models.Viaje,{
            as: "viaje",
            foreingKey: "id_paquete_viaje"

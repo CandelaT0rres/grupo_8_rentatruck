@@ -1,5 +1,7 @@
 module.exports = (sequelize, dataTypes) => {
-    let alias = "Usuario"
+
+    let alias = 'Usuario';
+    
     let columnas = {
         id: {
             type : dataTypes.INTEGER,
@@ -8,50 +10,59 @@ module.exports = (sequelize, dataTypes) => {
             autoIncrement : true
         },
         nombre: { 
-            type: dataTypes.STRING,
+            type: dataTypes.STRING(150),
             allowNull : false 
         },
         dni: {
-            type: dataTypes.STRING,
-            allowNull : false
+            type: dataTypes.STRING(150),
+            allowNull : false,
+            unique: true
         },
         telefono: {
-            type: dataTypes.STRING,
+            type: dataTypes.STRING(150),
             allowNull : false
         },
         apellido: {
-            type: dataTypes.STRING,
+            type: dataTypes.STRING(150),
             allowNull : false
         },
         direccion: {
-            type: dataTypes.STRING,
+            type: dataTypes.STRING(150),
             allowNull : false
         },
         email: {
-            type: dataTypes.STRING,
-            allowNull : false
+            type: dataTypes.STRING(150),
+            allowNull : false,
+            unique: true
         },
         contra: {
-            type: dataTypes.STRING,
+            type: dataTypes.STRING(255),
             allowNull : false
         }, 
         id_rol: {
             type: dataTypes.INTEGER,
             allowNull : false
-        }                  
+        },
+        img: {
+            type: dataTypes.STRING(100),
+            allowNull: false
+        }                 
     };
     
     let configuracion = {
-        tableName : "usuario",
-        timestamps : false
+        tableName : 'usuario',
+        timestamps : false,
+        camelCase: false
     };
     const Usuario = sequelize.define(alias, columnas, configuracion);
     
     Usuario.associate = function (models) {
+        
         Usuario.belongsTo(models.Rol, {
             as: 'usuarios',
             foreignKey: 'id_rol'
         })
+    
 
         Usuario.belongsToMany(models.Vehiculo,{
             as: 'vehiculos',

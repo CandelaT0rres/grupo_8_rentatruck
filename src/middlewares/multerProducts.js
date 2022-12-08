@@ -11,7 +11,7 @@ const fileFilter = (req, file, cb) => {
     let extencion = path.extname(file.originalname);
     type && extencionesAceptadas.includes(extencion) ? cb(null, true): cb(null, false)};
 
-const upload = multer({storage : storage, fileFilter: fileFilter} );
+const upload = multer({storage : storage, fileFilter: fileFilter});
 
 module.exports = upload; 
 

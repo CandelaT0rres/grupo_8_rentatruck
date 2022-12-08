@@ -612,6 +612,9 @@ display: flex;
     background-size: cover;
     background-position: center;
 }
+.none {
+    display: none
+}
 
 .logo-registro {
     width: 20%;

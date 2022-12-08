@@ -28,7 +28,7 @@
         <main id="margen-productos-sm"> 
 
             <br><br><br>
-            <% if (locals.userLogueado) { %>
+            <% if (locals.usuarioLogueadoVistas.id_rol == 1) { %>
                 <a href="/products/cargar"class=""><button class="icon-btn add-btn">
                     <div class="add-icon"></div>
                     <div class="btn-txt">Nuevo Camión</div>
@@ -42,15 +42,15 @@
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
                         <a href="/products/detalle/<%= d.id %>" class="text-decoration-none text-dark">
                             <div class="card border-light mb-3 m-3" style="width: 20rem;">
-                                <img src="/img/<%= d.rutaImg %>" class="camiones card-img-top">
+                                <img src="/img/<%= d.ruta_img %>" class="camiones card-img-top">
                                 <div class="card-body">
                                     <h1 class="fs-2 fw-bold"><%= d.nombre %></h1>
                                     <p> 
                                         <ul class="list-group list-group-flush fw-bold">
-                                            <li  class="list-group-item ">Marca: <%= d.marca %></li>
+                                            <li  class="list-group-item ">Marca: <%= d.marcas.nombre %></li>
                                             <li  class="list-group-item">Modelo: <%= d.modelo %></li>
-                                            <li  class="list-group-item"> Tipo de carga: <br> <%= d.tipoC %></li>
-                                            <li  class="list-group-item">Precio por Km: $<%= d.precioKm %></li>
+                                            <li  class="list-group-item"> Tipo de carga: <br> <%= d.tipo_mercaderia.nombre %></li>
+                                            <li  class="list-group-item">Precio por Km: $<%= d.precio_km %></li>
                                         </ul>
                                         </p>
                                                                

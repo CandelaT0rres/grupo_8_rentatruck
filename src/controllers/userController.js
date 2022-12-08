@@ -1,86 +1,90 @@
-//Importación fs + path + bcrypt + shar
+//Importación fs + path + bcrypt + sharp + Express-Validator
 const path = require('path');
 const fs = require('fs');
 const bcrypt = require('bcryptjs');
 const sharp = require('sharp');
-
-//Importación express-validator
 const {validationResult} = require('express-validator');
 
-//Usuarios
-let pathUsuarios = path.join(__dirname, '../data/users.json');
-let usuarios = JSON.parse(fs.readFileSync(pathUsuarios, 'utf-8'));
-
-//Geneador ID
-function generadorId (){
-   let ultimoId
-   if (usuarios.length != 0) {
-      ultimoId = (usuarios[usuarios.length-1].id)+1;
-   } else {
-      ultimoId = 1;
-   };
-   return ultimoId;
-}
+//Importación Modelo
+const db = require('../database/models');
 
 const userController = {
+   
+   pathImg: path.join(__dirname, '../../public/img/img-users/'),
+
    //Vista Form Registro 
    registro: (req , res) => {
-       res.render ('./users/registro')
+      db.Rol.findAll()
+         .then((rol) => {
+            res.render ('./users/registro', {rol})
+         })
+         .catch((err) => {console.log(`${'Rol no encontrado'}${err}`)})
     },
    
    //Creación de usuario
    nuevoUsuario: async (req, res) =>{
       let errors = validationResult(req);
       if(errors.isEmpty()){
- 
+         
          //Sharp
          let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
          await sharp(req.file.buffer)
             .resize(300, 300 , {fit:'contain', background:'#fff'})
             .toFormat('jpeg')
             .jpeg({quality: 50})
-            .toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
-
-         let usuarioNuevo = {
-            'id' : generadorId(), 
-            'nombre' : req.body.nombre,
-            'direccion' : req.body.direccion,
-            'apellido': req.body.apellido,
-            'direccion2' : req.body.direccion2,
-            'dni' : parseInt(req.body.dni),
-            'ciudad': req.body.ciudad,
-            'provincia' : req.body.provincia,
-            'email' : req.body.email,
-            'codigopostal' : parseInt(req.body.codigopostal),
-            'pais' : req.body.pais,
-            'password': bcrypt.hashSync(req.body.password, 10),
-            'password2': bcrypt.hashSync(req.body.password2, 10),
-            'img' : img
-         }
-         usuarios.push(usuarioNuevo);
-         fs.writeFileSync(pathUsuarios, JSON.stringify(usuarios, null , 4) , 'utf-8');
-         res.redirect('/user/login');
-         
+            .toFile(`${ path.join(__dirname, '../../public/img/img-users/')}${img}`);
+            
+            db.Usuario.create({
+               'id_rol':  req.body.id_rol,
+               'nombre' : req.body.nombre,
+               'dni' : parseInt(req.body.dni),
+               'telefono' : req.body.telefono,
+               'apellido': req.body.apellido,
+               'direccion' : req.body.direccion,
+               'email' : req.body.email,
+               'contra': bcrypt.hashSync(req.body.password, 10),
+               'img' : img
+            });
+            res.redirect('/user/login');     
       }else{
-         res.render('./users/registro', {errors: errors.mapped(), oldData: req.body});
+         db.Rol.findAll()
+            .then(rol => {
+               res.render('./users/registro', {errors: errors.mapped(), oldData: req.body, rol});
+            })
       }
    },
 
    //Vista y edición de usuario
    editarUsuario: (req, res) => {
-      let usuarioEncontrado = usuarios.find((cadaElemento) =>  cadaElemento.id == req.params.id);
-      usuarioEncontrado ? res.render('./users/user-edit', {usuario: usuarioEncontrado}) : res.send('No existe el usuario');
+      let usuario= db.Usuario.findByPk(req.params.id);
+      let rol= db.Rol.findAll();
+      Promise.all([
+         usuario, rol
+      ])
+         .then(([usuario,rol]) => {
+            res.render('./users/user-edit', {usuario: usuario, rol: rol});
+         })
+         .catch((err) => {
+            res.send(`${'No existe el usuario'}${err}`)
+         })
+         
    },
+
 
    updateUsuario: async (req, res) => {
 
       let errors = validationResult(req);
       if(errors.isEmpty()){
          
-         //Borro img unlinkSync() recibe como parametro el path completo del archivo
-         let product = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
-         let imgToDelete = path.join(__dirname, '../../public/img/img-users/', product.img);
-         fs.existsSync(imgToDelete) ? fs.unlinkSync(imgToDelete) : null;
+         //Borro img unlink() recibe como parametro el path completo del archivo
+         db.Usuario.findByPk(req.params.id)
+            .then((usuarioEncontrado) => {
+            let imagenABorrar = path.join(__dirname, '../../public/img/img-users/') + usuarioEncontrado.img;
+            fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
+            })
+            .catch((err) => {
+               console.log(`${err}${'imagen de usuario no encontrada'}`);
+            });
 
          //Sharp
          let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
@@ -90,30 +94,63 @@ const userController = {
             jpeg({quality: 50}).
             toFile(`${path.join(__dirname, '../../public/img/img-users/')}${img}`);
 
-         for ( let cadaElemento of usuarios){
-            if (cadaElemento.id == req.params.id) {
-               cadaElemento.nombre = req.body.nombre;
-               cadaElemento.apellido = req.body.apellido
-               cadaElemento.direccion = req.body.direccion;
-               cadaElemento.direccion2 = req.body.direccion2;
-               cadaElemento.dni = parseInt(req.body.dni);
-               cadaElemento.ciudad = req.body.ciudad;
-               cadaElemento.provincia = req.body.provincia;
-               cadaElemento.email = req.body.email;
-               cadaElemento.codigopostal = parseInt(req.body.codigopostal);
-               cadaElemento.pais = req.body.pais;
-               cadaElemento.password = bcrypt.hashSync(req.body.password, 10);
-               cadaElemento.img = img;
-               break;
-            }
-         }
-         fs.writeFileSync(pathUsuarios, JSON.stringify(usuarios, null, 4) , 'utf-8');
-         res.redirect('/');
-
+         db.Usuario.update({
+               'nombre' : req.body.nombre,
+               'dni' : parseInt(req.body.dni),
+               'telefono' : req.body.telefono,
+               'apellido': req.body.apellido,
+               'direccion' : req.body.direccion,
+               'email' : req.body.email,
+               'contra': bcrypt.hashSync(req.body.password, 10),
+               'id_rol': req.body.id_rol,
+               'img' : img
+         },{
+            where: {id:req.params.id}
+         })
+            .then(() =>{
+               res.redirect('/user/perfil');
+            })
+            .catch((err) => {
+               console.log(`${err}${'Error al actualizar usuario'}`);
+            });
       }else{
-         let usuarioEncontrado = usuarios.find((cadaElemento) => cadaElemento.id == req.params.id);
-         usuarioEncontrado ? res.render('./users/user-edit', {usuario: usuarioEncontrado , errors: errors.mapped(), oldData : req.body}) : res.send('No existe el usuario');
+         let usuario= db.Usuario.findByPk(req.params.id);
+         let rol= db.Rol.findAll();
+         Promise.all([
+            usuario, rol
+         ])
+            .then(([usuario,rol]) => {
+               res.render('./users/user-edit', {usuario: usuario, rol: rol, errors: errors.mapped(), oldData : req.body});
+            })
+            .catch((err) => {
+               res.send(`${'No existe el usuario'}${err}`)
+            });
       }
+   },
+   //Eliminar usuario
+
+   borrar: (req, res) => {
+      db.Usuario.findByPk(req.params.id)
+         .then((usuarioEncontrado) => {
+            let imagenABorrar=`${path.join(__dirname, '../../public/img/img-users/')}${usuarioEncontrado.img}`;
+            fs.existsSync(imagenABorrar)? fs.unlinkSync(imagenABorrar): null;
+         })
+         .catch((err) => {
+            console.log(`${err}${'imagen de usuario no encontrada'}`);
+         });
+         setTimeout(() => {
+            db.Usuario.destroy(
+               {where: {id: req.params.id}})
+               .then(() => {
+                  
+                  req.session.destroy();
+                  res.clearCookie('recordame');
+                  res.redirect('/')})
+
+               .catch((err) => {console.log(`${err}${'Error al eliminar usuario'}`)});
+            
+            
+         }, '3000')
    },
 
    //Vista Login
@@ -122,44 +159,51 @@ const userController = {
    },
    
    procesoLogin: (req, res) => {
-      let datos = req.body;
-      let usuarioALoguearse;
       let errors = validationResult(req);
-
       if (errors.isEmpty()) {
-         for (let o of usuarios) {
-            if (datos.email == o.email) {
-               if (bcrypt.compareSync(datos.password, o.password)) {
-                  usuarioALoguearse = o;
-               }
+         
+      db.Usuario.findOne({where: {email: req.body.email}})
+         .then((usuarioALoguearse) => {
+            if (bcrypt.compareSync(req.body.password, usuarioALoguearse.contra)) {
+               req.session.usuarioLogueado = usuarioALoguearse;
+               
+               if (req.body.recordame) {
+                  res.cookie('recordame', usuarioALoguearse.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
+               };
+               res.redirect('/user/perfil');
+            }else {
+               res.render('./users/login', { error: {
+                  credencial: {
+                     msg: 'Credenciales inválidas'
+                  }
+               }});
             }
-         };
-
-         if (usuarioALoguearse == undefined) {
+         })
+         .catch(() =>{
             res.render('./users/login', { error: {
                credencial: {
                   msg: 'Credenciales inválidas'
                }
-            } });
-         } else {
-            req.session.usuarioLogueado = usuarioALoguearse;
-   
-         if (datos.recordame != undefined) {
-            res.cookie('recordame', datos.email, { maxAge: ((((1000 * 60) * 60) * 24) * 30) })
-         };
-   
-         res.redirect('/');
-         };
+            }});
+         })
 
       } else {
-         res.render('./users/login', { errors: errors.mapped(), oldData: datos });
+         res.render('./users/login', { errors: errors.mapped(), oldData: req.body });
       }
 
    },
    //Perfil
 
    perfil: (req, res) => {
-      res.render('./users/perfil', {user: req.session.usuarioLogueado});
+      db.Usuario.findOne({
+         where: {
+            email: req.session.usuarioLogueado.email
+         }
+      })
+      .then ((user) => {
+       res.render('./users/perfil', {user});
+      })
+      
    },
 
    logout: (req, res) => {

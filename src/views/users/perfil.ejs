@@ -25,9 +25,15 @@
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-1 me-1">
                            <a href="/user/registro/<%= user.id %>"> <button type="submit" class="btn-home-inicio-sesion button-h">Editar perfil</button> </a>
                         </div>
+                        <div class="col-md-1 ms-1">
+                            <form action="/user/deleteUser/<%= user.id %>?_method=DELETE" method="post">
+                                
+                                <button type="submit" class="btn-home-inicio-sesion button-h">Eliminar </button>
+                            </form>
+                         </div>
                 </div>
                 <div class="row justify-content-center">
                         <div class="col-md-4">

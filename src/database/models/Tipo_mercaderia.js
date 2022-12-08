@@ -14,12 +14,12 @@ module.exports = (sequelize, dataTypes) => {
     };
     
     let configuracion = {
-        tablaName : "tipo_mercaderia",
+        tableName : "tipo_mercaderia",
         timestamps : false
     };
     const Tipo_mercaderia = sequelize.define(alias, columnas, configuracion);
 
-    Tipo_mercaderia.associate = function (models) {
+     Tipo_mercaderia.associate = function (models) {
 
         Tipo_mercaderia.hasMany(models.Vehiculo, {
             as: 'vehiculo',

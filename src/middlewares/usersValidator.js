@@ -9,11 +9,10 @@ const errors = [
     body('direccion').notEmpty().withMessage('Debe ingresar una dirección'),
     body('apellido').notEmpty().withMessage('Debe ingresar su apellido o nombre Fantasía'),
     body('dni').notEmpty().withMessage('Debe ingresar DNI'),
-    body('ciudad').notEmpty().withMessage('Debe agregar una ciudad'),
-    body('provincia').notEmpty().withMessage('Debe agregar una provincia'),
+    body('telefono').notEmpty().withMessage('Debe ingresar un n° de contacto'),
     body('email').notEmpty().withMessage('Debe ingresar un email')
         .isEmail().withMessage('ingrese un email valido'),
-    body('pais').notEmpty().withMessage('Seleccione su país'),
+    body('id_rol').notEmpty().withMessage('Seleccione un rol porfavor'),
     body('password').notEmpty().withMessage('Debe ingresar la contraseña'),
     body('img').custom((value, { req }) => {
       if (!req.file) {

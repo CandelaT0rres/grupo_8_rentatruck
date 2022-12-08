@@ -41,12 +41,13 @@ module.exports = (sequelize, dataTypes) => {
     };
 
     let configuracion = {
-        tablaName : "producto",
+        tableName : "producto",
         timestamps : false
     };
     const Producto = sequelize.define(alias, columnas, configuracion);
 
     Producto.associate = function (models) {
+
         Producto.belongsTo(models.Tipo_mercaderia, {
             as: 'tipo_mercaderia',
             foreignKey: 'id_tipo_mercaderia'
@@ -56,7 +57,8 @@ module.exports = (sequelize, dataTypes) => {
             as: 'paquete_viaje',
             foreignKey: 'id_paquete_viaje'
         })
-    
+        
+    }
     return Producto;
-}
+
 }

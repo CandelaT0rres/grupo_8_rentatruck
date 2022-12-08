@@ -19,8 +19,11 @@
                         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                             <div class="navbar-nav ms-auto">
                                 <a class="nav-link fw-bold" href="/products/productos/">Productos</a>
-                                <a class="nav-link fw-bold" href="/user/login">Login</a>
-                                <a class="nav-link fw-bold" href="/user/registro">Registrate</a>
+                                <a class="nav-link fw-bold" href="/user/logout">Logout</a>
+                                <% if (!locals.userLogueado) { %>
+                                    <a class="nav-link fw-bold" href="/user/login">Login</a>
+                                    <a class="nav-link fw-bold" href="/user/registro">Registrate</a>
+                                <% } %>
                             </div>
                         </div>
                     </div>

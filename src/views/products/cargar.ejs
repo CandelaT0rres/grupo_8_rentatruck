@@ -19,32 +19,25 @@
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                 
-                    <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/cargar" method="post" enctype="multipart/form-data"> 
+                    <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/cargar" method="post" enctype="multipart/form-data">
                         <div class="col-md-6">
-                        <label for="inputNoombre" class="form-label ">Nombre/Descripción</label>
-                        <input type="text" class="form-control <%= locals.errors && errors.nombre ? 'is-invalid' : null %>" id="inputNoombre" name="nombre" value="<%= locals.oldData ? oldData.nombre : null %>">
-
-                        <% if (locals.errors && errors.nombre) { %>
-                            <h5 class = "text-danger">
-                                <%= errors.nombre.msg %> 
-                            </h5>
-                        <% } %>
-                        </div>
-
-                        <div class="col-md-6">
-                            <label for="inputMarca" class="form-label">Marca</label>
-                            <input type="text" class="form-control  <%= locals.errors && errors.marca ? 'is-invalid' : null %>" id="inputMarca" name="marca" value="<%= locals.oldData ? oldData.marca : null %>">
-
-                            <% if (locals.errors && errors.marca) { %>
+                            <label for="marcas" class="form-label">Marca</label>
+                            <select name="marcas" id="marcas" class="form-control">
+                                <option value="">Seleccione Marca</option>
+                                <% marcas.forEach(marcas => { %>
+                                    <option value="<%= marcas.id %>"><%= marcas.nombre %></option>
+                                <% }) %> 
+                            </select>
+                            <% if (locals.errors && errors.marcas) { %>
                                 <h5 class = "text-danger ">
-                                    <%= errors.marca.msg %> 
+                                    <%= errors.marcas.msg %> 
                                 </h5>
                             <% } %>
 
                         </div>
                         <div class="col-md-6">
-                            <label for="inputModelo" class="form-label">Modelo</label>
-                            <input type="text" class="form-control  <%= locals.errors && errors.modelo ? 'is-invalid' : null %>" id="inputModelo" name="modelo" value="<%= locals.oldData ? oldData.modelo : null %>">
+                            <label for="modelo" class="form-label">Modelo</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.modelo ? 'is-invalid' : null %>" id="modelo" name="modelo" value="<%= locals.oldData ? oldData.modelo : null %>">
 
                             <% if (locals.errors && errors.modelo) { %>
                                 <h5 class = "text-danger">
@@ -52,58 +45,59 @@
                                 </h5>
                             <% } %>
                         </div>
-
                         <div class="col-md-6">
-                            <label for="inputCarga" class="form-label">Tipo de Carga</label>
-                            <input type="text" class="form-control  <%= locals.errors && errors.tipoC ? 'is-invalid' : null %>" id="inputCarga" name="tipoC" value="<%= locals.oldData ? oldData.tipoC : null %>">
+                            <label for="patente" class="form-label">Patente</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.patente ? 'is-invalid' : null %>" id="patente" name="patente" value="<%= locals.oldData ? oldData.patente : null %>">
 
-                            <% if (locals.errors && errors.tipoC) { %>
+                            <% if (locals.errors && errors.patente) { %>
                                 <h5 class = "text-danger">
-                                    <%= errors.tipoC.msg %> 
+                                    <%= errors.patente.msg %> 
+                                </h5>
+                            <% } %>
+                        </div>
+                        <div class="col-md-6">
+                            <label for="tipo_mercaderia" class="form-label">Tipo de Carga</label>
+                            <select name="tipo_mercaderia" id="tipo_mercaderia" class="form-control">
+                                <option value="">Seleccione tipo de mercaderia</option>
+                                <% tipo_mercaderia.forEach(mercaderias => { %>
+                                    <option value="<%= mercaderias.id %>"><%= mercaderias.nombre %></option>
+                                <% }) %> 
+                            </select>
+                            <% if (locals.errors && errors.tipo_mercaderia) { %>
+                                <h5 class = "text-danger">
+                                    <%= errors.tipo_mercaderia.msg %> 
                                 </h5>
                             <% } %>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="inputOrigen" class="form-label">Origen</label>
-                            <input type="text" class="form-control  <%= locals.errors && errors.origen ? 'is-invalid' : null %>" id="inputOrigen" name="origen" value="<%= locals.oldData ? oldData.origen : null %>">
+                            <label for="km" class="form-label">Kilometraje</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.km ? 'is-invalid' : null %>" id="km" name="km" value="<%= locals.oldData ? oldData.km : null %>">
 
-                            <% if (locals.errors && errors.origen) { %>
+                            <% if (locals.errors && errors.km) { %>
                                 <h5 class = "text-danger">
-                                    <%= errors.origen.msg %> 
+                                    <%= errors.km.msg %> 
                                 </h5>
                             <% } %>
                         </div>
 
                         <div class="col-md-6">
-                            <label for="inputDestino" class="form-label">Destino</label>
-                            <input type="text" class="form-control  <%= locals.errors && errors.recorrido ? 'is-invalid' : null %>" id="inputDestino" name="recorrido" value="<%= locals.oldData ? oldData.recorrido : null %>">
+                            <label for="precio_km" class="form-label">Precio/km</label>
+                            <input type="text" class="form-control  <%= locals.errors && errors.precio_km ? 'is-invalid' : null %>" id="precio_km" name="precio_km" value="<%= locals.oldData ? oldData.precio_km : null %>">
 
-                            <% if (locals.errors && errors.recorrido) { %>
+                            <% if (locals.errors && errors.precio_km) { %>
                                 <h5 class = "text-danger">
-                                    <%= errors.recorrido.msg %> 
+                                    <%= errors.precio_km.msg %> 
                                 </h5>
                             <% } %>
                         </div>
-
                         <div class="col-md-6">
-                            <label for="inputPrecio" class="form-label">Precio</label>
-                            <input type="number" class="form-control  <%= locals.errors && errors.precioKm ? 'is-invalid' : null %>" id="inputPrecio" name="precioKm" value="<%= locals.oldData ? oldData.precioKm : null %>">
+                            <label for="ruta_img" class="form-label">Imagen</label>
+                            <input type="file" enctype="" class="form-control  <%= locals.errors && errors.ruta_img ? 'is-invalid' : null %>" id="ruta_img" name="ruta_img" accept="image/*">
 
-                            <% if (locals.errors && errors.precioKm) { %>
+                            <% if (locals.errors && errors.ruta_img) { %>
                                 <h5 class = "text-danger">
-                                    <%= errors.precioKm.msg %> 
-                                </h5>
-                            <% } %>
-
-                        </div>
-                        <div class="col-md-6">
-                            <label for="inputFile" class="form-label">Imagen</label>
-                            <input type="file" enctype="" class="form-control  <%= locals.errors && errors.rutaImg ? 'is-invalid' : null %>" id="inputFile" name="rutaImg" accept="image/*">
-
-                            <% if (locals.errors && errors.rutaImg) { %>
-                                <h5 class = "text-danger">
-                                    <%= errors.rutaImg.msg %> 
+                                    <%= errors.ruta_img.msg %> 
                                 </h5 >
                             <% } %>
                         </div>

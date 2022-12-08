@@ -1,10 +1,9 @@
-module.exports =                                                                                   
-{ 
+module.exports = {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "rentatruck",
-    "host": "127.0.0.1",
+    "username": "287678",
+    "password": "rentatruck",
+    "database": "berniifranco_8_rent_a_truck",
+    "host": "mysql-berniifranco.alwaysdata.net",
     "dialect": "mysql"
   },
   "test": {
@@ -15,10 +14,10 @@ module.exports =
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "username": "287678",
+    "password": "rentatruck",
+    "database": "berniifranco_8_rent_a_truck",
+    "host": "mysql-berniifranco.alwaysdata.net",
     "dialect": "mysql"
   }
 }
