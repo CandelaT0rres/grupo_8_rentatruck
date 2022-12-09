@@ -10,7 +10,7 @@ window.addEventListener('load', function() {
     const expReg = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/;
 
     let errors = [];
-    
+
     const validaciones = {
         vacioLongitud: (input, error) => {
             if (input.type == 'file') {
@@ -123,10 +123,6 @@ window.addEventListener('load', function() {
         };
         if (errors.includes(1)) {
             e.preventDefault();
-            console.log('con errores');
-        } else {
-            e.preventDefault();
-            console.log('sin errores');
         }
         errors = [];
     })
