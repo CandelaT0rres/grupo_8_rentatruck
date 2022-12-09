@@ -73,6 +73,8 @@ window.addEventListener('load', () => {
         };
         if (errors.includes(1)) {
             e.preventDefault();
+            console.log('con errores');
         }
+        errors = [];
     })
 })
