@@ -104,8 +104,9 @@ inputs.forEach((input) => {
     input.addEventListener("blur", validarCampos);
     input.addEventListener("change", validarCampos);
 });
+
+//Hago un preventDefault(). Si todos los campos son true --> formulario.submit() else Hago visible el div Errores!
 formulario.addEventListener("submit", (e) => {
-    console.log(campos);
     e.preventDefault()
     if (campos.km && campos.marcas && campos.modelo && campos.patente && campos.precio_km && campos.ruta_img && campos.tipo_mercaderia) {
         formulario.submit();
