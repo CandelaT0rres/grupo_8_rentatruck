@@ -32,18 +32,15 @@ window.addEventListener('load', function() {
                     error.classList.remove('d-none');
                     error.classList.add('text-danger');
                     error.innerText = 'Debes completar este campo';
-                    return true;
                 } else if (esValido == false) {
                     input.classList.add('is-invalid');
                     error.classList.remove('d-none');
                     error.classList.add('text-danger');
                     error.innerText = 'Debe ingresar un formato de E-Mail válido';
-                    return true;
                 } else {
                     input.classList.remove('is-invalid');
                     input.classList.add('is-valid');
                     error.classList.add('d-none');
-                    return false;
                 }
             } else if (input.type != 'select-one') {
                 if (input.value.length == 0) {
@@ -51,18 +48,15 @@ window.addEventListener('load', function() {
                     error.classList.remove('d-none');
                     error.classList.add('text-danger');
                     error.innerText = 'Debes completar este campo';
-                    return true;
                 } else if (input.value.length < 6) {
                     input.classList.add('is-invalid');
                     error.classList.remove('d-none');
                     error.classList.add('text-danger');
                     error.innerText = 'Debe tener 6 caracteres como mínimo';
-                    return true;
                 } else {
                     input.classList.remove('is-invalid');
                     input.classList.add('is-valid');
                     error.classList.add('d-none');
-                    return false;
                 }
             }
         },
@@ -123,6 +117,7 @@ window.addEventListener('load', function() {
         };
         if (errors.includes(1)) {
             e.preventDefault();
+            alert('Debes completar todos los campos correctamente para continuar');
         }
         errors = [];
     })
