@@ -19,20 +19,28 @@ const campos = {
     ruta_img: false,
     tipo_mercaderia: false
 };
-//Valido que se cumplan las expresiones y que el campo no este vacío
-//Puse un span vacío - 'nextElementSibling' lo uso para indicar que es el elemento hermano que le sigue (el span) dentro del mismo padre.
-const validandoExpresiones = (expresiones, input, name, mensaje) => {
-    if (expresiones.test(input.value) && input.value.length != 0) {
-        document.getElementById(name).classList.remove('is-invalid');
-        document.getElementById(name).classList.add('is-valid');
-        input.nextElementSibling.innerText = ''; 
-        campos[name] = true;
-    } else {
+//Creo una función que agregue o quite los elementos según los errores
+const validandoErrores = (input, name, mensaje, error = true) => {
+    if (error) {
         document.getElementById(name).classList.remove('is-valid');
         document.getElementById(name).classList.add('is-invalid');
         input.nextElementSibling.classList.add('text-danger'); // --> al span vacío le agrego la clase y el texto de error.
         input.nextElementSibling.innerText = mensaje; 
         campos[name] = false;
+    } else {
+        document.getElementById(name).classList.remove('is-invalid');
+        document.getElementById(name).classList.add('is-valid');
+        input.nextElementSibling.innerText = ''; 
+        campos[name] = true;
+    }
+}
+//Valido que se cumplan las expresiones y que el campo no este vacío
+//Puse un span vacío - 'nextElementSibling' lo uso para indicar que es el elemento hermano que le sigue (el span) dentro del mismo padre.
+const validandoExpresiones = (expresiones, input, name, mensaje) => {
+    if (expresiones.test(input.value) && input.value.length != 0) {
+        validandoErrores(input, name, mensaje, false);
+    } else {
+        validandoErrores(input, name, mensaje, true);
     };
 };
 const validandoImg = (input, id) => {
@@ -41,34 +49,19 @@ const validandoImg = (input, id) => {
     let extensionImg = input.files[0].name.split('.').pop().toLowerCase();
     let extensiones = ['jpg', 'png', 'gif', 'jpeg'];
     if (extensiones.includes(extensionImg)) {
-        document.getElementById(id).classList.add('is-valid');
-        document.getElementById(id).classList.remove('is-invalid');
-        input.nextElementSibling.innerText = '';
-        campos[id] = true;
+        validandoErrores(input, id, '', false);
     }else{
-        document.getElementById(id).classList.add('is-invalid');
-        document.getElementById(id).classList.remove('is-valid');
-        input.nextElementSibling.innerText = 'Debes cargar una imagen, las extenciones permitidas son: .jpg, .png, .gif, .jpeg';
-        input.nextElementSibling.classList.add('text-danger');
-        campos[id] = false;
-    }
+        validandoErrores(input, id, 'Debes cargar una imagen, las extenciones permitidas son: .jpg, .png, .gif, .jpeg', true);
+    };
 };
 //Valido que se haya alguna opcion seleccionada
 const validandoSelects = (input, name, mensaje) => {
     if (input.value.length != 0) {
-        document.getElementById(name).classList.remove('is-invalid');
-        document.getElementById(name).classList.add('is-valid');
-        input.nextElementSibling.innerText = ''; 
-        campos[name] = true;
+        validandoErrores(input, name, mensaje, false);
     } else {
-        document.getElementById(name).classList.add('is-invalid');
-        document.getElementById(name).classList.remove('is-valid');
-        input.nextElementSibling.innerText = mensaje;
-        input.nextElementSibling.classList.add('text-danger'); 
-        campos[name] = false;
+        validandoErrores(input, name, mensaje, true);
     };
 };
-
 //Creo una funsión que dentro hace un switch según el e.target.name (name del input), segun el case, aplica uno u otro código.
 const validarCampos = (e) => {
     switch (e.target.name) {
@@ -104,7 +97,6 @@ inputs.forEach((input) => {
     input.addEventListener("blur", validarCampos);
     input.addEventListener("change", validarCampos);
 });
-
 //Hago un preventDefault(). Si todos los campos son true --> formulario.submit() else Hago visible el div Errores!
 formulario.addEventListener("submit", (e) => {
     e.preventDefault()
