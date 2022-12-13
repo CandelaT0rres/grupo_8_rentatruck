@@ -19,7 +19,7 @@
             <div class="container">
                 <div class="row justify-content-center align-items-center">
                 
-                    <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/cargar" method="post" enctype="multipart/form-data">
+                    <form class="row col-8 g-3 fondo-registro m-4 rounded-3" action="/products/cargar" method="post" enctype="multipart/form-data" id="formulario">
                         <div class="col-md-6">
                             <label for="marcas" class="form-label">Marca</label>
                             <select name="marcas" id="marcas" class="form-control">
@@ -28,6 +28,7 @@
                                     <option value="<%= marcas.id %>"><%= marcas.nombre %></option>
                                 <% }) %> 
                             </select>
+                            <span></span>
                             <% if (locals.errors && errors.marcas) { %>
                                 <h5 class = "text-danger ">
                                     <%= errors.marcas.msg %> 
@@ -38,7 +39,7 @@
                         <div class="col-md-6">
                             <label for="modelo" class="form-label">Modelo</label>
                             <input type="text" class="form-control  <%= locals.errors && errors.modelo ? 'is-invalid' : null %>" id="modelo" name="modelo" value="<%= locals.oldData ? oldData.modelo : null %>">
-
+                            <span></span>
                             <% if (locals.errors && errors.modelo) { %>
                                 <h5 class = "text-danger">
                                     <%= errors.modelo.msg %> 
@@ -48,7 +49,7 @@
                         <div class="col-md-6">
                             <label for="patente" class="form-label">Patente</label>
                             <input type="text" class="form-control  <%= locals.errors && errors.patente ? 'is-invalid' : null %>" id="patente" name="patente" value="<%= locals.oldData ? oldData.patente : null %>">
-
+                            <span></span>
                             <% if (locals.errors && errors.patente) { %>
                                 <h5 class = "text-danger">
                                     <%= errors.patente.msg %> 
@@ -63,6 +64,7 @@
                                     <option value="<%= mercaderias.id %>"><%= mercaderias.nombre %></option>
                                 <% }) %> 
                             </select>
+                            <span></span>
                             <% if (locals.errors && errors.tipo_mercaderia) { %>
                                 <h5 class = "text-danger">
                                     <%= errors.tipo_mercaderia.msg %> 
@@ -73,7 +75,7 @@
                         <div class="col-md-6">
                             <label for="km" class="form-label">Kilometraje</label>
                             <input type="text" class="form-control  <%= locals.errors && errors.km ? 'is-invalid' : null %>" id="km" name="km" value="<%= locals.oldData ? oldData.km : null %>">
-
+                            <span></span>
                             <% if (locals.errors && errors.km) { %>
                                 <h5 class = "text-danger">
                                     <%= errors.km.msg %> 
@@ -84,7 +86,7 @@
                         <div class="col-md-6">
                             <label for="precio_km" class="form-label">Precio/km</label>
                             <input type="text" class="form-control  <%= locals.errors && errors.precio_km ? 'is-invalid' : null %>" id="precio_km" name="precio_km" value="<%= locals.oldData ? oldData.precio_km : null %>">
-
+                            <span></span>
                             <% if (locals.errors && errors.precio_km) { %>
                                 <h5 class = "text-danger">
                                     <%= errors.precio_km.msg %> 
@@ -93,8 +95,8 @@
                         </div>
                         <div class="col-md-6">
                             <label for="ruta_img" class="form-label">Imagen</label>
-                            <input type="file" enctype="" class="form-control  <%= locals.errors && errors.ruta_img ? 'is-invalid' : null %>" id="ruta_img" name="ruta_img" accept="image/*">
-
+                            <input type="file" class="form-control  <%= locals.errors && errors.ruta_img ? 'is-invalid' : null %>" id="ruta_img" name="ruta_img" accept="image/*">
+                            <span></span>
                             <% if (locals.errors && errors.ruta_img) { %>
                                 <h5 class = "text-danger">
                                     <%= errors.ruta_img.msg %> 
@@ -105,14 +107,20 @@
                         <div class="col-12">
                             <button type="submit" class="btn-home-inicio-sesion button-h">Guardar</button>
                           </div>
+
+                        <div class="col-sm-12 border border-danger border-4 rounded bg-danger mb-3 invisible" id="divError">
+                            <p class="m-0 fs-5" ><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Complete el formulario correctamente</p>
+                        </div>
                     </form>
                 </div>
             </div> 
         </main>
     </div>
+    <footer class="text-dark bg-light mt-3">
+    <%- include('../partials/footer') %>
+    </footer>
+ 
 
-        <footer class="register-footer text-dark bg-light mt-1">
-        <%- include('../partials/footer') %>
-        </footer>
+    <script src="/js/validacionesProductos.js"></script>
 </body>
 </html>

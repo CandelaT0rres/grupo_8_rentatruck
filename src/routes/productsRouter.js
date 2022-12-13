@@ -27,7 +27,7 @@ router.post('/cargar', upload.single('ruta_img'), validaciones, controller.guard
 
 //Editar producto
 router.get('/editar/:id' ,authMiddleware, controller.editar);
-router.put('/editar/:id', upload.single('rutaImg'), validaciones, controller.actualizar);
+router.put('/editar/:id', upload.single('ruta_img'), validaciones, controller.actualizar);
 
 //Borrado producto
 router.delete('/borrar/:id', authMiddleware, controller.borrar);
