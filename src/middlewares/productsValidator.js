@@ -1,5 +1,4 @@
-//Importo path + express-validator
-const path = require('path');
+//Importo  express-validator
 const { body } = require('express-validator');
 
 // Crear validaciones

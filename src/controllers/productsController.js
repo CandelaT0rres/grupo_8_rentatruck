@@ -146,8 +146,6 @@ const productsController = {
 
       } else {
 
-         console.log('ENTRE A ERRORES');
-
          let marcas = db.Marca.findAll()
          let tipo_mercaderia = db.Tipo_mercaderia.findAll()
          let producto = db.Vehiculo.findByPk(req.params.id, {
