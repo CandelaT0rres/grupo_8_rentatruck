@@ -181,9 +181,9 @@ const productsController = {
             console.log(`${err}${'imagen de vehiculo no encontrada'}`);
          });
          setTimeout(() => {
-            db.Vehiculo.destroy(
-               {where: {id: req.params.id}})
-               .then(() => {res.redirect('/')})
+               db.Vehiculo.destroy(
+                  {where: {id: req.params.id}})
+                  .then(() => {res.redirect('/')})
                .catch((err) => {console.log(`${err}${'Error al eliminar vehiculo'}`)});
          }, '500')
       }   

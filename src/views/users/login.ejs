@@ -4,6 +4,7 @@
 <head>
     <%- include('../partials/head') %>
     <title>login</title>
+    <script src="/js/login.js"></script>
 </head>
 </html>
 
@@ -22,7 +23,7 @@
                     </div>
 
                     
-                    <form action="/user/login" method="POST">
+                    <form action="/user/login" method="POST" id="form-login">
                         <% if (locals.error && error.credencial) { %>
                             <h5 class="text-danger">
                                 <%= error.credencial.msg %>
@@ -30,19 +31,21 @@
                         <% } %>
                         <div class="mb-3">
                             <label for="E-mail" class="form-label">E-mail</label>
-                            <input type="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" value="<%= locals.oldData && oldData.email ? oldData.email : null %>" name="email" id="E-mail" aria-describedby="emailHelp">
-                            <% if (locals.errors && errors.email) { %>
+                            <input id="email" type="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" value="<%= locals.oldData && oldData.email ? oldData.email : null %>" name="email" id="E-mail" aria-describedby="emailHelp">
+                            <h5 id="msgErrorEmail"></h5>
+                             <% if (locals.error && error.email) { %>
                                 <h5 class="text-danger">
-                                    <%= errors.email.msg %> 
+                                    <%= error.email.msg %>
                                 </h5>
                             <% } %>
                         </div>
                         <div class="mb-4">
                             <label for="contraseña" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" name="password" id="contraseña">
-                            <% if (locals.errors && errors.password) { %>
+                            <input  type="password" id="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" name="password" id="contraseña">
+                            <h5 id="msgErrorPassword"></h5>
+                            <% if (locals.error && error.password) { %>
                                 <h5 class="text-danger">
-                                    <%= errors.password.msg %> 
+                                    <%= error.password.msg %>
                                 </h5>
                             <% } %>
                         </div>
