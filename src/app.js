@@ -11,6 +11,7 @@ const app = express();
 const homeRouter = require('./routes/homeRouter');
 const productsRouter = require('./routes/productsRouter');
 const userRouter = require('./routes/userRouter');
+const apiRouter = require('./routes/apiRouter');
 
 //Seteo POST
 app.use(express.urlencoded({ extended: false}));
@@ -34,6 +35,7 @@ app.set('view engine', 'ejs');
 app.use('/', homeRouter);
 app.use('/products', productsRouter);
 app.use('/user', userRouter);
+app.use('/api', apiRouter);
 
 //ERROR 404 
 app.use(error404);
