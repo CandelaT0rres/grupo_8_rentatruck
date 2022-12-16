@@ -51,28 +51,12 @@
                                             <th scope="col" class="centrado-carrito">Mercadería</th>
                                             <th scope="col" class="centrado-carrito">Precio</th>
                                             <th scope="col" class="centrado-carrito">Cantidad</th>
+                                            <th scope="col" class="centrado-carrito"></th>
                                         </tr>
                                     </thead>
                                    
                                     <tbody class ="cuerpoCarrito">
-                                        <% for (let i of productos) { %>
-                                            <tr>
-                                                <th scope="row" class="centrado-carrito">1</th>
-                                                <td class="table-carrito-camiones centrado-carrito" data-title="Camión">
-                                                    <img src="/img/<%= i.ruta_img %>" alt="camión-carga-blanco" >
-                                                </td>
-                                                <td class="table-carrito-recorrido centrado-carrito "  data-title="Recorrido">
-                                                    <p class="lead"> Mercadería: <%= i.tipo_mercaderia.nombre %></p>
-                                                </td>
-                                                <td class="table-carrito-precio centrado-carrito" data-title="Precio">
-                                                    <p class="lead">u$s<%= i.precio_km %>/km</p>
-                                                </td>
-                                                <td class="table-carrito-cantidad centrado-carrito" data-title="Cantidad">
-                                                    <input type="number" min="1" value="1" class="input-carrito-cantidad">
-                                                    <button class="btn-home-inicio-sesion button-h "> Eliminar </a></button>
-                                                </td>
-                                              </tr>
-                                        <% } %>
+                                     
                                     </tbody>
 
                                     <tfoot>
@@ -86,7 +70,7 @@
                                 <div class="row mx-4">
                                 
                                     <div class="col col-md-11 col-lg-11 col-xl-11">
-                                        <h3 class="total-carrito-items text-danger">Total: $<%= totalProductos  %></h3>
+                                        <h3 class="total-carrito-items text-danger totalCarrito">Total: 0 </h3>
                                     </div>
                                     
                                     <div class="col col-md-1 col-lg-1 col-xl-1">

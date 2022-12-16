@@ -15,7 +15,6 @@ const productsController = {
          include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}, {association: 'tipo_mercaderia'}, {association: 'usuarios'}]
       })
          .then(productos => {
-            console.log(productos);
             res.render ('./products/productos', {productos});
          })
          .catch(err => {
