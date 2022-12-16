@@ -7,7 +7,7 @@ const controller = {
     },
 
     checkout: async (req, res)  => {
-       let ordenDeCompra = await db.Ordenes_compra.create({...req.body, id_usuario: req.session.usuarioLogueado.id}, {include: db.Ordenes_compra.Vehiculo} );
+       let ordenDeCompra = await db.Ordenes_compra.create({...req.body, id_usuario: req.session.usuarioLogueado.id});
        res.json({ok: true, status: 200, ordenesUsuarios: ordenDeCompra});
     }
 };

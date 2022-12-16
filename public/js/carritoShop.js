@@ -4,9 +4,6 @@ window.addEventListener("load", () => {
         localStorage.removeItem('carrito');
     };
 
-    function eliminarDelCarrito(productos) {
-        productos.find((elemento) => {})
-    };
 
     function precioTotal(productos) {
         return productos.reduce((acum, producto) =>  (acum += producto.precio * producto.cantidad),0);
@@ -43,22 +40,43 @@ window.addEventListener("load", () => {
                             
                         </td>
                         <td class="table-carrito-cantidad centrado-carrito" data-title="Cantidad">
-                            <button class="btn-home-inicio-sesion button-h quitarProducto onclick=removeItem(${index})"> Eliminar </button>
+                            <button class="btn-home-inicio-sesion button-h quitarProducto" data-id="${producto.id}"> Eliminar </button>
                         </td>
                         </tr>
                         `
-                        productos.push({id_vehiculo: producto.id, modelo: producto.modelo, precio: parseInt(producto.precio_km), cantidad: item.cantidad})                  
+                        productos.push({id_vehiculo: producto.id, modelo: producto.modelo, precio: parseInt(producto.precio_km), cantidad: item.cantidad});
+                        
                     }else{
                         carrito.splice(index, 1);
                         localStorage.setItem('carrito', JSON.stringify(carrito));
                     };
-
+                    EliminarProducto()
                 })
                 .then(() => {
                     //Calculo el total de los productos
                     document.querySelector('.totalCarrito').innerText = `Total: ${precioTotal(productos)}`;
-                });    
+                });
+            
         });
+
+        //Función que captura el boton y el evento de click - pero no el borrado propiamente dicho
+        function EliminarProducto() {
+            let botonEliminar = document.querySelectorAll('.quitarProducto')
+            botonEliminar.forEach((boton) => {
+                boton.addEventListener('click', eliminarProductoCarrito)
+                boton.addEventListener('click', () => {
+                    location.reload()
+                })  
+                
+            });
+        };
+        //funcion que borra, splice del array carrito en el index.
+        function eliminarProductoCarrito(e) {
+            index = carrito.findIndex((producto) => producto.id === e.target.dataset.id)
+            carrito.splice(index, 1)
+            return localStorage.setItem('carrito', JSON.stringify(carrito));
+        };
+
         //Por post finalizo la compra, escucho el formulario de contratar
         let formularioComprar = document.getElementById('formularioComprar');
         formularioComprar.addEventListener('submit', (e) => {
