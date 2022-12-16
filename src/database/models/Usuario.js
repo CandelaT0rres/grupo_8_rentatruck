@@ -61,7 +61,7 @@ module.exports = (sequelize, dataTypes) => {
         Usuario.belongsTo(models.Rol, {
             as: 'usuarios',
             foreignKey: 'id_rol'
-        })
+        });
     
 
         Usuario.belongsToMany(models.Vehiculo,{
@@ -70,8 +70,13 @@ module.exports = (sequelize, dataTypes) => {
             foreignKey: 'id_usuario',
             otherKey: 'id_vehiculo',
             timestamps: false
-        })
-    }
+        });
+
+        Usuario.hasMany(models.Ordenes_compra, {
+            as:'ordenes',
+            foreignKey: 'id_usuario'
+        });
+    };
 
     return Usuario;
 }

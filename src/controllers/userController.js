@@ -201,7 +201,10 @@ const userController = {
          }
       })
       .then ((user) => {
-       res.render('./users/perfil', {user});
+         db.Ordenes_compra.findAll({where:{id_usuario: req.session.usuarioLogueado.id }})
+            .then((pedidos) => {
+               res.render('./users/perfil', {user, pedidos});
+            })
       })
       
    },
@@ -210,6 +213,11 @@ const userController = {
       req.session.destroy();
       res.clearCookie('recordame');
       res.redirect('/');
+   },
+
+   pedidos: async(req, res) => {
+      let pedidos = await db.Ordenes_compra.findAll({where:{ id : req.params.id}})
+      res.render('./users/pedidos', {pedidos});
    }
 };
 

@@ -33,9 +33,11 @@ router.post('/login', validacionesLogin, controller.procesoLogin);
 //Perfil
 router.get('/perfil', authMiddleware, controller.perfil);
 
-//LOGOUT USUARIO
+//Logout Usuario
 router.get('/logout', authMiddleware, controller.logout);
-
 router.delete('/deleteUser/:id', authMiddleware, controller.borrar);
+
+//Pedidos realizados
+router.get('/pedidos/:id', authMiddleware, controller.pedidos)
 
 module.exports = router;

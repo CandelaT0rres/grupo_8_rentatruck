@@ -13,17 +13,19 @@
 
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
             <div class="navbar-nav ms-auto">
-                <% if (!locals.userLogueado) { %>
-                <a class="nav-link fw-bold" href="#empresa">EMPRESAS</a>
-                <a class="nav-link fw-bold" href="#servicios">SERVICIOS</a>
-                <a class="nav-link fw-bold" href="#flota">FLOTA</a>
-                <a class="nav-link fw-bold" href="#oficinas"> OFICINAS</a>
-                <a class="nav-link fw-bold" href="#contacto">CONTACTO</a>
-                <a class="nav-link fw-bold" href="/products/productos">PRODUCTOS</a>
+                <% if (!locals.userLogueado) { %> 
+                    <a class="nav-link fw-bold fs-5" href="/products/carrito"><i class="bi bi-cart-fill"></i></i><span class="carrito-numero text-danger"></span></a>
+                    <a class="nav-link fw-bold fs-5 " href="#empresa">EMPRESAS</a>
+                    <a class="nav-link fw-bold fs-5" href="#servicios">SERVICIOS</a>
+                    <a class="nav-link fw-bold fs-5" href="#flota">FLOTA</a>
+                    <a class="nav-link fw-bold fs-5" href="#oficinas"> OFICINAS</a>
+                    <a class="nav-link fw-bold fs-5" href="#contacto">CONTACTO</a>
+                    <a class="nav-link fw-bold fs-5" href="/products/productos">PRODUCTOS</a>
                 <%} else{ %> 
-                    <a class="nav-link fw-bold" href="/products/productos"><i class="fa-solid fa-truck"></i> PRODUCTOS</a>
-                    <a class="nav-link fw-bold" href="/user/perfil"><i class="fa-solid fa-user"></i> MI PERFIL</a>
-                    <a class="nav-link fw-bold" href="/user/logout"><i class="fa-solid fa-door-open"></i> SALIR</a>
+                    <a class="nav-link fw-bold fs-5" href="/products/carrito"><i class="bi bi-cart-fill"></i></i><span class="carrito-numero text-danger"></span></a>
+                    <a class="nav-link fw-bold fs-5" href="/products/productos"><i class="fa-solid fa-truck"></i> PRODUCTOS</a>
+                    <a class="nav-link fw-bold fs-5" href="/user/perfil"><i class="fa-solid fa-user"></i> MI PERFIL</a>
+                    <a class="nav-link fw-bold fs-5" href="/user/logout"><i class="fa-solid fa-door-open"></i> SALIR</a>
                 <% } %>
             </div>
         </div>

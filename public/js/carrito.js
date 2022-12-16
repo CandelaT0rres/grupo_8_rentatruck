@@ -3,8 +3,7 @@ window.addEventListener("load", () => {
     //Función para verificar cantidad de elementos del carrito. Si existe devuelvo la cantidad, sino 0
     function productosEnCarrito() {
         return localStorage.carrito ? JSON.parse(localStorage.carrito).length : 0;
-    }
-
+    };
     //Capturo botón comprar
     let botonCarrito = document.querySelectorAll('.carrito')
 

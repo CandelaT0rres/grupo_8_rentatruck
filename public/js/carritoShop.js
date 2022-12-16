@@ -4,10 +4,13 @@ window.addEventListener("load", () => {
         localStorage.removeItem('carrito');
     };
 
+    function eliminarDelCarrito(productos) {
+        productos.find((elemento) => {})
+    };
+
     function precioTotal(productos) {
-       
-        return productos.reduce((acum, producto) =>  (acum += (producto.precio * producto.cantidad)),0);
-    }
+        return productos.reduce((acum, producto) =>  (acum += producto.precio * producto.cantidad),0);
+    };
 
     let productos = [];
     let cuerpoCarrito = document.querySelector('.cuerpoCarrito');
@@ -23,7 +26,6 @@ window.addEventListener("load", () => {
                 .then((res) => {return res.json()}) //Lo tengo en json
                 .then((producto) => {
                     if (producto) {
-                        
                         cuerpoCarrito.innerHTML += `
                         <tr>
                         <th scope="row" class="centrado-carrito"> ${index + 1} </th>
@@ -41,23 +43,50 @@ window.addEventListener("load", () => {
                             
                         </td>
                         <td class="table-carrito-cantidad centrado-carrito" data-title="Cantidad">
-                            <button class="btn-home-inicio-sesion button-h "> Eliminar </a></button>
+                            <button class="btn-home-inicio-sesion button-h quitarProducto onclick=removeItem(${index})"> Eliminar </button>
                         </td>
                         </tr>
                         `
-                        productos.push({viaje_id: 1, modelo: producto.modelo, precio: parseInt(producto.precio_km), cantidad: item.cantidad})
-                    
+                        productos.push({id_vehiculo: producto.id, modelo: producto.modelo, precio: parseInt(producto.precio_km), cantidad: item.cantidad})                  
                     }else{
                         carrito.splice(index, 1);
                         localStorage.setItem('carrito', JSON.stringify(carrito));
                     };
 
                 })
-                //Calculo el total de los productos
-                document.querySelector('.totalCarrito').innerText = `${precioTotal(productos)}`;
+                .then(() => {
+                    //Calculo el total de los productos
+                    document.querySelector('.totalCarrito').innerText = `Total: ${precioTotal(productos)}`;
+                });    
         });
-
-    } else {
-        
+        //Por post finalizo la compra, escucho el formulario de contratar
+        let formularioComprar = document.getElementById('formularioComprar');
+        formularioComprar.addEventListener('submit', (e) => {
+            e.preventDefault();
+            productos.forEach((producto) => {
+                const data = {
+                    id_vehiculo: producto.id_vehiculo,
+                    modelo: producto.modelo,
+                    precio: producto.precio,
+                    cantidad: producto.cantidad,
+                    total: precioTotal(productos)
+                }; 
+                
+                //Guardo el registro de la compra en la base de datos
+                fetch('/api/checkout', {
+                    method: 'POST',
+                    headers: {'Content-Type' : 'application/json'},
+                    body: JSON.stringify(data)
+                })
+                    .then((res) => res.json())
+                    .then((data) => {
+                        if (data.ok) { // en el controlador doy respuesta ok si sale todo bien
+                            vaciarCarrito();
+                            location.href = '/user/perfil'
+                        }
+                    })
+                
+            })
+        })
     }
 });

@@ -7,11 +7,9 @@ module.exports = (sequelize, dataTypes) => {
         autoIncrement: true,
         allowNull: false,
       },
-      vehiculo_id: {
-        type: dataTypes.INTEGER(11),
-        allowNull: true
+      id_usuario: {
+        type: dataTypes.INTEGER(11)
       },
-  
       modelo: {
         type: dataTypes.STRING(50),
         allowNull: false,
@@ -24,25 +22,38 @@ module.exports = (sequelize, dataTypes) => {
         type: dataTypes.INTEGER(11),
         allowNull: false,
       },
-      viaje_id: {
-        type: dataTypes.INTEGER(11)
-      }
+      total: {
+        type: dataTypes.INTEGER(11),
+        allowNull: false
+      },
+      createdAt: {
+        type: dataTypes.DATE(),
+        allowNull: false
+      },
+      updatedAt: {
+        type: dataTypes.DATE(),
+        allowNull: true
+      },
+      deletedAt: {
+        type: dataTypes.DATE(),
+        allowNull: true
+      },
+      
     };
     let config = {
         tableName: 'ordenes_compra',
-        timestamps: false
+        timestamps: true
     };
   
     const Ordenes_compra = sequelize.define(alias, cols, config);
   
     Ordenes_compra.associate = (models) => {
-        Ordenes_compra.belongsTo(models.Viaje, {
-        as: "viaje",
+
+      Ordenes_compra.belongsTo(models.Usuario, {
+        as:'ordenesUsuarios',
+        foreignKey: 'id_usuario'
       });
-  
-      Ordenes_compra.Viaje = Ordenes_compra.hasMany(models.Ordenes_compra, {
-        as: 'ordenes'
-      })
+
     };
   
     return Ordenes_compra;
