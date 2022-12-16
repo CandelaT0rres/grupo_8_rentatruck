@@ -4,23 +4,36 @@
         <%- include('../partials/head') %>
 
         <title>Productos</title>
-        
+        <script src="/js/carrito.js"></script>
     </head>
 
     <body class="body-productos">
 
         <header>
             <nav class="navbar fondo-registro">
-                <div class="container-fluid">
+                <div class="container-fluid row justify-content-center">
+                    <div class="col-4">
+                        <a class="navbar-brand" href="/" id="principio">
+                            <img src="/img/logo.jpg" id="logo" class="logo rounded-pill">
+                       </a>
+
+                    </div>
+                    <div class="col-4">
+                       <p class="text-center-productos">Una empresa que se proyecta a futuro.</p>
+                    </div>
+                    <div class="col-4 align-self-start">
+                        
+                          <li class="nav-item fs-2">
+                              <a class="nav-link " href="/products/carrito">
+                                  <span class="clearfix d-none d-sm-inline-block"></span>
+                                  <i class="fas fa-shopping-cart  text-light fs-4"></i>
+                                  <span class="text-light carrito-numero">0</span>
+                              </a>
+                          </li>
+
+                    </div>
                    
-                    <a class="navbar-brand" href="/" id="principio">
-                         <img src="/img/logo.jpg" id="logo" class="logo rounded-pill">
-                    </a>
-                    <p class="text-center-productos">Una empresa que se proyecta a futuro.</p>
-                    <form class="d-flex" role="Buscar">
-                        <input class="form-control me-2" type="Buscar" placeholder="Buscar" aria-label="Buscar">
-                        <button class="btn-home-inicio-sesion button-h" type="submit">Buscar</button>
-                    </form>
+                    
                 </div>
             </nav>               
         </header>
@@ -28,7 +41,8 @@
         <main id="margen-productos-sm"> 
 
             <br><br><br>
-            <% if (locals.usuarioLogueadoVistas.id_rol == 1) { %>
+
+            <% if (locals.usuarioLogueadoVistas && locals.usuarioLogueadoVistas.id_rol == 1) { %>
                 <a href="/products/cargar"class=""><button class="icon-btn add-btn">
                     <div class="add-icon"></div>
                     <div class="btn-txt">Nuevo Camión</div>
@@ -40,9 +54,9 @@
                     <div class="row my-custom-row justify-content-center">
                     <% for (let d of productos) { %>
                         <div class="col-sm-12 col-md-6 col-lg-6 col-xl-4">
-                        <a href="/products/detalle/<%= d.id %>" class="text-decoration-none text-dark">
                             <div class="card border-light mb-3 m-3" style="width: 20rem;">
-                                <img src="/img/<%= d.ruta_img %>" class="camiones card-img-top">
+                                <a href="/products/detalle/<%= d.id %>" class="text-decoration-none text-dark">
+                                <img src="/img/<%= d.ruta_img %>" class="camiones card-img-top"> </a>
                                 <div class="card-body">
                                     <h1 class="fs-2 fw-bold"><%= d.nombre %></h1>
                                     <p> 
@@ -52,11 +66,14 @@
                                             <li  class="list-group-item"> Tipo de carga: <br> <%= d.tipo_mercaderia.nombre %></li>
                                             <li  class="list-group-item">Precio por Km: $<%= d.precio_km %></li>
                                         </ul>
+                                        <div  class="col-4">
+                                            <button class="btn-home-inicio-sesion button-h carrito" data-id="<%=d.id%>"> Contratar </button>
+                                        </div>
                                         </p>
                                                                
                                 </div>
                             </div>
-                        </a>
+                       
                         </div>               
                     <% } %> 
                     </div>

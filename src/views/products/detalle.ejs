@@ -37,9 +37,6 @@
                                                 <li  class="list-group-item">Precio por Km: $<%= camion.precio_km %></li>
                                                <li class="list-group-item"> 
                                                 <div class="col-12 row">
-                                                    <div  class="col-4">
-                                                        <button class="btn-home-inicio-sesion button-h"> <a href="/products/carrito" class="text-reset text-decoration-none">Contratar</a> </button>
-                                                    </div>
                                                 <% if (locals.userLogueado) { %>
                                                     <div class="col-4">
                                                             <button class="btn-home-inicio-sesion button-h"> <a href="/products/editar/<%= camion.id %>" class="text-reset text-decoration-none">Editar</a> </button>

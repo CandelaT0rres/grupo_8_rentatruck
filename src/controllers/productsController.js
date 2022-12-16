@@ -6,7 +6,6 @@ const db = require('../database/models');
 
 // Importación express-validator
 const { validationResult } = require('express-validator');
-const { promiseImpl } = require('ejs');
 
 const productsController = {
 
@@ -16,6 +15,7 @@ const productsController = {
          include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}, {association: 'tipo_mercaderia'}, {association: 'usuarios'}]
       })
          .then(productos => {
+            console.log(productos);
             res.render ('./products/productos', {productos});
          })
          .catch(err => {
@@ -25,13 +25,20 @@ const productsController = {
     
     //Muestro vista Carrito
     carrito: (req , res) => {
-      var totalProductos = 0;
-      for (d of productosData) {
-         totalProductos = totalProductos + d.precioKm;
-      };
-        res.render ('./products/carrito', {productos: productosData, total: totalProductos})
+      db.Vehiculo.findAll({
+         include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}]
+      })
+         .then(productos => {
+           var totalProductos = 0;
+           for (d of productos) {
+              totalProductos = totalProductos + parseInt(d.precio_Km);
+           };
+             res.render ('./products/carrito', {productos, totalProductos})
+         })
+         .catch(err => {
+            console.log(err);
+         });
      },
-     
      //Muestro form nuevo producto
      cargar: (req, res) => {
       let marcas = db.Marca.findAll();
@@ -90,7 +97,6 @@ const productsController = {
             })
       }
 
-   
      },
      
      //Muestro form editar producto
