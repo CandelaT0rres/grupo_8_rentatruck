@@ -19,8 +19,7 @@ router.get('/productos', controller.productos);
 router.get('/detalle/:id', controller.detalle);
 
 //Vista Carrito
-//router.get('/carrito', authMiddleware, controller.carrito);
-router.get('/carrito', controller.carrito);
+router.get('/carrito', authMiddleware, controller.carrito);
 
 //Nuevo producto
 router.get('/cargar', authMiddleware, controller.cargar);
