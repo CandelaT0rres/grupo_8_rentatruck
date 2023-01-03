@@ -1,0 +1,70 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title>login</title>
+    <script src="/js/login.js"></script>
+</head>
+</html>
+
+    <body>
+        <main class="main-login">
+            <section class="section-login">
+            <video muted autoplay loop class="video-login">
+                <source src="/video/recuperar.mp4">
+            </video> 
+        
+          <div class="container container-login">
+                <div class="col col-login" >
+                    <h2 class=" text-center py-1">Bienvenido de Nuevo</h2>
+                    <div class="text-end text-end-login">
+                        <a href="/"><img src="/img/logo.jpg" width="90" alt="" class="logo-login rounded-pill"></a>
+                    </div>
+
+                    
+                    <form action="/user/recuperar" method="POST" id="form-login" class="my-4">
+                        <% if (locals.error && error.credencial) { %>
+                            <h5 class="text-danger">
+                                <%= error.credencial.msg %>
+                            </h5>
+                        <% } %>
+                        <div class="mb-3">
+                            <label for="E-mail" class="form-label">E-mail</label>
+                            <input id="email" type="email" class="form-control <%= locals.errors && errors.email ? 'is-invalid' : null %>" value="<%= locals.oldData && oldData.email ? oldData.email : null %>" name="email" id="E-mail" aria-describedby="emailHelp">
+                            <h5 id="msgErrorEmail"></h5>
+                             <% if (locals.error && error.email) { %>
+                                <h5 class="text-danger">
+                                    <%= error.email.msg %>
+                                </h5>
+                            <% } %>
+                        </div>
+                        <div class="mb-4">
+                            <label for="contraseña" class="form-label">Contraseña</label>
+                            <input  type="password" id="password" class="form-control <%= locals.errors && errors.password ? 'is-invalid' : null %>" name="password" id="contraseña">
+                            <h5 id="msgErrorPassword"></h5>
+                            <% if (locals.error && error.password) { %>
+                                <h5 class="text-danger">
+                                    <%= error.password.msg %>
+                                </h5>
+                            <% } %>
+                        </div>
+                        <div class="d-grid iniciar-sesion">
+                            <button type="submit" class="btn-home-inicio-sesion button-h">Ingresar</button>
+                        </div>
+                        <div class="my-4 no-tienes-cuenta">
+                            <span class="border border-danger border-4 rounded bg-danger invisible" id="divError">
+                                <p class="m-0 fs-5" ><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Ingrese credenciales</p>
+                            </span>
+                            <span>No tenes cuenta? <a href="/user/registro"> Registrate</a></span> <br>
+                        </div>
+                    </form> 
+                </div>
+            </div>
+          </section>  
+        </main>
+        <footer><h1></h1></footer>
+    
+    </body>
+
+</html>

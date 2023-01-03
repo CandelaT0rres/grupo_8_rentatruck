@@ -117,7 +117,8 @@ window.addEventListener('load', function() {
         };
         if (errors.includes(1)) {
             e.preventDefault();
-            alert('Debes completar todos los campos correctamente para continuar');
+            document.getElementById('divError').classList.remove('invisible')
+            document.getElementById('divError').classList.add('visible')
         }
         errors = [];
     })

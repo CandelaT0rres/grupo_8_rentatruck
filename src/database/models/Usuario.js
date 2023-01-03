@@ -46,12 +46,16 @@ module.exports = (sequelize, dataTypes) => {
         img: {
             type: dataTypes.STRING(100),
             allowNull: false
-        }                 
+        },
+        createdAt: {type: dataTypes.DATE, allowNull: true},
+        updatedAt: {type: dataTypes.DATE, allowNull: true},
+        deletedAt: {type: dataTypes.DATE, allowNull: true}                 
     };
     
     let configuracion = {
         tableName : 'usuario',
-        timestamps : false,
+        timestamps : true,
+        paranoid: true,
         camelCase: false
     };
     const Usuario = sequelize.define(alias, columnas, configuracion);
@@ -62,8 +66,6 @@ module.exports = (sequelize, dataTypes) => {
             as: 'usuarios',
             foreignKey: 'id_rol'
         });
-    
-
         Usuario.belongsToMany(models.Vehiculo,{
             as: 'vehiculos',
             through: 'vehiculo_usuario',
@@ -71,7 +73,6 @@ module.exports = (sequelize, dataTypes) => {
             otherKey: 'id_vehiculo',
             timestamps: false
         });
-
         Usuario.hasMany(models.Ordenes_compra, {
             as:'ordenes',
             foreignKey: 'id_usuario'

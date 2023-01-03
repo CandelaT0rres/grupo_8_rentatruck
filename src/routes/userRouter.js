@@ -33,9 +33,13 @@ router.post('/login', validacionesLogin, controller.procesoLogin);
 //Perfil
 router.get('/perfil', authMiddleware, controller.perfil);
 
-//Logout Usuario
+//Logout Usuario y Soft Delete
 router.get('/logout', authMiddleware, controller.logout);
 router.delete('/deleteUser/:id', authMiddleware, controller.borrar);
+
+//Recuperar usuario
+router.get('/recuperar', guestMiddleware, controller.recuperarUsuario);
+router.post('/recuperar', guestMiddleware, controller.UsuarioRecuperado);
 
 //Pedidos realizados
 router.get('/pedidos/:id', authMiddleware, controller.pedidos)

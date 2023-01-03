@@ -53,13 +53,17 @@
                             <input type="checkbox" class="form-check-input" name="recordame" id="recordame">
                             <label class="form-check-label" for="recordame">Recordar cuenta</label>
                         </div>
-                            <div class="d-grid iniciar-sesion">
+                        <div class="d-grid iniciar-sesion">
                             <button type="submit" class="btn-home-inicio-sesion button-h">Ingresar</button>
                         </div>
                         <div class="my-4 no-tienes-cuenta">
-                            <span>No tenes cuenta? <a href="/user/registro"> Registrate</a></span> <br>
-                            <span>No recordas la contraseña? <a href="#">Recupera la contraseña</a></span>
+                            <span class="border border-danger border-4 rounded bg-danger invisible" id="divError">
+                                <p class="m-0 fs-5" ><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Ingrese credenciales</p>
+                            </span>
+                            <span class="mb-2">No tenes cuenta? <a href="/user/registro"> Registrate</a></span> 
+                            <span class="mb-2">Ya tenías cuenta? <a href="/user/recuperar"> Recuperar</a></span>
                         </div>
+                    
                     </form> 
                 </div>
             </div>

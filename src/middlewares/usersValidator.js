@@ -14,6 +14,7 @@ const errors = [
         .isEmail().withMessage('ingrese un email valido'),
     body('id_rol').notEmpty().withMessage('Seleccione un rol porfavor'),
     body('password').notEmpty().withMessage('Debe ingresar la contraseña'),
+    body('id_rol').notEmpty().withMessage('Ingrese su rol'),
     body('img').custom((value, { req }) => {
       if (!req.file) {
         throw new Error ('Debes cargar una imagen, las extenciones permitidas son: .jpg, .png, .gif, .jpeg')

@@ -42,6 +42,8 @@ window.addEventListener("load", ()=>{
     formLogin.addEventListener("submit", (event)=>{
         if(password.value.length == 0 || email.value.length == 0 ){
             event.preventDefault()
+            document.getElementById('divError').classList.remove('invisible')
+            document.getElementById('divError').classList.add('visible')
         }
     })
 })

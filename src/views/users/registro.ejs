@@ -22,36 +22,67 @@
         <div class="d-flex justify-content-center">
             <div class="row section-1-home container ">
                 <form action="/user/registro" method="post" enctype="multipart/form-data" class="row g-3 fondo-registro" id="formulario-registro">
+                    
                     <div class="col-md-6">
                         <label for="nombre" class="form-label">Nombre/Razón social</label>
                         <input type="text" name="nombre" id="nombre" class="form-control input" id="nombre">
                         <p></p>
+                        <% if (locals.errors && errors.nombre) { %>
+                            <h5 class="text-danger">
+                                <%= errors.nombre.msg %>
+                            </h5>
+                        <% } %>
                     </div>
     
                     <div class="col-md-6">
                         <label for="direccion" class="form-label">Dirección</label>
                         <input type="text" class="form-control input" id="direccion" name="direccion">
                         <p></p>
+                        <% if (locals.errors && errors.direccion) { %>
+                            <h5 class="text-danger">
+                                <%= errors.direccion.msg %>
+                            </h5>
+                        <% } %>
                     </div>
                     <div class="col-md-6">
                         <label for="apellido" class="form-label">Apellido/Nombre Fantasía</label>
                         <input type="text" class="form-control input" id="apellido" name="apellido">
                         <p></p>
+                        <% if (locals.errors && errors.apellido) { %>
+                            <h5 class="text-danger">
+                                <%= errors.apellido.msg %>
+                            </h5>
+                        <% } %>
                     </div>
                     <div class="col-md-6">
                           <label for="telefono" class="form-label">Teléfono</label>
                           <input type="number" class="form-control input" id="telefono" name="telefono">
                           <p></p>
+                            <% if (locals.errors && errors.telefono) { %>
+                                <h5 class="text-danger">
+                                    <%= errors.telefono.msg %>
+                                </h5>
+                            <% } %>
                     </div>
                     <div class="col-md-6">
                         <label for="dni" class="form-label">DNI o CUIT</label>
                         <input type="number" class="form-control input" id="dni" name="dni">
                         <p></p>
+                        <% if (locals.errors && errors.dni) { %>
+                            <h5 class="text-danger">
+                                <%= errors.dni.msg %>
+                            </h5>
+                        <% } %>
                     </div>
                     <div class="col-md-6">
                         <label for="email" class="form-label email">E-Mail</label>
                         <input type="email" class="form-control input" id="email" name="email">
                         <p></p>
+                        <% if (locals.errors && errors.email) { %>
+                            <h5 class="text-danger">
+                                <%= errors.email.msg %>
+                            </h5>
+                        <% } %>
                     </div>
                     <div class="col-md-6 licencia none">
                         <label for="licencia" class="form-label">Nº de Licencia</label>
@@ -72,7 +103,12 @@
                     <div class="col-md-6 mt-4">
                         <label for="img" class="form-label">Imágen de perfil</label>
                         <input type="file" name="img" id="img" class="form-control input">
-                        <p></p>                      
+                        <p></p>
+                        <% if (locals.errors && errors.img) { %>
+                            <h5 class="text-danger">
+                                <%= errors.img.msg %>
+                            </h5>
+                        <% } %>                      
                     </div>
                     <div class="col-md-6 mt-4">
                         <label for="id_rol" class="form-label">Tipo de usuario</label>
@@ -82,10 +118,18 @@
                             <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
                             <% } %> 
                         <% }) %> 
-                        </select>        
+                        </select>
+                        <% if (locals.errors && errors.id_rol) { %>
+                            <h5 class="text-danger">
+                                <%= errors.id_rol.msg %>
+                            </h5>
+                        <% } %>        
                     </div>
-                    <div class="col-12 my-2">
-                      <button type="submit" class="btn-home-inicio-sesion button-h">Registrarme</button>
+                    <div class="col-2 my-2">
+                        <button type="submit" class="btn-home-inicio-sesion button-h">Registrarme</button>
+                    </div>
+                    <div class="col-sm-10 border border-danger border-4 rounded bg-danger mb-3 my-2 invisible" id="divError">
+                        <p class="m-0 fs-5 fw-bold" ><i class="fa-solid fa-triangle-exclamation"></i> <b>Error: </b> Complete el formulario correctamente</p>
                     </div>
                 </form>
             </div>
