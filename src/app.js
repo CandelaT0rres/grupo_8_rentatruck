@@ -3,6 +3,7 @@ const express = require("express");
 const path = require("path");
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
+const cors = require('cors')
 
 //Ejecución express
 const app = express();
@@ -24,6 +25,7 @@ app.use(express.static(path.join(__dirname,"../public")));
 const error404 = require('./middlewares/error404');
 app.use(session({secret: 'Es un secreto papu', resave: false, saveUninitialized: false}));
 app.use(cookieParser());
+app.use(cors());
 const userLoggedMiddleware = require('./middlewares/userLoggedMiddleware');
 app.use(userLoggedMiddleware);
 

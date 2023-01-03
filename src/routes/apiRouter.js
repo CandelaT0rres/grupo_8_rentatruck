@@ -7,4 +7,6 @@ router.get('/products', controller.products);
 router.get('/list/:id', controller.productsList);
 router.post('/checkout', controller.checkout);
 
+router.get('/users', controller.users);
+
 module.exports = router;
