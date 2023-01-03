@@ -1,6 +1,10 @@
 const db = require('../database/models');
 
 const controller = {
+    products: (req, res) => {
+        db.Vehiculo.findAll()
+            .then(respuesta => res.json(respuesta));
+    },
     productsList: (req, res) => {
         db.Vehiculo.findByPk(req.params.id, {include: [{association: 'tipo_mercaderia'}, {association: 'marcas'}]})
             .then(respuesta => res.json(respuesta));
