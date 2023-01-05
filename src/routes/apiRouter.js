@@ -3,10 +3,22 @@ const express = require('express');
 const router = express.Router();
 const controller = require('../controllers/ApiController');
 
-router.get('/products', controller.products);
-router.get('/list/:id', controller.productsList);
+//Vehiculos
+router.get('/products', controller.vehiculos);
+router.get('/list/:id', controller.vehiculosByPk);
+router.get('/vehiculosCantidad', controller.vehiculosCantidad);
+router.get('/vehiculosCategoria', controller.vehiculosCategoria);
+
+//Usuarios
+router.get('/usuarios', controller.usuarios);
+router.get('/usuariosCantidad', controller.usuariosCantidad);
+
+//Categorias
+router.get('/categorias', controller.categorias);
+
+//Marcas
+router.get('/marcas', controller.marca);
+
+//Carito
 router.post('/checkout', controller.checkout);
-
-router.get('/users', controller.users);
-
 module.exports = router;

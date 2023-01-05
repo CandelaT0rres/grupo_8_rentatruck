@@ -1,22 +1,42 @@
-const db = require('../database/models');
+const apiServices = require('../services/apiServices');
 
 const controller = {
-    products: (req, res) => {
-        db.Vehiculo.findAll()
-            .then(respuesta => res.json(respuesta));
+    vehiculosCantidad: async (req, res) => {
+       let vehiculos = await apiServices.vehiculos.count()
+       res.json(vehiculos);
     },
-    productsList: (req, res) => {
-        db.Vehiculo.findByPk(req.params.id, {include: [{association: 'tipo_mercaderia'}, {association: 'marcas'}]})
-            .then(respuesta => res.json(respuesta));
+    vehiculosCategoria: async (req, res) => {
+        let vehiculos = await apiServices.vehiculos.countByCategory()
+        res.json(vehiculos);
+    },
+    vehiculos: async (req, res) => {
+        let vehiculos = await apiServices.vehiculos.allVehiculos()
+        res.json(vehiculos);
+    },
+    vehiculosByPk: async (req, res) => {
+        let vehiculos = await apiServices.vehiculoByPk(req);
+        res.json(vehiculos);
+    },
+    usuariosCantidad: async(req, res) => {
+        let usuarios = await apiServices.usuarios.count();
+        res.json(usuarios);
+    },
+    usuarios: async(req, res) => {
+        let usuarios = await apiServices.usuarios.users();
+        res.json(usuarios);
+    },
+    categorias: async (req, res) => {
+        let categorias = await apiServices.categorias();
+        res.json(categorias);
+    },
+    marca: async (req, res) => {
+        let marca = await apiServices.marcas()
+        res.json(marca);
     },
 
     checkout: async (req, res)  => {
        let ordenDeCompra = await db.Ordenes_compra.create({...req.body, id_usuario: req.session.usuarioLogueado.id});
        res.json({ok: true, status: 200, ordenesUsuarios: ordenDeCompra});
-    },
-    users: (req, res) => {
-        db.Usuario.findAll()
-            .then(respuesta => res.json(respuesta))
     }
 };
 

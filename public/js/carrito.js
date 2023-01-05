@@ -13,8 +13,7 @@ window.addEventListener("load", () => {
 
     botonCarrito.forEach((boton) => {
         boton.addEventListener('click', (e) => {
-
-            console.log(e.target.dataset.id);
+            
             if (localStorage.carrito) {
                 let carrito = JSON.parse(localStorage.carrito)
                 let indice = carrito.findIndex((producto) => producto.id == e.target.dataset.id)
@@ -29,6 +28,7 @@ window.addEventListener("load", () => {
                 localStorage.setItem('carrito', JSON.stringify([{id: e.target.dataset.id, cantidad: 1}]));
             };
             carritoNumero.innerText = productosEnCarrito();
+           
         })
     });
     
