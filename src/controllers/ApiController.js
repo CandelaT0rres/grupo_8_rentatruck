@@ -9,6 +9,10 @@ const controller = {
         let vehiculos = await apiServices.vehiculos.countByCategory()
         res.json(vehiculos);
     },
+    categoriasVehiculo: async (req, res) => {
+        let categoriasVehiculo = await apiServices.categoriasVehiculos()
+        res.json(categoriasVehiculo);
+    },
     vehiculos: async (req, res) => {
         let vehiculos = await apiServices.vehiculos.allVehiculos()
         res.json(vehiculos);

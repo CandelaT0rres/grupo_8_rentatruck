@@ -15,6 +15,7 @@ router.get('/usuariosCantidad', controller.usuariosCantidad);
 
 //Categorias
 router.get('/categorias', controller.categorias);
+router.get('/categoriasVehiculo', controller.categoriasVehiculo);
 
 //Marcas
 router.get('/marcas', controller.marca);

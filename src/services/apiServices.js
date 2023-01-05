@@ -41,7 +41,7 @@ let vehiculos = {
         return categorias;
     },
     allVehiculos: async () => {
-        return await db.Vehiculo.findAll();
+        return await db.Vehiculo.findAll({include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}]});
     }
 };
 
@@ -49,6 +49,9 @@ let vehiculos = {
 async function categorias() {
     return await db.Tipo_mercaderia.findAll();
 };
+async function categoriasVehiculos() {
+    return await db.Tipo_mercaderia.findAll({include: [{association: 'vehiculo'}]});
+}
 
 //Marcas
 async function marcas() {
@@ -61,4 +64,4 @@ async function vehiculoByPk(req) {
 }
 
 
-module.exports = {usuarios, vehiculos, categorias, vehiculoByPk, marcas}
+module.exports = {usuarios, vehiculos, categorias, vehiculoByPk, marcas, categoriasVehiculos}
