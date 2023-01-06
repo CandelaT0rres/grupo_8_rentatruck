@@ -58,10 +58,15 @@ async function marcas() {
     return await db.Marca.findAll();
 }
 
+async function marcasCantidad() {
+    let marcas = await db.Marca.findAll();
+    return marcas.length;
+};
+
 //Producto por ID
 async function vehiculoByPk(req) {
     return await db.Vehiculo.findByPk(req.params.id, {include: [{association: 'tipo_mercaderia'}, {association: 'marcas'}, {association: 'usuarios'}]});
 }
 
 
-module.exports = {usuarios, vehiculos, categorias, vehiculoByPk, marcas, categoriasVehiculos}
+module.exports = {usuarios, vehiculos, categorias, vehiculoByPk, marcas, categoriasVehiculos, marcasCantidad}

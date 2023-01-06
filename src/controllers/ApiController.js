@@ -37,6 +37,10 @@ const controller = {
         let marca = await apiServices.marcas()
         res.json(marca);
     },
+    marcaCantidad: async (req, res) => {
+        let marcas = await apiServices.marcasCantidad();
+        res.json(marcas);
+    },
 
     checkout: async (req, res)  => {
        let ordenDeCompra = await db.Ordenes_compra.create({...req.body, id_usuario: req.session.usuarioLogueado.id});

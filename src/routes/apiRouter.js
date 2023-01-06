@@ -19,6 +19,7 @@ router.get('/categoriasVehiculo', controller.categoriasVehiculo);
 
 //Marcas
 router.get('/marcas', controller.marca);
+router.get('/marcasCantidad', controller.marcaCantidad);
 
 //Carito
 router.post('/checkout', controller.checkout);

@@ -11,9 +11,17 @@ window.addEventListener("load", () => {
     let carritoNumero = document.querySelector('.carrito-numero');
     carritoNumero.innerText = productosEnCarrito();
 
+    //TOAST capturo div
+    var toastLiveExample = document.getElementById('liveToast')
+ 
     botonCarrito.forEach((boton) => {
         boton.addEventListener('click', (e) => {
-            
+            //toast bootstrap
+            if (boton) {
+               var toast = new bootstrap.Toast(toastLiveExample)
+               toast.show()
+            }
+
             if (localStorage.carrito) {
                 let carrito = JSON.parse(localStorage.carrito)
                 let indice = carrito.findIndex((producto) => producto.id == e.target.dataset.id)
