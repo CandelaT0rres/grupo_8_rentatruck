@@ -11,11 +11,12 @@ async function rol() {
 };
 //Nuevo usuario
 async function nuevoUsuario(req) {
-    let usuario = db.Usuario.findOne({where: {email: req.body.email}});
+    let usuario = await db.Usuario.findOne({where: {email: req.body.email}});
+    
     if (!usuario) {
         let img = `${'user-'}${Date.now()}${path.extname(req.file.originalname)}`;
         await sharp(req.file.buffer)
-           .resize(400, 400 , {fit:'contain', background:'#fff'})
+           .resize(300, 300 , {fit:'contain', background:'#fff'})
            .toFormat('jpeg')
            .jpeg({quality: 50})
            .toFile(`${ path.join(__dirname, '../../public/img/img-users/')}${img}`);
