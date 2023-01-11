@@ -99,9 +99,9 @@
                 <div class="col-md-6 mt-4">
                     <select name="id_rol" id="" class="form-control">
                         <% rol.forEach((cadaElemento) => { %>
-                            
-                            <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
-      
+                            <% if (cadaElemento.nombre != 'Administrador') { %>
+                                <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
+                            <% } %> 
                         <% }) %> 
                     </select>
                     <% if (locals.errors && errors.id_rol) { %>
