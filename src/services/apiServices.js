@@ -66,7 +66,11 @@ async function marcasCantidad() {
 //Producto por ID
 async function vehiculoByPk(req) {
     return await db.Vehiculo.findByPk(req.params.id, {include: [{association: 'tipo_mercaderia'}, {association: 'marcas'}, {association: 'usuarios'}]});
+};
+
+async function checkoutCart(req) {
+    return await db.Ordenes_compra.create({...req.body, id_usuario: req.session.usuarioLogueado.id})
 }
 
 
-module.exports = {usuarios, vehiculos, categorias, vehiculoByPk, marcas, categoriasVehiculos, marcasCantidad}
+module.exports = {usuarios, vehiculos, categorias, vehiculoByPk, marcas, categoriasVehiculos, marcasCantidad, checkoutCart};

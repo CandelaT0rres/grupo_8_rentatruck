@@ -47,7 +47,6 @@ async function vehiculoNuevo(req) {
 async function imagenABorrar(req) {
     let vehiculo = await vehiculoPk(req)
     let imagenAborrar = path.join(__dirname, '../../public/img/' + vehiculo.ruta_img);
-    console.log(imagenAborrar);
     fs.existsSync(imagenAborrar) ? fs.unlinkSync(imagenAborrar) : null;
 };
 //Actualizar vehículo
