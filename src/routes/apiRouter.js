@@ -7,7 +7,6 @@ const controller = require('../controllers/ApiController');
 router.get('/products', controller.vehiculos);
 router.get('/list/:id', controller.vehiculosByPk);
 router.get('/vehiculosCantidad', controller.vehiculosCantidad);
-router.get('/vehiculosCategoria', controller.vehiculosCategoria);
 
 //Usuarios
 router.get('/usuarios', controller.usuarios);

@@ -36,7 +36,7 @@ async function nuevoUsuario(req) {
 };
 //Usuario por ID
 async function usuarioPk(req) {
-    return await db.Usuario.findByPk(req.params.id);
+    return await db.Usuario.findByPk(req.params.id, {include: [{association: 'usuarios'}]});
 };
 //Borrar Avatar
 async function borrarAvatar(req) {

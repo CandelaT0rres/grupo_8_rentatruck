@@ -88,6 +88,7 @@
                     <h5 class="d-none"></h5>
                   </div>
                   <div class="col-md-6 mt-4 input-edit">
+                    <label for="img" class="form-label">Imágen de perfil</label>
                     <input type="file" name="img" class="form-control">
                     <h5 class="d-none"></h5>
                     <% if (locals.errors && errors.img) { %>
@@ -97,11 +98,16 @@
                     <% } %>  
                 </div>
                 <div class="col-md-6 mt-4">
+                    <label for="id_rol" class="form-label">Tipo de usuario</label>
                     <select name="id_rol" id="" class="form-control">
                         <% rol.forEach((cadaElemento) => { %>
-                            
-                            <option value="<%= cadaElemento.id %> "> <%= cadaElemento.nombre %>  </option>
-      
+                                <% if (cadaElemento.id === usuario.usuarios.id) { %>
+                                    <option value="<%= cadaElemento.id %>" selected> <%= cadaElemento.nombre %>  </option>
+                                <% } else if (cadaElemento.id === 1){ %>
+                                    <option value="<%= cadaElemento.id %>" disabled> <%= cadaElemento.nombre %>  </option>
+                                <% } else { %> 
+                                    <option value="<%= cadaElemento.id %>"> <%= cadaElemento.nombre %>  </option>
+                                <% } %> 
                         <% }) %> 
                     </select>
                     <% if (locals.errors && errors.id_rol) { %>
