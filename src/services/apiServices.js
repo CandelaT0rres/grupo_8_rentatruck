@@ -21,6 +21,10 @@ let vehiculos = {
     },
     allVehiculos: async () => {
         return await db.Vehiculo.findAll({include: [{association: 'marcas'}, {association: 'tipo_mercaderia'}]});
+    },
+    ordenesCompra: async (idVehiculo, modelo, precio, cantidad, total, idUsuario) => {
+        let orden = await db.Ordenes_compra.create({id_vehiculo: idVehiculo, modelo: modelo, precio: parseInt(precio), cantidad: parseInt(cantidad), total: parseInt(total), id_usuario: idUsuario});
+        return orden;
     }
 };
 

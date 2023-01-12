@@ -43,7 +43,7 @@ const controller = {
     },
 
     checkout: async (req, res)  => {
-       let ordenDeCompra = await db.Ordenes_compra.create({...req.body, id_usuario: req.session.usuarioLogueado.id});
+       let ordenDeCompra = await apiServices.vehiculos.ordenesCompra(req.body.id_vehiculo, req.body.modelo, req.body.precio, req.body.cantidad, req.body.total, req.session.usuarioLogueado.id);
        res.json({ok: true, status: 200, ordenesUsuarios: ordenDeCompra});
     }
 };
